@@ -116,11 +116,12 @@ sub makeDataChoosersPage(Libui::Window $window) {
 		my Str $filename;
 
 		$filename = $window.open();
-		unless $filename {
+		if $filename {
+			$entry.set-text($filename); 
+			
+		} else {
 			$entry.set-text("(cancelled)");
-			return
 		}
-		$entry.set-text($filename);
 	});
 	
 	$grid.append($button, 0, 0, 1, 1, 0, 0, 0, 0);
@@ -133,11 +134,11 @@ sub makeDataChoosersPage(Libui::Window $window) {
 		my Str $filename;
 
 		$filename = $window.open();
-		unless $filename {
+		if $filename {
+			$entry2.set-text($filename);
+		} else {
 			$entry2.set-text("(cancelled)");
-			return
 		}
-		$entry2.set-text($filename);
 	});
 	$grid.append($button2, 0, 1, 1, 1, 0, 0, 0, 0);
 	$grid.append($entry2, 1, 1, 1, 1, 1, 0, 0, 0);
