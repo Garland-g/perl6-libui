@@ -15,7 +15,7 @@ sub makeBasicControlsPage() returns Libui::Control {
 	$vbox.append($hbox, 0);
 	$hbox.append(Libui::Button.new(label => "Button"), 0);
 	$hbox.append(Libui::Checkbox.new(text => "Checkbox"), 0); 
-	$vbox.append(Libui::Label.new(label => "This is a label. Right now, labels can only span one line."), 0);
+	$vbox.append(Libui::Label.new(text => "This is a label. Right now, labels can only span one line."), 0);
 	$vbox.append(Libui::HSeparator.new(), 0);
 	$group.set-margined(1);
 	$vbox.append($group, 1);
