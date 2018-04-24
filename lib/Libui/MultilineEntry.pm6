@@ -1,0 +1,59 @@
+use Libui::Raw;
+use Libui::Control;
+
+role Libui::MultilineEntry-Common {
+	also does Libui::Control;
+
+	has uiMultilineEntry $!entry;
+	has $!changed-supply;
+
+	method text() returns Str {
+		uiMultilineEntryText($!entry);
+	}
+
+	method set-text(Str $text) {
+		uiMultilineEntrySetText($!entry, $text);
+	}
+
+	method append($text) {
+		uiMultilineEntryAppend($!entry, $text);
+	}
+
+	method changed() {
+		$!changed-supply //= do {
+			my $s = Supplier.new;
+			uiMultilineEntryOnChanged($!entry, -> $, $ {
+				$s.emit(self);
+				CATCH { default { note $_; } }
+			},
+			Str);
+			return $s.Supply;
+		}
+	}
+
+	method read-only() returns int32 {
+		return uiMultilineEntryReadOnly($!entry);
+	}
+
+	method set-read-only(int32 $read-only) {
+		uiMultilineEntrySetReadOnly($!entry, $read-only);
+	}
+
+	method WIDGET() {
+		return $!entry;
+	}
+}
+
+class Libui::MultilineEntry does Libui::MultilineEntry-Common {
+
+	submethod BUILD() {
+		$!entry = uiNewMultilineEntry();
+	}
+}
+
+class Libui::NonWrappingMultilineEntry does Libui::MultilineEntry-Common {
+
+	submethod BUILD() {
+		$!entry = uiNewNonWrappingMultilineEntry();
+	}
+}

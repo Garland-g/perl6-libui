@@ -1,0 +1,19 @@
+{
+  "authors" : [
+    "Travis Gibson"
+  ],
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "NativeCall binding to libui",
+  "license" : "Artistic-2.0",
+  "name" : "Libui",
+  "perl" : "6.c",
+  "provides" : {
+    "Libui" : "lib/Libui.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "https://gogs.templeoffirehazard.duckdns.org/Garland_g/perl6-libui",
+  "tags" : [ ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}

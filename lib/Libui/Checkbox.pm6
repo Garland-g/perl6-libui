@@ -1,0 +1,43 @@
+use Libui::Raw;
+use Libui::Control;
+
+unit class Libui::Checkbox does Libui::Control;
+
+has uiCheckbox $!checkbox;
+has $!toggled-supply;
+
+submethod BUILD(Str :$text) {
+	$!checkbox = uiNewCheckbox($text);
+}
+
+method text() returns Str {
+	return uiCheckboxText($!checkbox);
+}
+
+method set-text(Str $text) {
+	uiCheckboxSetText($!checkbox, $text);
+}
+
+method toggled() returns Supply {
+	$!toggled-supply //= do {
+		my $s = Supplier.new;
+		uiCheckboxOnToggled($!checkbox, -> $, $, {
+			$s.emit(self);
+			CATCH { default { note $_; } } 
+			},
+		Str);
+		return $s.Supply;
+	}
+}
+
+method checked() returns int32 {
+	uiCheckboxChecked($!checkbox);
+}
+
+method set-checked(int32 $checked) {
+	uiCheckboxSetChecked($!checkbox, $checked);
+}
+
+method WIDGET() {
+	return $!checkbox;
+}
