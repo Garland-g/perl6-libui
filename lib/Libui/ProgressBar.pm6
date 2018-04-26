@@ -21,6 +21,6 @@ method set-value(int32 $value) {
 	uiProgressBarSetValue($!pbar, $value);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!pbar;
 }

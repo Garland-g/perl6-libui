@@ -1,9 +1,9 @@
 use Libui::Raw;
-use Libui::Control;
+#use Libui::Control;
 use Libui::Container;
 
 unit class Libui::Grid is export;
-also does Libui::Control;
+#also does Libui::Control;
 also does Libui::Container;
 
 
@@ -59,7 +59,7 @@ method set-padded(int32 $padded) {
 	uiGridSetPadded($!grid, $padded);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!grid;
 }
 

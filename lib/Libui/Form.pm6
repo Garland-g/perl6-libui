@@ -1,9 +1,9 @@
 use Libui::Raw;
-use Libui::Control;
+#use Libui::Control;
 use Libui::Container;
 
 unit class Libui::Form;
-also does Libui::Control;
+#also does Libui::Control;
 also does Libui::Container;
 
 has uiForm $!form;
@@ -28,6 +28,6 @@ method set-padded(int32 $padded) {
 	uiFormSetPadded($!form, $padded);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!form;
 }

@@ -1,9 +1,9 @@
 use Libui::Raw;
-use Libui::Control;
+#use Libui::Control;
 use Libui::Container;
 
 unit class Libui::Window 
-	does Libui::Control
+#	does Libui::Control
 	does Libui::Container;
 
 has uiWindow $!window;
@@ -14,7 +14,11 @@ submethod BUILD(Str :$title, int32 :$width, int32 :$height, int32 :$has-menubar)
 	$!window = uiNewWindow($title, $width, $height, $has-menubar);
 }
 
-method content( Libui::Control $control) {
+multi method new(Str $title, int32 $width = 640, int32 $height = 480, int32 $has-menubar = 0) { 
+	self.bless(:$title, :$width, :$height, :$has-menubar);
+}
+
+method !set-content( Libui::Control $control) {
 	uiWindowSetChild($!window, $control.Control);
 }
 
@@ -30,6 +34,7 @@ method set-title(Str $title) {
 	uiWindowSetTitle($!window, $title);
 }
 
+#| Fails until $window.show() has been run
 method content-size(int32 $width is rw, int32 $height is rw) {
 	uiWindowContentSize($!window, $width, $height);
 }
@@ -37,17 +42,17 @@ method content-size(int32 $width is rw, int32 $height is rw) {
 method width() {
 	my int32 $height;
 	my int32 $width;
-	self.content-size($!window, $width, $height);
+	self.content-size($width, $height);
 	return $width;
 }
 
 method height() {
 	my int32 $height;
 	my int32 $width;
-	self.content-size($!window, $width, $height);
+	self.content-size($width, $height);
 	return $height;
 }
-
+#| Currently fails unless uiMain() has been run
 method set-content-size(int32 $width, int32 $height) {
 	uiWindowSetContentSize($!window, $width, $height);
 }
@@ -101,7 +106,7 @@ method size-changed() returns Supply {
 	}
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!window;
 }
 

@@ -4,7 +4,7 @@ use Libui::Control;
 role Libui::Separator does Libui::Control {
 	has $!separator;
 
-	method WIDGET() {
+	method !WIDGET() {
 		return $!separator;
 	}
 }

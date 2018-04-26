@@ -42,6 +42,6 @@ method set-checked(int32 $checked) {
 	uiMenuItemSetChecked($!item, $checked);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!item;
 }

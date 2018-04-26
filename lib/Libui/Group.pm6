@@ -1,10 +1,10 @@
 use Libui::Raw;
 use Libui::Container;
-use Libui::Control;
+#use Libui::Control;
 
 unit class Libui::Group;
 also does Libui::Container;
-also does Libui::Control;
+#also does Libui::Control;
 
 has uiGroup $!group;
 
@@ -32,6 +32,6 @@ method set-margined(int32 $margined) {
 	uiGroupSetMargined($!group, $margined);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!group;
 }

@@ -6,8 +6,12 @@ unit class Libui::Button does Libui::Control;
 has uiButton $!button;
 has $!clicked-supply;
 
-submethod BUILD(:$label!) {
+submethod BUILD(Str :$label!) {
 	$!button = uiNewButton($label);
+}
+
+multi method new(Str $label) {
+	self.bless(:$label);
 }
 
 method text() returns Str {
@@ -30,6 +34,6 @@ method clicked() returns Supply {
 	}
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!button;
 }

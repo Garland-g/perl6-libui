@@ -4,7 +4,7 @@ use Libui::Control;
 role Libui::Picker does Libui::Control {
 	has uiDateTimePicker $!picker;
 
-	method WIDGET() {
+	method !WIDGET() {
 		return $!picker;
 	}
 }

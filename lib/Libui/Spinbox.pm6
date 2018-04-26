@@ -30,6 +30,6 @@ method changed() returns Supply {
 	}
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!spinbox;
 }

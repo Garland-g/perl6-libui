@@ -18,6 +18,6 @@ method set-text(Str $text) {
 	uiLabelSetText($!label, $text);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!label;
 }

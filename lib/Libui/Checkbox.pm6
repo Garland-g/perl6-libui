@@ -10,6 +10,10 @@ submethod BUILD(Str :$text) {
 	$!checkbox = uiNewCheckbox($text);
 }
 
+multi method new(Str $text) {
+	self.bless(:$text);
+}
+
 method text() returns Str {
 	return uiCheckboxText($!checkbox);
 }
@@ -38,6 +42,6 @@ method set-checked(int32 $checked) {
 	uiCheckboxSetChecked($!checkbox, $checked);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!checkbox;
 }

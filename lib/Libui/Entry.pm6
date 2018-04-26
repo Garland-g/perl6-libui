@@ -37,7 +37,7 @@ role Libui::Entry-Common does Libui::Control {
 	}
 
 
-	method WIDGET() {
+	method !WIDGET() {
 		return $!entry;
 	}
 }

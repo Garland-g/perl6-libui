@@ -39,7 +39,7 @@ role Libui::MultilineEntry-Common {
 		uiMultilineEntrySetReadOnly($!entry, $read-only);
 	}
 
-	method WIDGET() {
+	method !WIDGET() {
 		return $!entry;
 	}
 }

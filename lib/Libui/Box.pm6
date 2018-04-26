@@ -1,10 +1,10 @@
 use v6;
 use Libui::Raw;
-use Libui::Control;
+#use Libui::Control;
 use Libui::Container;
 
 role Libui::Box {
-	also does Libui::Control;
+#	also does Libui::Control;
 	also does Libui::Container;
 
 	has uiBox $!box;
@@ -39,7 +39,7 @@ role Libui::Box {
 		uiBoxSetPadded($!box, $padded);
 	}
 
-	method WIDGET() {
+	method !WIDGET() {
 		return $!box;
 	}
 }

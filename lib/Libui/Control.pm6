@@ -2,10 +2,10 @@ use Libui::Raw;
 
 unit role Libui::Control;
 
-method WIDGET() { ... }
+method !WIDGET() { ... }
 
 method Control( --> uiControl) { 
-	return uicontrol(self.WIDGET()); 
+	return uicontrol(self!WIDGET()); 
 }
 
 method destroy() {

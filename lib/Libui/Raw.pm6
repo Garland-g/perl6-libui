@@ -820,7 +820,7 @@ sub uiWindowContentSize(uiWindow $w
 sub uiWindowSetContentSize(uiWindow $w
 											,int32 $width
 											,int32 $height
-											) is native(LIB) returns int32 is export { * }
+											) is native(LIB) is export { * }
 
 
 sub uiWindowFullscreen(uiWindow $w

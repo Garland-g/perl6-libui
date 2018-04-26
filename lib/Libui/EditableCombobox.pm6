@@ -34,6 +34,6 @@ method changed() {
 	}
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!combobox;
 }

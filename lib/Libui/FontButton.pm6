@@ -72,7 +72,7 @@ class Libui::FontButton does Libui::Control is export {
 		}
 	}
 
-	method WIDGET() {
+	method !WIDGET() {
 		return $!button;
 	}
 }

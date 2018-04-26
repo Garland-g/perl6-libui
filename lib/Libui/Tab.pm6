@@ -1,9 +1,9 @@
 use Libui::Raw;
-use Libui::Control;
+#use Libui::Control;
 use Libui::Container;
 
 unit class Libui::Tab;
-also does Libui::Control;
+#also does Libui::Control;
 also does Libui::Container;
 
 has uiTab $!tab;
@@ -36,6 +36,6 @@ method set-margined(int32 $page, int32 $margined) {
 	uiTabSetMargined($!tab, $page, $margined);
 }
 
-method WIDGET() {
+method !WIDGET() {
 	return $!tab;
 }
