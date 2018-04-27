@@ -22,7 +22,8 @@ subtest 'before $window.show', {
 
 	$window.set-content($button);
 
-	is-deeply $button.parent, $window.Control, <Set the window's content>;
+	is-deeply $button.parent, $window.Control, <Set the window's content> 
+		or bail-out "Must be able to set window's content";
 
 };
 
