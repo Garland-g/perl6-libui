@@ -14,7 +14,7 @@ submethod BUILD(Str :$title, int32 :$width, int32 :$height, int32 :$has-menubar)
 	$!window = uiNewWindow($title, $width, $height, $has-menubar);
 }
 
-multi method new(Str $title, int32 $width = 640, int32 $height = 480, int32 $has-menubar = 0) { 
+multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 0) { 
 	self.bless(:$title, :$width, :$height, :$has-menubar);
 }
 
