@@ -10,6 +10,10 @@ submethod BUILD(Str :$text) {
 	$!label = uiNewLabel($text);
 }
 
+multi method new(Str $text){
+	self.bless(:$text);
+}
+
 method text() returns Str {
 	return uiLabelText($!label);
 }

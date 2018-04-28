@@ -4,7 +4,6 @@ use Libui::Control;
 unit class Libui::ProgressBar does Libui::Control;
 
 has uiProgressBar $!pbar;
-has $!value-changed;
 
 submethod BUILD() {
 	$!pbar = uiNewProgressBar();

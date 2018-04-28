@@ -4,15 +4,19 @@ unit class Libui::Menu;
 
 has uiMenu $menu;
 
-submethod BUILD(Str :$name) {
+submethod BUILD(Str:D :$name) {
 	$!menu = uiNewMenu($name);
 }
 
-method append-item(Str $name) returns Libui::MenuItem {
+multi method new(Str:D $name) {
+	self.bless(:$name);
+}
+
+method append-item(Str:D $name) returns Libui::MenuItem {
 	return Libui::MenuItem.new(uiMenuAppendItem($!menu, $name));
 }
 
-method append-check-item(Str $name) returns Libui::MenuItem {
+method append-check-item(Str:D $name) returns Libui::MenuItem {
 	return Libui::MenuItem.new(uiMenuAppendCheckItem($!menu, $name));
 }
 

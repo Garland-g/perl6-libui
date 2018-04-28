@@ -10,6 +10,10 @@ submethod BUILD(:$min, :$max) {
 	$!spinbox = uiNewSpinbox($min, $max);
 }
 
+multi method new(int32 $min, int32 $max) {
+	self.bless(:$min, :$max);
+}
+
 method value() returns int32 {
 	uiSpinboxValue($!spinbox);
 }

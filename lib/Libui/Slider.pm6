@@ -6,8 +6,12 @@ unit class Libui::Slider does Libui::Control;
 has uiSlider $!slider;
 has $!value-changed;
 
-submethod BUILD(:$min, :$max) {
+submethod BUILD(int32 :$min, int32 :$max) {
 	$!slider = uiNewSlider($min, $max);
+}
+
+multi method new(int32 $min, int32 $max) {
+	self.bless(:$min, :$max);
 }
 
 method value() returns int32 {

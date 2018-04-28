@@ -41,19 +41,20 @@ method insert(Libui::Control $control
 						 , int32 $halign
 						 , int32 $vexpand
 						 , int32 $valign
-						 ) {
+					 ) {
 	uiGridInsertAt($!grid
-								, $control.Control
-								, $existing.Control
-								, $xspan, $yspan
-								, $hexpand, $halign
-								, $vexpand, $valign
-							);
+							 , $control.Control
+							 , $existing.Control
+							 , $at
+							 , $xspan, $yspan
+							 , $hexpand, $halign
+							 , $vexpand, $valign
+							 );
 }	
 
-						 method padded() returns int32 {
-							 return uiGridPadded($!grid);
-					 }
+method padded() returns int32 {
+	return uiGridPadded($!grid);
+}
 
 method set-padded(int32 $padded) {
 	uiGridSetPadded($!grid, $padded);

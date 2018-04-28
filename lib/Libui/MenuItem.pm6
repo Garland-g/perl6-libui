@@ -6,6 +6,8 @@ has uiMenuItem $!item;
 has $!clicked-supply;
 
 #uiMenuItems are returned by the uiMenu methods
+#therefore
+#Libui::MenuItems are returned by Libui::Menu methods
 method new(uiMenuItem $item) {
 	self.bless(item => $item);
 }
@@ -24,7 +26,7 @@ method disable() {
 
 method clicked() returns Supply {
 	$!clicked-supply //= do {
-		my $s = Supply.new;
+		my $s = Supplier.new;
 		uiMenuItemOnClicked($!item, -> $, $ {
 			$s.emit(self);
 			CATCH { default { note $_; } }

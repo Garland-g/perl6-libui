@@ -9,15 +9,15 @@ role Libui::Box {
 
 	has uiBox $!box;
 
-	#multi method append(@control, @stretchy) {
-		#for @control.kv -> $i, $control {
-			#if $i < @stretchy.elems {
-				#	uiBoxAppend(self.WIDGET, $control.WIDGET, @stretchy[$i]);
-				#}	else {
-				#uiBoxAppend(self.WIDGET, $control.WIDGET, @stretchy[*-1]);
-				#}
-			#}
-		#}
+	method append-list(@control, @stretchy = (0,)) {
+		for @control.kv -> $i, $control {
+			if $i < @stretchy.elems {
+					uiBoxAppend(self!WIDGET, $control.Control, @stretchy[$i]);
+				}	else {
+				uiBoxAppend(self!WIDGET, $control.Control, @stretchy[*-1]);
+				}
+			}
+		}
 
 	method append(Libui::Control $control, int32 $stretchy) {
 		uiBoxAppend($!box, $control.Control, $stretchy);

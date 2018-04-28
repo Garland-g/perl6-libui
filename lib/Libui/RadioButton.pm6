@@ -18,7 +18,7 @@ method selected() returns int32 {
 	uiRadioButtonsSelected($!radio-buttons);
 }
 
-method get-selected(int32 $n) {
+method set-selected(int32 $n) {
 	uiRadioButtonsSetSelected($!radio-buttons, $n);
 }
 

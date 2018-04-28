@@ -1,0 +1,36 @@
+use v6;
+use Test;
+use Libui;
+
+Init();
+
+plan *;
+
+my Libui::Menu $menu .= new('File');
+
+
+isa-ok $menu.append-item('Open'), Libui::MenuItem, <Append item>;
+
+isa-ok $menu.append-check-item('toggled'), Libui::MenuItem, <Append check-item>;
+
+isa-ok $menu.append-preferences-item, Libui::MenuItem, <Append preferences item>;
+
+lives-ok {$menu.append-separator},<Append separator>;
+
+isa-ok $menu.append-about-item, Libui::MenuItem, <Append about item>;
+
+isa-ok $menu.append-quit-item, Libui::MenuItem, <Append quit item>;
+
+#Multiple menus are just new menus made after the first
+my Libui::Menu $menu2 .= new('Edit');
+
+my Libui::Menu $menu3 .= new('Help');
+
+#View results
+my Libui::App $app .= new('test');
+
+start { Promise.in(0.2).then({$app.exit});};
+$app.run;
+
+done-testing;
+# vi:syntax=perl6

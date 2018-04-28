@@ -12,6 +12,10 @@ submethod BUILD(Str :$title) {
 	$!group = uiNewGroup($title);
 }
 
+multi method new(Str $title) {
+	self.bless(:$title);
+}
+
 method title() returns Str {
 	uiGroupTitle($!group);
 }

@@ -37,28 +37,28 @@ class Libui::FontButton does Libui::Control is export {
 #}
 #
 	method font() {
-		$!desc = uiFontButtonFont($!button);
+		uiDrawTextFontDescribe(uiFontButtonFont($!button), $!desc);
 	}
+###Current Error: Cannot look up attributes in $!desc
+#	method family() returns Str {
+#		return $!desc.Family();
+#	}
 
-	method family() returns Str {
-		return $!desc.Family;
-	}
+#	method size() returns num64 {
+#		return $!desc.Size();
+#	}
 
-	method size() returns num64 {
-		return $!desc.Size;
-	}
+#	method weight() returns uint32 {
+#		return $!desc.Weight();
+#	}
 
-	method weight() returns uint32 {
-		return $!desc.Weight;
-	}
+#	method italic() returns uint32 {
+#		return $!desc.Italic();
+#	}
 
-	method italic() returns uint32 {
-		return $!desc.Italic;
-	}
-
-	method stretch() returns uint32 {
-		return $!desc.Stretch;
-	}
+#	method stretch() returns uint32 {
+#		return $!desc.Stretch();
+#	}
 
 	method changed() {
 		$!changed-supply //= do {
