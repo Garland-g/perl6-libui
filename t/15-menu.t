@@ -26,11 +26,12 @@ my Libui::Menu $menu2 .= new('Edit');
 
 my Libui::Menu $menu3 .= new('Help');
 
+unless $*KERNEL eq 'win32' {
 #View results
 my Libui::App $app .= new('test');
 
 start { Promise.in(0.2).then({$app.exit});};
 $app.run;
-
+}
 done-testing;
 # vi:syntax=perl6

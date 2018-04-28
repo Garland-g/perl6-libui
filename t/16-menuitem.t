@@ -40,11 +40,14 @@ lives-ok {
 	my Libui::MenuItem $about-item = $menu2.append-about-item;
 }, <Create about item>;
 
+unless $*KERNEL eq 'win32' {
 #view results
 my Libui::App $app .= new('test');
 
 
 start {Promise.in(0.2).then({$app.exit});};
 $app.run;
+
+}
 done-testing;
 # vi:syntax=perl6
