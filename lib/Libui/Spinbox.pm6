@@ -6,11 +6,11 @@ unit class Libui::Spinbox does Libui::Control;
 has uiSpinbox $!spinbox;
 has $!value-changed;
 
-submethod BUILD(:$min, :$max) {
+submethod BUILD(int32 :$min, int32 :$max) {
 	$!spinbox = uiNewSpinbox($min, $max);
 }
 
-multi method new(int32 $min, int32 $max) {
+multi method new(Int $min, Int $max) {
 	self.bless(:$min, :$max);
 }
 

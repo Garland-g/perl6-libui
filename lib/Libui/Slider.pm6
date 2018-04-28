@@ -10,7 +10,7 @@ submethod BUILD(int32 :$min, int32 :$max) {
 	$!slider = uiNewSlider($min, $max);
 }
 
-multi method new(int32 $min, int32 $max) {
+multi method new(Int $min, Int $max) {
 	self.bless(:$min, :$max);
 }
 
