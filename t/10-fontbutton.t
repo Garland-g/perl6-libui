@@ -12,7 +12,7 @@ isa-ok $button, Libui::FontButton, <Create fontbutton>;
 
 isa-ok $button.changed, Supply, <Get changed supply>;
 
-lives-ok {$button.font(); }, <Get font>;
+#lives-ok {$button.font(); }, <Get font>;
 
 #say $button.family;
 
