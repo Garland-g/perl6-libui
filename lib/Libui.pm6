@@ -40,20 +40,27 @@ sub Init($options = uiInitOptions.new) is export {
 
 =head3 Cross-platform: Windows, Mac, Linux
 
-=for description
 This library provides an object-oriented interface to libui.
 
+=head3 Basic Use:
+
+C<Init();
+my Libui::App $app .= new("test");
+$app.root.closing.tap({$app.exit});
+$app.run();>
+
+=head4 Install from CPAN with:
 
 
 =head2 Examples:
 =head3 Controlgallery Tab: Basic Controls
 =for Linux
-C<[!controlgallery](./examples/controlgallery-linux.png)>
+[!controlgallery](./examples/controlgallery-linux.png)
 
 =for Windows
-C<[!controlgallery](./examples/controlgallery-windows.png)>
+[!controlgallery](./examples/controlgallery-windows.png)
 
 =for Macos
-C<[!controlgallery](./examples/controlgallery-macos.png)>
+[!controlgallery](./examples/controlgallery-macos.png)
 
 =end pod

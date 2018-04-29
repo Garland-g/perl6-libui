@@ -6,10 +6,13 @@ Perl6 binding to [libui](https://github.com/andlabs/libui)
 
 ### Cross-platform: Windows, Mac, Linux
 
-description
-===========
-
 This library provides an object-oriented interface to libui.
+
+### Basic Use:
+
+`Init(); my Libui::App $app .= new("test"); $app.root.closing.tap({$app.exit}); $app.run();`
+
+#### Install from CPAN with:
 
 Examples:
 ---------
@@ -19,15 +22,15 @@ Examples:
 Linux
 =====
 
-`[!controlgallery](./examples/controlgallery-linux.png)`
+[!controlgallery](./examples/controlgallery-linux.png)
 
 Windows
 =======
 
-`[!controlgallery](./examples/controlgallery-windows.png)`
+[!controlgallery](./examples/controlgallery-windows.png)
 
 Macos
 =====
 
-`[!controlgallery](./examples/controlgallery-macos.png)`
+[!controlgallery](./examples/controlgallery-macos.png)
 
