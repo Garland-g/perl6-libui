@@ -1,32 +1,23 @@
-# Libui
+Libui
+=====
 
-##Perl6 binding to [libui](https://github.com/andlabs/libui)
+Perl6 binding to [libui](https://github.com/andlabs/libui)
+----------------------------------------------------------
 
-###Cross-platform: Windows, Mac, Linux
+### Cross-platform: Windows, Mac, Linux
+
+description
+===========
 
 This library provides an object-oriented interface to libui.
 
-###Basic Use:
+Examples:
+---------
 
-> Init();
+### Controlgallery Tab: Basic Controls
 
-> my Libui::App $app .= new("test");
+pictures
+========
 
-> $app.root.closing.tap({$app.exit});
+Linux: [controlgallery](./examples/controlgallery-linux.png) Windows: [controlgallery](./examples/controlgallery-windows.png) Macos: [controlgallery](./examples/controlgallery-macos.png)
 
-> $app.run();
-
-Install with :
-> zef install Libui;
-
-##Examples:
-###Controlgallery Tab: Basic Controls
-
-Linux:
-![controlgallery](./examples/controlgallery-linux.png)
-
-Windows:
-![controlgallery](./examples/controlgallery-windows.png)
-
-Macos:
-![controlgallery](./examples/controlgallery-macos.png)

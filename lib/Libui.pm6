@@ -31,3 +31,29 @@ sub Init($options = uiInitOptions.new) is export {
 		die $err;
 	}
 }
+
+=begin pod
+
+=head1 Libui
+
+=head2 Perl6 binding to L<libui|https://github.com/andlabs/libui>
+
+=head3 Cross-platform: Windows, Mac, Linux
+
+=for description
+This library provides an object-oriented interface to libui.
+
+
+
+=head2 Examples:
+=head3 Controlgallery Tab: Basic Controls
+=for Linux
+L<controlgallery|./examples/controlgallery-linux.png>
+
+=for Windows
+L<controlgallery|./examples/controlgallery-windows.png>
+
+=for Macos
+L<controlgallery|./examples/controlgallery-macos.png>
+
+=end pod
