@@ -34,13 +34,6 @@ lives-ok {
 	$grid.insert($entry2, $entry, 3, 1, 1, 1, 0, 0, 0);
 	$grid.insert($button2, $entry2, 0, 1, 1, 0, 0, 0, 0);
 }
-unless $*KERNEL eq 'win32' {
-my Libui::App $app .= new('test');
 
-$app.set-content($vbox);
-
-start {Promise.in(0.2).then({$app.exit})};
-$app.run();
-}
 done-testing;
 # vi:syntax=perl6

@@ -18,11 +18,6 @@ $box.append($button, 0);
 
 lives-ok {$app.set-content($box); }, <Add a control to the window>;
 
-unless $*KERNEL eq 'win32' {
-start {Promise.in(0.3).then( {$app.exit}) };
-lives-ok {$app.run;}, 'Run the app';
-}
-
 
 done-testing;
 
