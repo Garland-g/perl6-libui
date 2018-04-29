@@ -15,9 +15,9 @@ submethod BUILD(
 }
 
 multi method new( Str $title
-								, int32 $width  = 640
-								, int32 $height = 480
-								, int32 $has-menubar = 1) {
+								, Int $width  = 640
+								, Int $height = 480
+								, Int $has-menubar = 1) {
 	self.bless(:$title, :$width, :$height, :$has-menubar);
 }
 
