@@ -10,19 +10,21 @@ This library provides an object-oriented interface to libui.
 
 ### Basic Use:
 
-`Init(); my Libui::App $app .= new("test"); $app.root.closing.tap({$app.exit}); $app.run();`
+    Init();
+    my Libui::App $app .= new("test");
+    $app.root.closing.tap({$app.exit});
+    $app.run();
 
 #### Install from CPAN with:
+
+`zef install Libui`
 
 Examples:
 ---------
 
 ### Controlgallery Tab: Basic Controls
 
-Linux
-=====
-
-[!controlgallery](./examples/controlgallery-linux.png)
+#### Linux [!controlgallery](./examples/controlgallery-linux.png)
 
 Windows
 =======

@@ -44,17 +44,20 @@ This library provides an object-oriented interface to libui.
 
 =head3 Basic Use:
 
-C<Init();
+=begin code
+Init();
 my Libui::App $app .= new("test");
 $app.root.closing.tap({$app.exit});
-$app.run();>
+$app.run();
+=end code
 
 =head4 Install from CPAN with:
 
+C<zef install Libui>
 
 =head2 Examples:
 =head3 Controlgallery Tab: Basic Controls
-=for Linux
+=head4 Linux
 [!controlgallery](./examples/controlgallery-linux.png)
 
 =for Windows
