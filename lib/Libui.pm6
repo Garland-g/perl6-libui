@@ -23,14 +23,16 @@ use Libui::Spinbox;
 use Libui::Tab;
 use Libui::Window;
 
-unit module Libui is export;
+class Libui is export {
 
-sub Init($options = uiInitOptions.new) is export {
-	my Str $err = uiInit($options);
-	if $err {
-		die $err;
+	sub Init($options = uiInitOptions.new) is export {
+		my Str $err = uiInit($options);
+		if $err {
+			die $err;
+		}
 	}
 }
+
 
 =begin pod
 
@@ -58,12 +60,17 @@ C<zef install Libui>
 =head2 Examples:
 =head3 Controlgallery Tab: Basic Controls
 =head4 Linux
-[!controlgallery](./examples/controlgallery-linux.png)
 
-=for Windows
-[!controlgallery](./examples/controlgallery-windows.png)
+![controlgallery](./examples/controlgallery-linux.png)
 
-=for Macos
-[!controlgallery](./examples/controlgallery-macos.png)
+=head4 Windows
+
+![controlgallery](./examples/controlgallery-windows.png)
+
+=head4 Macos
+
+![controlgallery](./examples/controlgallery-macos.png)
 
 =end pod
+
+

@@ -24,15 +24,15 @@ Examples:
 
 ### Controlgallery Tab: Basic Controls
 
-#### Linux [!controlgallery](./examples/controlgallery-linux.png)
+#### Linux
 
-Windows
-=======
+![controlgallery](./examples/controlgallery-linux.png)
 
-[!controlgallery](./examples/controlgallery-windows.png)
+#### Windows
 
-Macos
-=====
+![controlgallery](./examples/controlgallery-windows.png)
 
-[!controlgallery](./examples/controlgallery-macos.png)
+#### Macos
+
+![controlgallery](./examples/controlgallery-macos.png)
 
