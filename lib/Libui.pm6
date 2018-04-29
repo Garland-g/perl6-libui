@@ -48,12 +48,12 @@ This library provides an object-oriented interface to libui.
 =head2 Examples:
 =head3 Controlgallery Tab: Basic Controls
 =for Linux
-L<controlgallery|./examples/controlgallery-linux.png>
+C<[!controlgallery](./examples/controlgallery-linux.png)>
 
 =for Windows
-L<controlgallery|./examples/controlgallery-windows.png>
+C<[!controlgallery](./examples/controlgallery-windows.png)>
 
 =for Macos
-L<controlgallery|./examples/controlgallery-macos.png>
+C<[!controlgallery](./examples/controlgallery-macos.png)>
 
 =end pod
