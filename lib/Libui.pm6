@@ -50,7 +50,7 @@ This library provides an object-oriented interface to libui.
 =begin code
 use Libui;
 
-Libui::Init();
+Libui-Init();
 my Libui::App $app .= new("test");
 $app.window.closing.tap({$app.exit});
 $app.run();
