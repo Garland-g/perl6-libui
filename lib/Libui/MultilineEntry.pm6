@@ -7,12 +7,16 @@ role Libui::MultilineEntry-Common {
 	has uiMultilineEntry $!entry;
 	has $!changed-supply;
 
-	method text() returns Str {
+	multi method text() returns Str {
 		uiMultilineEntryText($!entry);
 	}
 
 	method set-text(Str $text) {
 		uiMultilineEntrySetText($!entry, $text);
+	}
+
+	multi method text(Str $text) {
+		self.set-text($text);
 	}
 
 	method append($text) {
@@ -31,12 +35,16 @@ role Libui::MultilineEntry-Common {
 		}
 	}
 
-	method read-only() returns int32 {
+	multi method read-only() returns int32 {
 		return uiMultilineEntryReadOnly($!entry);
 	}
 
 	method set-read-only(int32 $read-only) {
 		uiMultilineEntrySetReadOnly($!entry, $read-only);
+	}
+
+	multi method read-only(Int $read-only) {
+		self.read-only($read-only);
 	}
 
 	method !WIDGET() {

@@ -36,12 +36,16 @@ method clicked() returns Supply {
 	}
 }
 
-method checked() returns int32 {
+multi method checked() returns int32 {
 	uiMenuItemChecked($!item);
 }
 
 method set-checked(int32 $checked) {
 	uiMenuItemSetChecked($!item, $checked);
+}
+
+multi method checked(Int $checked) {
+	self.set-checked($checked);
 }
 
 method !WIDGET() {

@@ -20,8 +20,12 @@ multi method new( Str $title
 								, Int $has-menubar = 1) {
 	self.bless(:$title, :$width, :$height, :$has-menubar);
 }
+#| Get the Libui::Window
+method root() returns Libui::Window {
+	return $!window;
+}
 
-method root() {
+method window() returns Libui::Window {
 	return $!window;
 }
 

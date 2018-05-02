@@ -17,6 +17,8 @@ This library provides an object-oriented interface to libui.
     $app.window.closing.tap({$app.exit});
     $app.run();
 
+### Widgets Provided:
+
 <table class="pod-table">
 <thead><tr>
 <th>Widget</th> <th>Description</th>

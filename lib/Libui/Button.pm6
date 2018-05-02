@@ -14,12 +14,16 @@ multi method new(Str $label) {
 	self.bless(:$label);
 }
 
-method text() returns Str {
+multi method text() returns Str {
 	return uiButtonText($!button);
 }
 
 method set-text(Str $label) {
 	uiButtonSetText($!button, $label);
+}
+
+multi method text(Str $label) {
+	self.set-text($label);
 }
 
 method clicked() returns Supply {

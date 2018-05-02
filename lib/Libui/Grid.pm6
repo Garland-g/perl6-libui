@@ -1,9 +1,7 @@
 use Libui::Raw;
-#use Libui::Control;
 use Libui::Container;
 
 unit class Libui::Grid is export;
-#also does Libui::Control;
 also does Libui::Container;
 
 
@@ -23,13 +21,17 @@ method append(Libui::Control $control
 						 , int32 $vexpand
 						 , int32 $valign
 						 ) {
- uiGridAppend($!grid
+	if $control.top-level {			
+		note "cannot place {$control.WHAT} into a Libui::Container";
+	} else {
+	uiGridAppend($!grid
 							, $control.Control
 							, $left, $top
 							, $xspan, $yspan
 							, $hexpand, $halign
 							, $vexpand, $valign
 							);
+	}
 }
 
 method insert(Libui::Control $control
@@ -42,6 +44,9 @@ method insert(Libui::Control $control
 						 , int32 $vexpand
 						 , int32 $valign
 					 ) {
+	if $control.top-level {			
+		note "cannot place {$control.WHAT} into a Libui::Container";
+	} else {
 	uiGridInsertAt($!grid
 							 , $control.Control
 							 , $existing.Control
@@ -50,14 +55,32 @@ method insert(Libui::Control $control
 							 , $hexpand, $halign
 							 , $vexpand, $valign
 							 );
-}	
+	}	
+}
 
-method padded() returns int32 {
+multi method padded() returns int32 {
 	return uiGridPadded($!grid);
 }
 
 method set-padded(int32 $padded) {
 	uiGridSetPadded($!grid, $padded);
+}
+
+method set-content(Libui::Control $control
+						 , int32 $left
+						 , int32 $top
+						 , int32 $xspan
+						 , int32 $yspan
+						 , int32 $hexpand
+						 , int32 $halign
+						 , int32 $vexpand
+						 , int32 $valign
+						 )  {
+self.append($control, $left, $top, $xspan, $yspan, $hexpand, $halign, $vexpand, $valign);
+}
+
+multi method padded(Int $padded) {
+	self.set-padded($padded);
 }
 
 method !WIDGET() {

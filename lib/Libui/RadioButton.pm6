@@ -14,12 +14,16 @@ method append(Str $text) {
 	uiRadioButtonsAppend($!radio-buttons, $text);
 }
 
-method selected() returns int32 {
+multi method selected() returns int32 {
 	uiRadioButtonsSelected($!radio-buttons);
 }
 
 method set-selected(int32 $n) {
 	uiRadioButtonsSetSelected($!radio-buttons, $n);
+}
+
+multi method selected(Int $n) {
+	self.set-selected($n);
 }
 
 method changed() {

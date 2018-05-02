@@ -56,6 +56,7 @@ $app.window.closing.tap({$app.exit});
 $app.run();
 =end code
 
+=head3 Widgets Provided:
 =begin table
  Widget | Description
  =====================

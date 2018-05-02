@@ -7,12 +7,16 @@ role Libui::Entry-Common does Libui::Control {
 	has $!changed-supply;
 
 
-	method text() returns Str {
+	multi method text() returns Str {
 		return uiEntryText($!entry);
 	}
 
 	method set-text(Str $text) {
 		uiEntrySetText($!entry, $text);
+	}
+
+	multi method text(Str $text) {
+		self.set-text($text);
 	}
 
 	method changed() returns Supply {
@@ -28,7 +32,7 @@ role Libui::Entry-Common does Libui::Control {
 	}
 
 
-	method read-only() returns int32 {
+	multi method read-only() returns int32 {
 		return uiEntryReadOnly($!entry);
 	}
 
@@ -36,6 +40,9 @@ role Libui::Entry-Common does Libui::Control {
 		uiEntrySetReadOnly($!entry, $read-only);
 	}
 
+	multi method read-only(Int $read-only) {
+		self.set-read-only($read-only);
+	}
 
 	method !WIDGET() {
 		return $!entry;

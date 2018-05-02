@@ -14,12 +14,16 @@ multi method new(Int $min, Int $max) {
 	self.bless(:$min, :$max);
 }
 
-method value() returns int32 {
+multi method value() returns int32 {
 	uiSpinboxValue($!spinbox);
 }
 
 method set-value(int32 $value) {
 	uiSpinboxSetValue($!spinbox, $value);
+}
+
+multi method value(Int $value) {
+	self.set-value($value);
 }
 
 method changed() returns Supply {

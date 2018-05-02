@@ -12,12 +12,16 @@ method destroy() {
 	uiControlDestroy(self.Control);
 }
 
-method parent() returns uiControl {
+multi method parent() returns uiControl {
 	return uiControlParent(self.Control);
 }
 
 method set-parent(uiControl $control)  {
 	uiControlSetParent(self.Control, $control); 
+}
+
+multi method parent(uiControl $control) {
+	self.set-parent($control);
 }
 
 method top-level() returns int32 {

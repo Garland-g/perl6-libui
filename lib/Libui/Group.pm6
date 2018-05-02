@@ -1,10 +1,8 @@
 use Libui::Raw;
 use Libui::Container;
-#use Libui::Control;
 
 unit class Libui::Group;
 also does Libui::Container;
-#also does Libui::Control;
 
 has uiGroup $!group;
 
@@ -16,7 +14,7 @@ multi method new(Str $title) {
 	self.bless(:$title);
 }
 
-method title() returns Str {
+multi method title() returns Str {
 	uiGroupTitle($!group);
 }
 
@@ -24,16 +22,32 @@ method set-title(Str $title) {
 	uiGroupSetTitle($!group, $title);
 }
 
-method set-child(Libui::Control $control) {
-	uiGroupSetChild($!group, $control.Control)
+multi method title(Str $title) {
+	self.set-title($title);
 }
 
-method margined() returns int32 {
+method set-child(Libui::Control $control) {
+	if $control.top-level {			
+		note "cannot place {$control.WHAT} into a Libui::Container";
+	} else {
+		uiGroupSetChild($!group, $control.Control)
+	}
+}
+
+method set-content(Libui::Control $control) {
+	self.set-child($control);
+}
+
+multi method margined() returns int32 {
 	return uiGroupMargined($!group);
 }
 
 method set-margined(int32 $margined) {
 	uiGroupSetMargined($!group, $margined);
+}
+
+multi method margined(Int $margined) {
+	self.set-margined($margined);	
 }
 
 method !WIDGET() {

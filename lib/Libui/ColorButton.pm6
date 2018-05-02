@@ -10,7 +10,7 @@ submethod BUILD() {
 	$!button = uiNewColorButton();
 }
 
-method color(num64 $r is rw, num64 $g is rw, num64 $b is rw, num64 $a is rw) {
+multi method color(num64 $r is rw, num64 $g is rw, num64 $b is rw, num64 $a is rw) {
 	uiColorButtonColor($!button, $r, $g, $b, $a);
 }
 

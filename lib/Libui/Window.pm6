@@ -1,9 +1,7 @@
 use Libui::Raw;
-#use Libui::Control;
 use Libui::Container;
 
 unit class Libui::Window 
-#	does Libui::Control
 	does Libui::Container;
 
 has uiWindow $!window;
@@ -18,20 +16,29 @@ multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menub
 	self.bless(:$title, :$width, :$height, :$has-menubar);
 }
 
-method !set-content( Libui::Control $control) {
-	uiWindowSetChild($!window, $control.Control);
+method set-content( Libui::Control $control) {
+	if $control.top-level {			
+		note "cannot place {$control.WHAT} into a Libui::Container";
+	} else {
+		uiWindowSetChild($!window, $control.Control);
+	}
 }
 
 #method append(Libui::Control $control) {
 #	uiWindowSetChild($!window, $control.Control);
 #}
 
-method title() returns Str {
+multi method title() returns Str {
 	return uiWindowTitle($!window);
 }
 
 method set-title(Str $title) {
 	uiWindowSetTitle($!window, $title);
+}
+
+
+multi method title(Str $title) {
+	self.set-title($title);
 }
 
 #| Fails until $window.show() has been run
@@ -57,7 +64,7 @@ method set-content-size(int32 $width, int32 $height) {
 	uiWindowSetContentSize($!window, $width, $height);
 }
 
-method fullscreen() {
+multi method fullscreen() {
 	return uiWindowFullscreen($!window);
 }
 
@@ -65,7 +72,11 @@ method set-fullscreen(int32 $fullscreen) {
 	uiWindowSetFullscreen($!window, $fullscreen);
 }
 
-method borderless() returns int32 {
+multi method fullscreen(Int $fullscreen) {
+	self.set-fullscreen($fullscreen);
+}
+
+multi method borderless() returns int32 {
 	return uiWindowBorderless($!window);
 }
 
@@ -73,12 +84,20 @@ method set-borderless(int32 $borderless) {
 	uiWindowSetBorderless($!window, $borderless);
 }
 
-method margined() returns int32 {
+multi method borderless(Int $borderless) {
+	self.set-borderless($borderless);
+}
+
+multi method margined() returns int32 {
 	return uiWindowMargined($!window);
 }
 
 method set-margined(int32 $margined) {
 	uiWindowSetMargined($!window, $margined);
+}
+
+multi method margined(Int $margined) {
+	self.set-margined($margined);
 }
 
 method closing() returns Supply {

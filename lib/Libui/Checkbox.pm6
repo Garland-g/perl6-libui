@@ -34,8 +34,12 @@ method toggled() returns Supply {
 	}
 }
 
-method checked() returns int32 {
+multi method checked() returns int32 {
 	uiCheckboxChecked($!checkbox);
+}
+
+multi method checked(Int $checked) {
+	self.set-checked($checked);
 }
 
 method set-checked(int32 $checked) {

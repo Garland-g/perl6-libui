@@ -11,13 +11,16 @@ submethod BUILD() {
 
 #Method not implemented in upstream
 # TODO Enable when implemented
-#method value() returns int32 { 
+#multi method value() returns int32 { 
 #	uiProgressBarValue($!pbar);
 #}
 
-
 method set-value(int32 $value) {
 	uiProgressBarSetValue($!pbar, $value);
+}
+
+multi method value(Int $value) {
+	self.set-value($value);
 }
 
 method !WIDGET() {

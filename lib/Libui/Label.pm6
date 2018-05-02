@@ -14,12 +14,16 @@ multi method new(Str $text){
 	self.bless(:$text);
 }
 
-method text() returns Str {
+multi method text() returns Str {
 	return uiLabelText($!label);
 }
 
 method set-text(Str $text) {
 	uiLabelSetText($!label, $text);
+}
+
+multi method text(Str $text) {
+	self.set-text($text);
 }
 
 method !WIDGET() {

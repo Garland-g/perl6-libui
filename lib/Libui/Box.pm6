@@ -1,42 +1,52 @@
 use v6;
 use Libui::Raw;
-#use Libui::Control;
 use Libui::Container;
 
 role Libui::Box {
-#	also does Libui::Control;
 	also does Libui::Container;
 
 	has uiBox $!box;
 
 	method append-list(@control, @stretchy = (0,)) {
 		for @control.kv -> $i, $control {
-			if $i < @stretchy.elems {
+			if $control.top-level {
+				note "cannot place {$control.WHAT} into a Libui::Container";
+			} else {
+				if $i < @stretchy.elems {
 					uiBoxAppend(self!WIDGET, $control.Control, @stretchy[$i]);
 				}	else {
-				uiBoxAppend(self!WIDGET, $control.Control, @stretchy[*-1]);
+					uiBoxAppend(self!WIDGET, $control.Control, @stretchy[*-1]);
 				}
 			}
 		}
+	}
 
 	method append(Libui::Control $control, int32 $stretchy) {
-		uiBoxAppend($!box, $control.Control, $stretchy);
+		if $control.top-level() {
+			note "cannot place {$control.WHAT} into a Libui::Box";
+		} else {
+			uiBoxAppend($!box, $control.Control, $stretchy);
+		}
 	}
 
 	method delete-item(int32:D $index) {
 		uiBoxDelete($!box, $index);
 	}
 
-	method content(Libui::Control $control, int32:D :$stretchy) {
+	method set-content(Libui::Control $control, int32:D :$stretchy) {
 		self.append($control, $stretchy);
 	}
 
-	method padded() returns int32 {
+	multi method padded() returns int32 {
 		return uiBoxPadded($!box);
 	}
 
 	method set-padded(int32:D $padded) {
 		uiBoxSetPadded($!box, $padded);
+	}
+
+	multi method padded(Int $padded) {
+		self.set-padded($padded);
 	}
 
 	method !WIDGET() {

@@ -14,12 +14,16 @@ method append(Str $text) {
 	uiEditableComboboxAppend($!combobox, $text);
 }
 
-method text() returns Str {
+multi method text() returns Str {
 	return uiEditableComboboxText($!combobox);
 }
 
 method set-text(Str $text) {
 	uiEditableComboboxSetText($!combobox, $text);
+}
+
+multi method text(Str $text) {
+	self.set-text($text);
 }
 
 method changed() {
