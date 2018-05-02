@@ -4,7 +4,7 @@ use Libui;
 
 plan *;
 
-Init();
+Libui-Init();
 
 my $combobox = Libui::EditableCombobox.new;
 

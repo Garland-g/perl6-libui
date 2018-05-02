@@ -3,7 +3,7 @@ use Test;
 use Libui;
 
 plan 4;
-Init();
+Libui-Init();
 my $button = Libui::Button.new('test');
 
 isa-ok $button, Libui::Button, <Create a Button> or bail-out "Cannot continue without a button";
