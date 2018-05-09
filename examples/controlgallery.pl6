@@ -164,7 +164,7 @@ sub makeDataChoosersPage(Libui::Window $window) {
 	return $hbox;
 }
 
-Init();
+Libui-Init();
 
 my $app = Libui::App.new(title => "libui Control Gallery", width => 640, height => 480, has-menubar => 0);
 $app.root.closing.tap({ $app.exit });

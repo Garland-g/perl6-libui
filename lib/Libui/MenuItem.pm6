@@ -1,6 +1,7 @@
 use Libui::Raw;
+use Libui::Control;
 
-unit class Libui::MenuItem;
+unit class Libui::MenuItem does Libui::Control;
 
 has uiMenuItem $!item;
 has $!clicked-supply;

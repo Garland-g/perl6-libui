@@ -16,12 +16,12 @@ multi method parent() returns uiControl {
 	return uiControlParent(self.Control);
 }
 
-method set-parent(uiControl $control)  {
-	uiControlSetParent(self.Control, $control); 
+method set-parent(Libui::Control $control)  {
+	uiControlSetParent(self.Control, $control.Control); 
 }
 
-multi method parent(uiControl $control) {
-	self.set-parent($control);
+multi method parent(Libui::Control $control) {
+	self.set-parent($control.Control);
 }
 
 method top-level() returns int32 {

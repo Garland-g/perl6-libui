@@ -5,14 +5,14 @@ unit class Libui::Window
 	does Libui::Container;
 
 has uiWindow $!window;
-has $!size-changed-supply;
-has $!closing-supply;
+has Supply $!size-changed-supply;
+has Supply $!closing-supply;
 
-submethod BUILD(Str :$title, int32 :$width, int32 :$height, int32 :$has-menubar) {
+submethod BUILD(Str :$title, int32 :$width = 640, int32 :$height = 480, int32 :$has-menubar = 1) {
 	$!window = uiNewWindow($title, $width, $height, $has-menubar);
 }
 
-multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 0) { 
+multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 1) { 
 	self.bless(:$title, :$width, :$height, :$has-menubar);
 }
 

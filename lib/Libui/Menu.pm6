@@ -1,8 +1,9 @@
 use Libui::Raw;
 use Libui::MenuItem;
-unit class Libui::Menu;
+use Libui::Control;
+unit class Libui::Menu does Libui::Control;
 
-has uiMenu $menu;
+has uiMenu $!menu;
 
 submethod BUILD(Str:D :$name) {
 	$!menu = uiNewMenu($name);
@@ -34,4 +35,8 @@ method append-about-item() returns Libui::MenuItem {
 
 method append-separator() {
 	uiMenuAppendSeparator($!menu);
+}
+
+method !WIDGET() {
+	return $!menu;
 }
