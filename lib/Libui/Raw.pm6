@@ -686,28 +686,24 @@ class uiGrid is repr('CStruct') is export {
 #constant uiDrawTextLayout is export := uiDrawTextLayout;
 # Functions
 
-#== /mnt/b/Documents/alpha3.1/src/ui.h ==
 
 #const char *uiInit(uiInitOptions *options);
 sub uiInit(uiInitOptions $options # Typedef<uiInitOptions>->«uiInitOptions»*
            ) is native(LIB) returns Str is export { * }
 
-#From /mnt/b/Documents/alpha3.1/src/ui.h:42
+
 #_UI_EXTERN void uiUninit(void);
 sub uiUninit(
              ) is native(LIB)  is export { * }
-#
-#From /mnt/b/Documents/alpha3.1/src/ui.h:43
+
 #_UI_EXTERN void uiFreeInitError(const char *err);
 sub uiFreeInitError(Str $err # const char*
                     ) is native(LIB)  is export { * }
 
-#From /mnt/b/Documents/alpha3.1/src/ui.h:45
 #UI_EXTERN void uiMain(void);
 sub uiMain(
            ) is native(LIB)  is export { * }
 
-#From /mnt/b/Documents/alpha3.1/src/ui.h:46
 #_UI_EXTERN int uiMainStep(int wait);
 sub uiMainStep(int32 $wait # int
                ) is native(LIB) returns int32 is export { * }
