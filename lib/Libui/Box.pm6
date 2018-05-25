@@ -1,5 +1,5 @@
 use v6;
-use Libui::Raw;
+use Libui::Raw :box;
 use Libui::Container;
 
 role Libui::Box {

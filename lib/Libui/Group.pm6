@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :group;
 use Libui::Container;
 
 unit class Libui::Group;

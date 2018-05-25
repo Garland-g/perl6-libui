@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :window;
 use Libui::Container;
 
 unit class Libui::Window 

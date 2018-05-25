@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :draw, :font;
 use Libui::Control;
 
 ############################################################

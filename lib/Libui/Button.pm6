@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :button;
 use Libui::Control;
 
 unit class Libui::Button does Libui::Control;

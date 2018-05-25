@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :combobox;
 use Libui::Control;
 
 unit class Libui::Combobox does Libui::Control;

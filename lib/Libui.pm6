@@ -1,3 +1,5 @@
+use Libui::Raw :init;
+
 use Libui::App;
 use Libui::Button;
 use Libui::Box;
@@ -16,17 +18,14 @@ use Libui::MultilineEntry;
 use Libui::Picker;
 use Libui::ProgressBar;
 use Libui::RadioButton;
-use Libui::Raw;
 use Libui::Separator;
 use Libui::Slider;
 use Libui::Spinbox;
 use Libui::Tab;
 use Libui::Window;
 
-class Libui is export {
-
-	# Initializes the library
-	sub Libui-Init($options = uiInitOptions.new) is export {
+module Libui is export {
+	our sub Init($options = uiInitOptions.new) {
 		my Str $err = uiInit($options);
 		if $err {
 			die $err;
@@ -50,7 +49,7 @@ This library provides an object-oriented interface to libui.
 =begin code
 use Libui;
 
-Libui-Init();
+Libui::Init;
 my Libui::App $app .= new("test");
 $app.window.closing.tap({$app.exit});
 $app.run();
@@ -93,15 +92,15 @@ C<zef install Libui>
 =head3 Controlgallery Tab: Basic Controls
 =head4 Linux
 
-!L<|./examples/controlgallery-linux.png>
+L<|./examples/controlgallery-linux.png>
 
 =head4 Windows
 
-!L<|./examples/controlgallery-windows.png>
+L<|./examples/controlgallery-windows.png>
 
 =head4 Macos
 
-!L<|./examples/controlgallery-macos.png>
+L<|./examples/controlgallery-macos.png>
 
 =head3 License
 

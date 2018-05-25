@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :separator;
 use Libui::Control;
 
 role Libui::Separator does Libui::Control {

@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :multientry;
 use Libui::Control;
 
 role Libui::MultilineEntry-Common {

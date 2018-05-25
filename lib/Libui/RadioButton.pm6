@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :radiobutton;
 use Libui::Control;
 
 unit class Libui::RadioButton does Libui::Control;

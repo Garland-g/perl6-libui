@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :progbar;
 use Libui::Control;
 
 unit class Libui::ProgressBar does Libui::Control;

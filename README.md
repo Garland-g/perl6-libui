@@ -12,7 +12,7 @@ This library provides an object-oriented interface to libui.
 
     use Libui;
 
-    Libui-Init();
+    Libui::Init;
     my Libui::App $app .= new("test");
     $app.window.closing.tap({$app.exit});
     $app.run();
@@ -39,15 +39,15 @@ Examples:
 
 #### Linux
 
-![](./examples/controlgallery-linux.png)
+[](./examples/controlgallery-linux.png)
 
 #### Windows
 
-![](./examples/controlgallery-windows.png)
+[](./examples/controlgallery-windows.png)
 
 #### Macos
 
-![](./examples/controlgallery-macos.png)
+[](./examples/controlgallery-macos.png)
 
 ### License
 

@@ -5,7 +5,7 @@ use Libui;
 plan *;
 
 my Libui::App $app;
-Libui-Init(); 
+Libui::Init();
 
 lives-ok {$app .= new('test'); }, 'Create a Libui::App'
 	or bail-out "Cannot proceed without an app";

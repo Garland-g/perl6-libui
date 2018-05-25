@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :checkbox;
 use Libui::Control;
 
 unit class Libui::Checkbox does Libui::Control;

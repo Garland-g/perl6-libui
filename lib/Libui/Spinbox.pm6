@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :spinbox;
 use Libui::Control;
 
 unit class Libui::Spinbox does Libui::Control;

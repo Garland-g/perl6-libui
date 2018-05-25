@@ -2,7 +2,7 @@ use v6;
 use Test;
 use Libui;
 
-Libui-Init();
+Libui::Init();
 
 plan *;
 

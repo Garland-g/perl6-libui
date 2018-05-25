@@ -4,7 +4,7 @@ use Libui;
 
 plan *;
 
-Libui-Init();
+Libui::Init();
 	my $window = Libui::Window.new('test');
 
 subtest 'before $window.show', {

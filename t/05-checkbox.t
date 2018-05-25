@@ -3,7 +3,7 @@ use Test;
 use Libui;
 
 plan *;
-Libui-Init();
+Libui::Init();
 my $checkbox = Libui::Checkbox.new('text');
 
 isa-ok $checkbox, Libui::Checkbox, <Create a checkbox> or bail-out "Cannot proceed without a checkbox";

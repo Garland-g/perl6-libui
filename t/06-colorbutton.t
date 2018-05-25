@@ -5,7 +5,7 @@ use Libui;
 
 plan *;
 
-Libui-Init();
+Libui::Init();
 
 my $button = Libui::ColorButton.new;
 

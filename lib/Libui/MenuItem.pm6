@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :menu;
 use Libui::Control;
 
 unit class Libui::MenuItem does Libui::Control;

@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :slider;
 use Libui::Control;
 
 unit class Libui::Slider does Libui::Control;

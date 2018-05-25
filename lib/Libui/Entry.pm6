@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :entry;
 use Libui::Control;
 
 role Libui::Entry-Common does Libui::Control {

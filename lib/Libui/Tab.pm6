@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :tab;
 use Libui::Container;
 
 unit class Libui::Tab;

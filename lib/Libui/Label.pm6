@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :label;
 use Libui::Control;
 
 unit class Libui::Label

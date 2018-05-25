@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :form;
 use Libui::Container;
 
 unit class Libui::Form;

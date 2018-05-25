@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :grid;
 use Libui::Container;
 
 unit class Libui::Grid is export;
