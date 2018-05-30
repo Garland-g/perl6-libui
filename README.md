@@ -4,9 +4,11 @@ Libui
 Perl6 binding to [andlabs/libui](https://github.com/andlabs/libui)
 ------------------------------------------------------------------
 
+andlabs/libui is currently alpha software. This binding works with the current release, alpha3.5. It does not have full functionality, and is subject to change as andlabs/libui changes underneath it.
+
 ### Cross-platform: Windows, Mac, Linux
 
-This library provides an object-oriented interface to libui.
+This library provides an object-oriented interface to libui. A DLL and a dylib are provided in resources.
 
 ### Basic Use:
 
@@ -14,7 +16,11 @@ This library provides an object-oriented interface to libui.
 
     Libui::Init;
     my Libui::App $app .= new("test");
+
+    #This allows the window to be closed 
+    #when the titlebar's close button is clicked
     $app.window.closing.tap({$app.exit});
+
     $app.run();
 
 ### Widgets Provided:

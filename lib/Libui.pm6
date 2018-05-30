@@ -40,9 +40,14 @@ module Libui is export {
 
 =head2 Perl6 binding to L<andlabs/libui|https://github.com/andlabs/libui>
 
+andlabs/libui is currently alpha software. This binding works with the current release, alpha3.5.
+It does not have full functionality, and is subject to change as andlabs/libui changes underneath it.
+
+
 =head3 Cross-platform: Windows, Mac, Linux
 
 This library provides an object-oriented interface to libui.
+A DLL and a dylib are provided in resources.
 
 =head3 Basic Use:
 
@@ -51,7 +56,11 @@ use Libui;
 
 Libui::Init;
 my Libui::App $app .= new("test");
+
+#This allows the window to be closed
+#when the titlebar's close button is clicked
 $app.window.closing.tap({$app.exit});
+
 $app.run();
 =end code
 
