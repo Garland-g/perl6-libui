@@ -101,15 +101,15 @@ C<zef install Libui>
 =head3 Controlgallery Tab: Basic Controls
 =head4 Linux
 
-L<|./examples/controlgallery-linux.png>
+L<./examples/controlgallery-linux.png>
 
 =head4 Windows
 
-L<|./examples/controlgallery-windows.png>
+L<./examples/controlgallery-windows.png>
 
 =head4 Macos
 
-L<|./examples/controlgallery-macos.png>
+L<./examples/controlgallery-macos.png>
 
 =head3 License
 

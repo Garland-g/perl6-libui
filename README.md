@@ -17,7 +17,7 @@ This library provides an object-oriented interface to libui. A DLL and a dylib a
     Libui::Init;
     my Libui::App $app .= new("test");
 
-    #This allows the window to be closed 
+    #This allows the window to be closed
     #when the titlebar's close button is clicked
     $app.window.closing.tap({$app.exit});
 
@@ -45,15 +45,15 @@ Examples:
 
 #### Linux
 
-[](./examples/controlgallery-linux.png)
+[./examples/controlgallery-linux.png](./examples/controlgallery-linux.png)
 
 #### Windows
 
-[](./examples/controlgallery-windows.png)
+[./examples/controlgallery-windows.png](./examples/controlgallery-windows.png)
 
 #### Macos
 
-[](./examples/controlgallery-macos.png)
+[./examples/controlgallery-macos.png](./examples/controlgallery-macos.png)
 
 ### License
 
