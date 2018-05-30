@@ -11,6 +11,7 @@
   "provides" : {
     "Libui" : "lib/Libui.pm6",
     "Libui::App" : "lib/Libui/App.pm6",
+    "Libui::Area" : "lib/Libui/Area.pm6",
     "Libui::Box" : "lib/Libui/Box.pm6",
     "Libui::Button" : "lib/Libui/Button.pm6",
     "Libui::Checkbox" : "lib/Libui/Checkbox.pm6",
@@ -38,8 +39,11 @@
     "Libui::Tab" : "lib/Libui/Tab.pm6",
     "Libui::Window" : "lib/Libui/Window.pm6"
   },
-  "resources" : [ ],
-  "source-url" : "https://gogs.templeoffirehazard.duckdns.org/Garland_g/perl6-libui",
+  "resources" : [
+    "ui.dll",
+    "ui.dylib"
+  ],
+  "source-url" : "https://gogs.templeoffirehazard.duckdns.org/Garland_g/Libui",
   "tags" : [ ],
   "test-depends" : [ ],
   "version" : "0.0.1"
