@@ -57,6 +57,11 @@ enum uiDrawTextStretch is export(:draw) (
    uiDrawTextStretchExtraExpanded => 7,
    uiDrawTextStretchUltraExpanded => 8
 );
+enum uiDrawTextAlign is export(:draw) (
+	uiDrawTextAlignLeft => 0,
+	uiDrawTextAlignCenter => 1,
+	uiDrawTextAlignRight => 2,
+);
 enum uiModifier is export(:DEFAULT) (
    uiModifierCtrl => 1,
    uiModifierAlt => 2,
@@ -539,14 +544,11 @@ class uiDrawStrokeParams is repr('CStruct') is export(:draw) {
 	has size_t                        $.NumDashes; # Typedef<size_t>->«long unsigned int» NumDashes
 	has num64                         $.DashPhase; # double DashPhase
 }
-class uiDrawFontFamilies is repr('CStruct') is export(:draw) {
-	#Windows
-	has Pointer $.fontCollection;
-	#Unix
-	has Pointer $.f;
-	has int32 $.n;
-	#Darwin
-	has Pointer $.fonts;
+class uiDrawTextLayoutParams is repr('CStruct') is export(:draw) {
+	has Str $.String;
+	has uiFontDescriptor $.DefaultFont;
+	has num64 $.Width;
+	has uint32 $.Align;
 }
 class uiDrawTextLayout is repr('CStruct') is export(:draw) {
 	#Unix
@@ -598,14 +600,14 @@ class uiAreaKeyEvent is repr('CStruct') is export(:area) {
 	has uint32                   $.Modifiers; # Typedef<uiModifiers>->«unsigned int» Modifiers
 	has int32                         $.Up; # int Up
 }
-# TODO Redo uiFontButton when libui 0.0.4 is released
-#class uiFontDescriptor is repr('CStruct') is export(:font) {
-#	has Str $.Family;
-#	has num64 $.Size;
-#	has uint32 $.Weight; #Typedef<uiTextWeight> -> unsigned int
-#	has uint32 $.Italic; #Typedef<uiTextItalic> -> unsigned int
-#	has uint32 $.Stretch; #Typedef<uiTextStretch> -> unsigned int
-#}
+
+class uiFontDescriptor is repr('CStruct') is export(:font) {
+	has Str $.Family;
+	has num64 $.Size;
+	has uint32 $.Weight; #Typedef<uiTextWeight> -> unsigned int
+	has uint32 $.Italic; #Typedef<uiTextItalic> -> unsigned int
+	has uint32 $.Stretch; #Typedef<uiTextStretch> -> unsigned int
+}
 
 class uiFontButton is repr('CStruct') is export(:font) {
 	also does autocast;
@@ -1790,67 +1792,6 @@ sub uiDrawRestore(uiDrawContext $c)
 	{ * }
 
 
-
-sub uiDrawListFontFamilies()
-	returns uiDrawFontFamilies
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawFontFamiliesNumFamilies(uiDrawFontFamilies $ff)
-	returns uint64
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawFontFamiliesFamily(uiDrawFontFamilies $ff, uint64 $n)
-	returns Str
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawFreeFontFamilies(uiDrawFontFamilies $ff)
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawLoadClosestFont(uiDrawTextFontDescriptor $desc)
-	returns uiDrawTextFont
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawFreeTextFont(uiDrawTextFont $font)
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawTextFontHandle(uiDrawTextFont $font)
-	returns uint64
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawTextFontDescribe(uiDrawTextFont $font, uiDrawTextFontDescriptor $desc)
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawTextFontGetMetrics(uiDrawTextFont $font, uiDrawTextFontMetrics $metrics)
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-
 sub uiDrawNewTextLayout(Str $text, uiDrawTextFont $defaultFont, num64 $width)
 	returns uiDrawTextLayout
 	is native(LIB)
@@ -1864,37 +1805,20 @@ sub uiDrawFreeTextLayout(uiDrawTextLayout $layout)
 	{ * }
 
 
-sub uiDrawTextLayoutSetWidth(uiDrawTextLayout $layout, num64 $width)
+sub uiDrawTextLayoutExtents(uiDrawTextLayout $tl, Pointer[num64] $width, Pointer[num64] $height)
 	is native(LIB)
 	is export(:draw) 
 	{ * }
 
 
-sub uiDrawTextLayoutExtents(uiDrawTextLayout $layout, Pointer[num64] $width, Pointer[num64] $height)
-	is native(LIB)
-	is export(:draw) 
-	{ * }
-
-
-sub uiDrawTextLayoutSetColor(uiDrawTextLayout $layout 
-                            ,int64      $startChar 
-                            ,int64      $endChar 
-                            ,num64      $r 
-                            ,num64      $g 
-                            ,num64      $b 
-                            ,num64      $a 
-                            ) is native(LIB) is export(:draw) { * }
-
-
-sub uiDrawText(uiDrawContext $c, num64 $x, num64 $y, uiDrawTextLayout $layout)
+sub uiDrawText(uiDrawContext $c, uiDrawTextLayout $tl, num64 $x, num64 $y)
 	is native(LIB)
 	is export(:draw) 
 	{ * }
 
 
 
-sub uiFontButtonFont(uiFontButton $b)
-	returns uiDrawTextFont
+sub uiFontButtonFont(uiFontButton $b, uiFontDescriptor $desc)
 	is native(LIB)
 	is export(:font) 
 	{ * }
@@ -1912,6 +1836,10 @@ sub uiNewFontButton()
 	is export(:font) 
 	{ * }
 
+sub uiFreeFontButtonFont(uiFontDescriptor $desc) 
+	is native(LIB)
+	is export(:font)
+	{ * }
 
 
 sub uiColorButtonColor(uiColorButton $b 
