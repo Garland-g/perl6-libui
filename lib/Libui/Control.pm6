@@ -1,4 +1,4 @@
-use Libui::Raw;
+use Libui::Raw :control, :uicontrol;
 
 unit role Libui::Control;
 

@@ -153,7 +153,26 @@ enum uiTextStretch is export(:text) (
 	uiTextStretchUltraExpanded => 8,
 );
 
+enum uiForEach is export(:foreach) (
+	uiForEachContinue => 0,
+	uiForEachStop => 1,
+);
+
 ## Structures
+
+##From time.h
+
+class Time is repr('CStruct') is export(:time) {
+	has int32 $tm_sec;   # seconds [0,61]
+	has int32 $tm_min;   # minutes [0,59]
+	has int32 $tm_hour;  # hour [0,23]
+	has int32 $tm_mday;  # day of month [1,31]
+	has int32 $tm_mon;   # month of year [0,11]
+	has int32 $tm_year;  # years since 1900
+	has int32 $tm_wday;  # day of week [0-6], (Sunday = 0)
+	has int32 $tm_yday;  # day of year [0,365]
+	has int32 $tm_isdst; # daylight savings flag
+}
 
 class uiInitOptions is repr('CStruct') is export(:init) {
 	has size_t                        $.Size; # Typedef<size_t>->«long unsigned int» Size
@@ -350,6 +369,9 @@ class uiRadioButtons is repr('CStruct') is export(:radiobutton) {
 }
 class uiDateTimePicker is repr('CStruct') is export(:picker) {
 	also does autocast;
+	has Pointer $.uiDateTimePickerTime;
+	has Pointer $.uiDateTimePickerSetTime;
+	has Pointer $.uiDateTimePickerOnChanged;
 	has Pointer $.uiNewDateTimePicker;
 	has Pointer $.uiNewDatePicker;
 	has Pointer $.uiNewTimePicker;
@@ -657,122 +679,122 @@ sub uiInit(uiInitOptions $options)
 
 sub uiUninit()
 	is native(LIB)
-	is export
+	is export(:init)
 	{ * }
 
 
 sub uiFreeInitError(Str $err)
 	is native(LIB)
-	is export
+	is export(:init)
 	{ * }
 
 
 sub uiMain()
 	is native(LIB)
-	is export
+	is export(:DEFAULT)
 	{ * }
 
 
 sub uiMainStep(int32 $wait)
 	returns int32
 	is native(LIB) 
-	is export
+	is export(:DEFAULT)
 	{ * }
 
 
 sub uiQuit()
 	is native(LIB)
-	is export
+	is export(:DEFAULT)
 	{ * }
 
 
 sub uiQueueMain(&f (Pointer), Pointer  $data)
 	is native(LIB)
-	is export
+	is export(:DEFAULT)
 	{ * }
 
 
 sub uiOnShouldQuit(&f (Pointer --> int32), Pointer $data) 
 	is native(LIB)
-	is export 
+	is export(:DEFAULT)
 	{ * }
 
 
 sub uiFreeText(Str $text)
 	is native(LIB)
-	is export 
+	is export()
 	{ * }
 
 
 
 sub uiControlDestroy(uiControl)
 	is native(LIB)
-	is export 
+	is export(:control)
 	{ * }
 
 
 sub uiControlHandle(uiControl)
 	returns uint32
 	is native(LIB)
-	is export 
+	is export(:control)
 	{ * }
 
 
 sub uiControlParent(uiControl)
 	returns uiControl
 	is native(LIB)
-	is export 
+	is export(:control)
 	{ * }
 
 
 sub uiControlSetParent(uiControl, uiControl)
 	is native(LIB)
-	is export 
+	is export(:control)
 	{ * }
 
 
 sub uiControlToplevel(uiControl)
 	returns int32
 	is native(LIB)
-	is export 
+	is export(:control)
 	{ * }
 
 
 sub uiControlVisible(uiControl)
 	returns int32
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
 sub uiControlShow(uiControl)
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
 sub uiControlHide(uiControl)
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
 sub uiControlEnabled(uiControl)
 	returns int32
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
 sub uiControlEnable(uiControl)
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
 sub uiControlDisable(uiControl)
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
@@ -780,13 +802,13 @@ sub uiControlDisable(uiControl)
 sub uiAllocControl(size_t $n, uint32 $OSsig, uint32 $typesig , Str $typenamestr)
 	returns uiControl
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
 sub uiFreeControl(uiControl)
 	is native(LIB)
-	is export 
+	is export(:control) 
 	{ * }
 
 
@@ -1356,12 +1378,25 @@ sub uiRadioButtonsSetSelected(uiRadioButtons $r, int32 $n)
 	is export(:radiobutton) 
 	{ * }
 
-sub uiRadioButtonsOnSelected(uiRadioButtons 	$r, &f (uiRadioButtons, Pointer), Pointer $data)
+sub uiRadioButtonsOnSelected(uiRadioButtons	$r, &f (uiRadioButtons, Pointer), Pointer $data)
 	is native(LIB)
 	is export(:radiobutton) 
 	{ * }
 
+sub uiDateTimePickerTime(uiDateTimePicker $d, Time $time is rw)
+	is native(LIB)
+	is export(:picker)
+	{ * }
 
+sub uiDateTimePickerSetTime(uiDateTimePicker $d, Time $time)
+	is native(LIB)
+	is export(:picker)
+	{ * }
+
+sub uiDateTimePickerOnChanged(uiDateTimePicker $d, &f (uiDateTimePicker, Pointer), Pointer $data)
+	is native(LIB)
+	is export(:picker)
+	{ * }
 
 sub uiNewDateTimePicker()
 	returns uiDateTimePicker
@@ -1980,10 +2015,10 @@ sub uiNewGrid()
 
 #useful subs
 
-sub uicontrol($control) is export(:DEFAULT) {
+sub uicontrol($control) is export(:uicontrol) {
 	return nativecast(uiControl, $control);
 }
 
-sub get-pointer($struct) is export(:DEFAULT) {
+sub get-pointer($struct) is export(:getpointer) {
 	return nativecast(Pointer, $struct);
 }
