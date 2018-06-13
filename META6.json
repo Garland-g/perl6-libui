@@ -11,7 +11,6 @@
   "provides" : {
     "Libui" : "lib/Libui.pm6",
     "Libui::App" : "lib/Libui/App.pm6",
-    "Libui::Area" : "lib/Libui/Area.pm6",
     "Libui::Box" : "lib/Libui/Box.pm6",
     "Libui::Button" : "lib/Libui/Button.pm6",
     "Libui::Checkbox" : "lib/Libui/Checkbox.pm6",
