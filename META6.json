@@ -40,8 +40,7 @@
     "Libui::Window" : "lib/Libui/Window.pm6"
   },
   "resources" : [
-    "ui.dll",
-    "ui.dylib"
+		"libraries/ui"
   ],
   "source-url" : "https://gogs.templeoffirehazard.duckdns.org/Garland_g/Libui",
   "tags" : [ ],

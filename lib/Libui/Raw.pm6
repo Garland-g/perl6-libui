@@ -4,7 +4,7 @@ unit module Libui::Raw;
 
 use NativeCall;
 
-constant \LIB = 'ui';
+constant \LIB = %?RESOURCES<libraries/ui>;
 
 ## Enumerations
 
