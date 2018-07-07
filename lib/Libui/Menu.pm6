@@ -22,7 +22,7 @@ method append-check-item(Str:D $name) returns Libui::MenuItem {
 }
 
 method append-quit-item() returns Libui::MenuItem {
-	return Libui::MenuItem.new(uiMenuAppendQuitItem($!menu));
+	return Libui::QuitItem.new(uiMenuAppendQuitItem($!menu));
 }
 
 method append-preferences-item() returns Libui::MenuItem {

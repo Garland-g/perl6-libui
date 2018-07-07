@@ -694,7 +694,7 @@ sub uiQueueMain(&f (Pointer), Pointer  $data)
 
 sub uiOnShouldQuit(&f (Pointer --> int32), Pointer $data) 
 	is native(LIB)
-	is export 
+	is export(:quit)
 	{ * }
 
 
