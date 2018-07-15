@@ -27,7 +27,7 @@ multi method title(Str $title) {
 }
 
 method set-child(Libui::Control $control) {
-	if $control.top-level {			
+	if $control.top-level {
 		note "cannot place {$control.WHAT} into a Libui::Container";
 	} else {
 		uiGroupSetChild($!group, $control.Control)
@@ -47,7 +47,7 @@ method set-margined(int32 $margined) {
 }
 
 multi method margined(Int $margined) {
-	self.set-margined($margined);	
+	self.set-margined($margined);
 }
 
 method !WIDGET() {

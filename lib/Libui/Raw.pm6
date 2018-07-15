@@ -595,7 +595,7 @@ class uiFontButton is repr('CStruct') is export(:font) {
 	has Pointer $.fc;
 	has Pointer $.onChanged;
 	has Pointer $.onChangedData;
-	#Windows 
+	#Windows
 	#has Pointer $.c;
 	has Pointer $.hwnd;
 	has Pointer $.params;
@@ -618,7 +618,7 @@ class uiColorButton is repr('CStruct') is export(:color) {
 	has Pointer $.cc;
 	has Pointer $.onChanged;
 	has Pointer $.onChangedData;
-	#Windows 
+	#Windows
 	#has Pointer $.c;
 	has Pointer $.hwnd;
 	has num64 $.r;
@@ -649,7 +649,7 @@ class uiGrid is repr('CStruct') is export(:grid) {
 
 
 sub uiInit(uiInitOptions $options)
-	returns Str 
+	returns Str
 	is native(LIB)
 	is export(:init)
 	{ * }
@@ -675,7 +675,7 @@ sub uiMain()
 
 sub uiMainStep(int32 $wait)
 	returns int32
-	is native(LIB) 
+	is native(LIB)
 	is export
 	{ * }
 
@@ -692,7 +692,7 @@ sub uiQueueMain(&f (Pointer), Pointer  $data)
 	{ * }
 
 
-sub uiOnShouldQuit(&f (Pointer --> int32), Pointer $data) 
+sub uiOnShouldQuit(&f (Pointer --> int32), Pointer $data)
 	is native(LIB)
 	is export(:quit)
 	{ * }
@@ -700,79 +700,79 @@ sub uiOnShouldQuit(&f (Pointer --> int32), Pointer $data)
 
 sub uiFreeText(Str $text)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 
 sub uiControlDestroy(uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlHandle(uiControl)
 	returns uint32
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlParent(uiControl)
 	returns uiControl
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlSetParent(uiControl, uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlToplevel(uiControl)
 	returns int32
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlVisible(uiControl)
 	returns int32
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlShow(uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlHide(uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlEnabled(uiControl)
 	returns int32
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlEnable(uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiControlDisable(uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
@@ -780,34 +780,34 @@ sub uiControlDisable(uiControl)
 sub uiAllocControl(size_t $n, uint32 $OSsig, uint32 $typesig , Str $typenamestr)
 	returns uiControl
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 sub uiFreeControl(uiControl)
 	is native(LIB)
-	is export 
+	is export
 	{ * }
 
 
 
 sub uiControlVerifySetParent(uiControl, uiControl)
 	is native(LIB)
-	is export(:control) 
+	is export(:control)
 	{ * }
 
 
 sub uiControlEnabledToUser(uiControl)
 	returns int32
 	is native(LIB)
-	is export(:control) 
+	is export(:control)
 	{ * }
 
 
 
 sub uiUserBugCannotSetParentOnToplevel(Str $type)
 	is native(LIB)
-	is export(:control) 
+	is export(:control)
 	{ * }
 
 
@@ -815,88 +815,88 @@ sub uiUserBugCannotSetParentOnToplevel(Str $type)
 sub uiWindowTitle(uiWindow $w)
 	returns Str
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowSetTitle(uiWindow $w, Str $title)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowContentSize(uiWindow $w, int32 $width is rw, int32 $height is rw)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowSetContentSize(uiWindow $w, int32 $width, int32 $height)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowFullscreen(uiWindow $w)
 	returns int32
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowSetFullscreen(uiWindow $w, int32 $fullscreen)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowOnContentSizeChanged(uiWindow $w, &f (uiWindow, Pointer --> int32), Pointer $data)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowOnClosing(uiWindow $w, &f (uiWindow, Pointer --> int32), Pointer $data)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowBorderless(uiWindow $w)
 	returns int32
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 sub uiWindowSetBorderless(uiWindow $w, int32 $borderless)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowSetChild(uiWindow $w, uiControl $child)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowMargined(uiWindow $w)
 	returns int32
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiWindowSetMargined(uiWindow $w, int32 $margined)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiNewWindow(Str $title, int32 $width, int32 $height, int32 $hasMenubar)
 	returns uiWindow
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
@@ -904,66 +904,66 @@ sub uiNewWindow(Str $title, int32 $width, int32 $height, int32 $hasMenubar)
 sub uiButtonText(uiButton $b)
 	returns Str
 	is native(LIB)
-	is export(:button) 
+	is export(:button)
 	{ * }
 
 
 sub uiButtonSetText(uiButton $b, Str $text)
 	is native(LIB)
-	is export(:button) 
+	is export(:button)
 	{ * }
 
 
 sub uiButtonOnClicked(uiButton $b, &f (uiButton, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:button) 
+	is export(:button)
 	{ * }
 
 
 sub uiNewButton(Str $text)
 	returns uiButton
 	is native(LIB)
-	is export(:button) 
+	is export(:button)
 	{ * }
 
 
 
 sub uiBoxAppend(uiBox $b, uiControl $child, int32 $stretchy)
 	is native(LIB)
-	is export(:box) 
+	is export(:box)
 	{ * }
 
 
 sub uiBoxDelete(uiBox $b, ulong $index)
 	is native(LIB)
-	is export(:box) 
+	is export(:box)
 	{ * }
 
 
 sub uiBoxPadded(uiBox $b)
 	returns int32
 	is native(LIB)
-	is export(:box) 
+	is export(:box)
 	{ * }
 
 
 sub uiBoxSetPadded(uiBox $b, int32 $padded)
 	is native(LIB)
-	is export(:box) 
+	is export(:box)
 	{ * }
 
 
 sub uiNewHorizontalBox()
 	returns uiBox
 	is native(LIB)
-	is export(:box) 
+	is export(:box)
 	{ * }
 
 
 sub uiNewVerticalBox()
 	returns uiBox
 	is native(LIB)
-	is export(:box) 
+	is export(:box)
 	{ * }
 
 
@@ -971,39 +971,39 @@ sub uiNewVerticalBox()
 sub uiCheckboxText(uiCheckbox $c)
 	returns Str
 	is native(LIB)
-	is export(:checkbox) 
+	is export(:checkbox)
 	{ * }
 
 
 sub uiCheckboxSetText(uiCheckbox $c, Str $text)
 	is native(LIB)
-	is export(:checkbox) 
+	is export(:checkbox)
 	{ * }
 
 
 sub uiCheckboxOnToggled(uiCheckbox $c, &f (uiCheckbox, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:checkbox) 
+	is export(:checkbox)
 	{ * }
 
 
 sub uiCheckboxChecked(uiCheckbox $c)
 	returns int32
 	is native(LIB)
-	is export(:checkbox) 
+	is export(:checkbox)
 	{ * }
 
 
 sub uiCheckboxSetChecked(uiCheckbox $c, int32 $checked)
 	is native(LIB)
-	is export(:checkbox) 
+	is export(:checkbox)
 	{ * }
 
 
 sub uiNewCheckbox(Str $text)
 	returns uiCheckbox
 	is native(LIB)
-	is export(:checkbox) 
+	is export(:checkbox)
 	{ * }
 
 
@@ -1011,65 +1011,65 @@ sub uiNewCheckbox(Str $text)
 sub uiEntryText(uiEntry $e)
 	returns Str
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiEntrySetText(uiEntry $e, Str $text)
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiEntryOnChanged(uiEntry $e, &f (uiEntry, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiEntryReadOnly(uiEntry $e)
 	returns int32
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiEntrySetReadOnly(uiEntry $e, int32 $readonly)
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiNewEntry()
 	returns uiEntry
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiNewPasswordEntry()
 	returns uiEntry
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 sub uiNewSearchEntry()
 	returns uiEntry
 	is native(LIB)
-	is export(:entry) 
+	is export(:entry)
 	{ * }
 
 
 sub uiFormAppend(uiForm $f, Str	$label, uiControl $c, int32	$stretchy)
 	is native(LIB)
-	is export(:form) 
+	is export(:form)
 	{ * }
 
 
 sub uiNewForm()
 	returns uiForm
 	is native(LIB)
-	is export(:form) 
+	is export(:form)
 	{ * }
 
 
@@ -1077,66 +1077,66 @@ sub uiNewForm()
 sub uiLabelText(uiLabel $l)
 	returns Str
 	is native(LIB)
-	is export(:label) 
+	is export(:label)
 	{ * }
 
 
 sub uiLabelSetText(uiLabel $l, Str $text)
 	is native(LIB)
-	is export(:label) 
+	is export(:label)
 	{ * }
 
 
 sub uiNewLabel(Str $text)
 	returns uiLabel
 	is native(LIB)
-	is export(:label) 
+	is export(:label)
 	{ * }
 
 
 
 sub uiTabAppend(uiTab $t, Str $name, uiControl $c)
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
 sub uiTabInsertAt(uiTab $t, Str $name, uint32 $before, uiControl $c)
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
 sub uiTabDelete(uiTab $t, uint32 $index)
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
 sub uiTabNumPages(uiTab $t)
 	returns uint32
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
 sub uiTabMargined(uiTab $t, uint32 $page)
 	returns int32
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
 sub uiTabSetMargined(uiTab $t, uint32 $page, int32 $margined)
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
 sub uiNewTab()
 	returns uiTab
 	is native(LIB)
-	is export(:tab) 
+	is export(:tab)
 	{ * }
 
 
@@ -1144,39 +1144,39 @@ sub uiNewTab()
 sub uiGroupTitle(uiGroup $g)
 	returns Str
 	is native(LIB)
-	is export(:group) 
+	is export(:group)
 	{ * }
 
 
 sub uiGroupSetTitle(uiGroup $g, Str $title)
 	is native(LIB)
-	is export(:group) 
+	is export(:group)
 	{ * }
 
 
 sub uiGroupSetChild(uiGroup $g, uiControl $c)
 	is native(LIB)
-	is export(:group) 
+	is export(:group)
 	{ * }
 
 
 sub uiGroupMargined(uiGroup $g)
 	returns int32
 	is native(LIB)
-	is export(:group) 
+	is export(:group)
 	{ * }
 
 
 sub uiGroupSetMargined(uiGroup $g, int32 $margined)
 	is native(LIB)
-	is export(:group) 
+	is export(:group)
 	{ * }
 
 
 sub uiNewGroup(Str $title)
 	returns uiGroup
 	is native(LIB)
-	is export(:group) 
+	is export(:group)
 	{ * }
 
 
@@ -1184,26 +1184,26 @@ sub uiNewGroup(Str $title)
 sub uiSpinboxValue(uiSpinbox $s)
 	returns int32
 	is native(LIB)
-	is export(:spinbox) 
+	is export(:spinbox)
 	{ * }
 
 
 sub uiSpinboxSetValue(uiSpinbox $s, int32 $value)
 	is native(LIB)
-	is export(:spinbox) 
+	is export(:spinbox)
 	{ * }
 
 
 sub uiSpinboxOnChanged(uiSpinbox $s, &f (uiSpinbox, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:spinbox) 
+	is export(:spinbox)
 	{ * }
 
 
 sub uiNewSpinbox(int64 $min, int64 $max)
 	returns uiSpinbox
 	is native(LIB)
-	is export(:spinbox) 
+	is export(:spinbox)
 	{ * }
 
 
@@ -1211,40 +1211,40 @@ sub uiNewSpinbox(int64 $min, int64 $max)
 sub uiSliderValue(uiSlider $s)
 	returns int32
 	is native(LIB)
-	is export(:slider) 
+	is export(:slider)
 	{ * }
 
 
 sub uiSliderSetValue(uiSlider $s, int64 $value)
 	is native(LIB)
-	is export(:slider) 
+	is export(:slider)
 	{ * }
 
 
 sub uiSliderOnChanged(uiSlider $s, &f (uiSlider, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:slider) 
+	is export(:slider)
 	{ * }
 
 
 sub uiNewSlider(int64 $min, int64 $max)
 	returns uiSlider
 	is native(LIB)
-	is export(:slider) 
+	is export(:slider)
 	{ * }
 
 
 
 sub uiProgressBarSetValue(uiProgressBar $p, int32 $n)
 	is native(LIB)
-	is export(:progbar) 
+	is export(:progbar)
 	{ * }
 
 
 sub uiNewProgressBar()
 	returns uiProgressBar
 	is native(LIB)
-	is export(:progbar) 
+	is export(:progbar)
 	{ * }
 
 
@@ -1252,113 +1252,113 @@ sub uiNewProgressBar()
 sub uiNewHorizontalSeparator()
 	returns uiSeparator
 	is native(LIB)
-	is export(:separator) 
+	is export(:separator)
 	{ * }
 
 
 sub uiNewVerticalSeparator()
 	returns uiSeparator
 	is native(LIB)
-	is export(:separator) 
+	is export(:separator)
 	{ * }
 
 
 
 sub uiComboboxAppend(uiCombobox $c, Str $text)
 	is native(LIB)
-	is export(:combobox) 
+	is export(:combobox)
 	{ * }
 
 
 sub uiComboboxSelected(uiCombobox $c)
 	returns int64
 	is native(LIB)
-	is export(:combobox) 
+	is export(:combobox)
 	{ * }
 
 
 sub uiComboboxSetSelected(uiCombobox $c, int64 $n)
 	is native(LIB)
-	is export(:combobox) 
+	is export(:combobox)
 	{ * }
 
 
 sub uiComboboxOnSelected(uiCombobox $c, &f (uiCombobox, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:combobox) 
+	is export(:combobox)
 	{ * }
 
 
 sub uiNewCombobox()
 	returns uiCombobox
 	is native(LIB)
-	is export(:combobox) 
+	is export(:combobox)
 	{ * }
 
 
 
 sub uiEditableComboboxAppend(uiEditableCombobox $c, Str $text)
 	is native(LIB)
-	is export(:e-combobox) 
+	is export(:e-combobox)
 	{ * }
 
 
 sub uiEditableComboboxText(uiEditableCombobox $c)
 	returns Str
 	is native(LIB)
-	is export(:e-combobox) 
+	is export(:e-combobox)
 	{ * }
 
 
 sub uiEditableComboboxSetText(uiEditableCombobox $c, Str $text)
 	is native(LIB)
-	is export(:e-combobox) 
+	is export(:e-combobox)
 	{ * }
 
 
 
 sub uiEditableComboboxOnChanged(uiEditableCombobox $c, &f (uiEditableCombobox, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:e-combobox) 
+	is export(:e-combobox)
 	{ * }
 
 
 sub uiNewEditableCombobox()
 	returns uiEditableCombobox
 	is native(LIB)
-	is export(:e-combobox) 
+	is export(:e-combobox)
 	{ * }
 
 
 
 sub uiRadioButtonsAppend(uiRadioButtons $r, Str $text)
 	is native(LIB)
-	is export(:radiobutton) 
+	is export(:radiobutton)
 	{ * }
 
 
 sub uiNewRadioButtons()
 	returns uiRadioButtons
 	is native(LIB)
-	is export(:radiobutton) 
+	is export(:radiobutton)
 	{ * }
 
 
 sub uiRadioButtonsSelected(uiRadioButtons  $r)
 	returns int32
 	is native(LIB)
-	is export(:radiobutton) 
+	is export(:radiobutton)
 	{ * }
 
 sub uiRadioButtonsSetSelected(uiRadioButtons $r, int32 $n)
 	returns int32
 	is native(LIB)
-	is export(:radiobutton) 
+	is export(:radiobutton)
 	{ * }
 
 sub uiRadioButtonsOnSelected(uiRadioButtons 	$r, &f (uiRadioButtons, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:radiobutton) 
+	is export(:radiobutton)
 	{ * }
 
 
@@ -1366,21 +1366,21 @@ sub uiRadioButtonsOnSelected(uiRadioButtons 	$r, &f (uiRadioButtons, Pointer), P
 sub uiNewDateTimePicker()
 	returns uiDateTimePicker
 	is native(LIB)
-	is export(:picker) 
+	is export(:picker)
 	{ * }
 
 
 sub uiNewDatePicker()
 	returns uiDateTimePicker
 	is native(LIB)
-	is export(:picker) 
+	is export(:picker)
 	{ * }
 
 
 sub uiNewTimePicker()
 	returns uiDateTimePicker
 	is native(LIB)
-	is export(:picker) 
+	is export(:picker)
 	{ * }
 
 
@@ -1388,84 +1388,84 @@ sub uiNewTimePicker()
 sub uiMultilineEntryText(uiMultilineEntry $e)
 	returns Str
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiMultilineEntrySetText(uiMultilineEntry $e, Str $text)
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiMultilineEntryAppend(uiMultilineEntry $e, Str $text)
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiMultilineEntryOnChanged(uiMultilineEntry $e, &f (uiMultilineEntry, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiMultilineEntryReadOnly(uiMultilineEntry $e)
 	returns int32
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiMultilineEntrySetReadOnly(uiMultilineEntry $e, int32 $readonly)
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiNewMultilineEntry()
 	returns uiMultilineEntry
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 sub uiNewNonWrappingMultilineEntry()
 	returns uiMultilineEntry
 	is native(LIB)
-	is export(:multientry) 
+	is export(:multientry)
 	{ * }
 
 
 
 sub uiMenuItemEnable(uiMenuItem $m)
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuItemDisable(uiMenuItem $m)
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuItemOnClicked(uiMenuItem $m, &f (uiMenuItem, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuItemChecked(uiMenuItem $m)
 	returns int32
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuItemSetChecked(uiMenuItem $m, int32 $checked)
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
@@ -1473,48 +1473,48 @@ sub uiMenuItemSetChecked(uiMenuItem $m, int32 $checked)
 sub uiMenuAppendItem(uiMenu $m, Str $name)
 	returns uiMenuItem
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuAppendCheckItem(uiMenu $m, Str $name)
 	returns uiMenuItem
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuAppendQuitItem(uiMenu $m)
 	returns uiMenuItem
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuAppendPreferencesItem(uiMenu $m)
 	returns uiMenuItem
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuAppendAboutItem(uiMenu $m)
 	returns uiMenuItem
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiMenuAppendSeparator(uiMenu $m)
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
 sub uiNewMenu(Str $name)
 	returns uiMenu
 	is native(LIB)
-	is export(:menu) 
+	is export(:menu)
 	{ * }
 
 
@@ -1522,236 +1522,236 @@ sub uiNewMenu(Str $name)
 sub uiOpenFile(uiWindow $parent)
 	returns Str
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiSaveFile(uiWindow $parent)
 	returns Str
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 
 sub uiMsgBox(uiWindow $parent, Str $title, Str $description)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 sub uiMsgBoxError(uiWindow $parent, Str $title, Str $description)
 	is native(LIB)
-	is export(:window) 
+	is export(:window)
 	{ * }
 
 
 
 sub uiAreaSetSize(uiArea $a, int64 $width, int64 $height)
 	is native(LIB)
-	is export(:area) 
+	is export(:area)
 	{ * }
 
 
 
 sub uiAreaQueueRedrawAll(uiArea $a)
 	is native(LIB)
-	is export(:area) 
+	is export(:area)
 	{ * }
 
 
 sub uiAreaScrollTo(uiArea $a, num64 $x , num64 $y, num64 $width, num64 $height)
 	is native(LIB)
-	is export(:area) 
+	is export(:area)
 	{ * }
 
 
 sub uiNewArea(uiAreaHandler $ah)
 	returns uiArea
 	is native(LIB)
-	is export(:area) 
+	is export(:area)
 	{ * }
 
 
 sub uiNewScrollingArea(uiAreaHandler $ah, int64 $width, int64 $height)
 	returns uiArea
 	is native(LIB)
-	is export(:area) 
+	is export(:area)
 	{ * }
 
 
 sub uiDrawNewPath(uint32 $fillMode)
 	returns uiDrawPath
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFreePath(uiDrawPath $p)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawPathNewFigure(uiDrawPath $p, num64 $x, num64 $y)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
-sub uiDrawPathNewFigureWithArc(uiDrawPath $p 
-                              ,num64      $xCenter 
-                              ,num64      $yCenter 
-                              ,num64      $radius 
-                              ,num64      $startAngle 
-                              ,num64      $sweep 
-                              ,int32      $negative 
+sub uiDrawPathNewFigureWithArc(uiDrawPath $p
+                              ,num64      $xCenter
+                              ,num64      $yCenter
+                              ,num64      $radius
+                              ,num64      $startAngle
+                              ,num64      $sweep
+                              ,int32      $negative
                               ) is native(LIB) is export(:draw) { * }
 
 
 sub uiDrawPathLineTo(uiDrawPath $p, num64 $x, num64 $y)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
-sub uiDrawPathArcTo(uiDrawPath $p 
-                   ,num64      $xCenter 
-                   ,num64      $yCenter 
-                   ,num64      $radius 
-                   ,num64      $startAngle 
-                   ,num64      $sweep 
-                   ,int32      $negative 
+sub uiDrawPathArcTo(uiDrawPath $p
+                   ,num64      $xCenter
+                   ,num64      $yCenter
+                   ,num64      $radius
+                   ,num64      $startAngle
+                   ,num64      $sweep
+                   ,int32      $negative
                    ) is native(LIB) is export(:draw) { * }
 
 
-sub uiDrawPathBezierTo(uiDrawPath $p 
-                      ,num64      $c1x 
-                      ,num64      $c1y 
-                      ,num64      $c2x 
-                      ,num64      $c2y 
-                      ,num64      $endX 
-                      ,num64      $endY 
+sub uiDrawPathBezierTo(uiDrawPath $p
+                      ,num64      $c1x
+                      ,num64      $c1y
+                      ,num64      $c2x
+                      ,num64      $c2y
+                      ,num64      $endX
+                      ,num64      $endY
                       ) is native(LIB) is export(:draw) { * }
 
 
 
 sub uiDrawPathCloseFigure(uiDrawPath $p)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 
 sub uiDrawPathAddRectangle(uiDrawPath $p, num64 $x, num64 $y, num64 $width, num64 $height)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawPathEnd(uiDrawPath $p)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawStroke(uiDrawContext $c, uiDrawPath $path, uiDrawBrush $b, uiDrawStrokeParams $p)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFill(uiDrawContext $c, uiDrawPath $path, uiDrawBrush $b)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixSetIdentity(uiDrawMatrix $m)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixTranslate(uiDrawMatrix $m, num64 $x, num64 $y)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixScale(uiDrawMatrix $m, num64 $xCenter, num64 $yCenter, num64 $x, num64 $y)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixRotate(uiDrawMatrix $m, num64 $x, num64 $y, num64 $amount)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixSkew(uiDrawMatrix $m, num64 $x, num64 $y, num64 $xamount, num64 $yamount)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixMultiply(uiDrawMatrix $dest, uiDrawMatrix $src)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixInvertible(uiDrawMatrix $m)
 	returns int32
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixInvert(uiDrawMatrix $m)
 	returns int32
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixTransformPoint(uiDrawMatrix $m, Pointer[num64] $x, Pointer[num64] $y)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawMatrixTransformSize(uiDrawMatrix $m, Pointer[num64] $x, Pointer[num64] $y)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawTransform(uiDrawContext $c, uiDrawMatrix $m)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 
 sub uiDrawClip(uiDrawContext $c, uiDrawPath $path)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 
 sub uiDrawSave(uiDrawContext $c)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawRestore(uiDrawContext $c)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
@@ -1759,59 +1759,59 @@ sub uiDrawRestore(uiDrawContext $c)
 sub uiDrawListFontFamilies()
 	returns uiDrawFontFamilies
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFontFamiliesNumFamilies(uiDrawFontFamilies $ff)
 	returns uint64
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFontFamiliesFamily(uiDrawFontFamilies $ff, uint64 $n)
 	returns Str
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFreeFontFamilies(uiDrawFontFamilies $ff)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawLoadClosestFont(uiDrawTextFontDescriptor $desc)
 	returns uiDrawTextFont
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFreeTextFont(uiDrawTextFont $font)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawTextFontHandle(uiDrawTextFont $font)
 	returns uint64
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawTextFontDescribe(uiDrawTextFont $font, uiDrawTextFontDescriptor $desc)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawTextFontGetMetrics(uiDrawTextFont $font, uiDrawTextFontMetrics $metrics)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
@@ -1819,41 +1819,41 @@ sub uiDrawTextFontGetMetrics(uiDrawTextFont $font, uiDrawTextFontMetrics $metric
 sub uiDrawNewTextLayout(Str $text, uiDrawTextFont $defaultFont, num64 $width)
 	returns uiDrawTextLayout
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawFreeTextLayout(uiDrawTextLayout $layout)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawTextLayoutSetWidth(uiDrawTextLayout $layout, num64 $width)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
 sub uiDrawTextLayoutExtents(uiDrawTextLayout $layout, Pointer[num64] $width, Pointer[num64] $height)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
-sub uiDrawTextLayoutSetColor(uiDrawTextLayout $layout 
-                            ,int64      $startChar 
-                            ,int64      $endChar 
-                            ,num64      $r 
-                            ,num64      $g 
-                            ,num64      $b 
-                            ,num64      $a 
+sub uiDrawTextLayoutSetColor(uiDrawTextLayout $layout
+                            ,int64      $startChar
+                            ,int64      $endChar
+                            ,num64      $r
+                            ,num64      $g
+                            ,num64      $b
+                            ,num64      $a
                             ) is native(LIB) is export(:draw) { * }
 
 
 sub uiDrawText(uiDrawContext $c, num64 $x, num64 $y, uiDrawTextLayout $layout)
 	is native(LIB)
-	is export(:draw) 
+	is export(:draw)
 	{ * }
 
 
@@ -1861,57 +1861,57 @@ sub uiDrawText(uiDrawContext $c, num64 $x, num64 $y, uiDrawTextLayout $layout)
 sub uiFontButtonFont(uiFontButton $b)
 	returns uiDrawTextFont
 	is native(LIB)
-	is export(:font) 
+	is export(:font)
 	{ * }
 
 
 sub uiFontButtonOnChanged(uiFontButton $b, &f (uiFontButton, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:font) 
+	is export(:font)
 	{ * }
 
 
 sub uiNewFontButton()
 	returns uiFontButton
 	is native(LIB)
-	is export(:font) 
+	is export(:font)
 	{ * }
 
 
 
-sub uiColorButtonColor(uiColorButton $b 
-                      ,num64         $r is rw 
-                      ,num64         $g is rw 
-                      ,num64         $bl is rw 
-                      ,num64         $a is rw 
+sub uiColorButtonColor(uiColorButton $b
+                      ,num64         $r is rw
+                      ,num64         $g is rw
+                      ,num64         $bl is rw
+                      ,num64         $a is rw
                       ) is native(LIB) is export(:color) { * }
 
 
-sub uiColorButtonSetColor(uiColorButton $b 
-                         ,num64         $r 
-                         ,num64         $g 
-                         ,num64         $bl 
-                         ,num64         $a 
+sub uiColorButtonSetColor(uiColorButton $b
+                         ,num64         $r
+                         ,num64         $g
+                         ,num64         $bl
+                         ,num64         $a
                          ) is native(LIB) is export(:color) { * }
 
 
 sub uiColorButtonOnChanged(uiColorButton $b, &f (uiColorButton, Pointer), Pointer $data)
 	is native(LIB)
-	is export(:color) 
+	is export(:color)
 	{ * }
 
 
 sub uiNewColorButton()
 	returns uiColorButton
 	is native(LIB)
-	is export(:color) 
+	is export(:color)
 	{ * }
 
 
 
 sub uiFormDelete(uiForm $f, int32 $index)
 	is native(LIB)
-	is export(:form) 
+	is export(:form)
 	{ * }
 
 
@@ -1929,16 +1929,16 @@ sub uiFormSetPadded(uiForm $f, int32 $padded)
 
 
 
-sub uiGridAppend(uiGrid    $g 
-                ,uiControl $c 
-                ,int32     $left 
-                ,int32     $top 
-                ,int32     $xspan 
-                ,int32     $yspan 
-                ,int32     $hexpand 
-                ,uint32    $halign 
-                ,int32     $vexpand 
-                ,uint32    $valign 
+sub uiGridAppend(uiGrid    $g
+                ,uiControl $c
+                ,int32     $left
+                ,int32     $top
+                ,int32     $xspan
+                ,int32     $yspan
+                ,int32     $hexpand
+                ,uint32    $halign
+                ,int32     $vexpand
+                ,uint32    $valign
                 ) is native(LIB) is export(:grid) { * }
 
 

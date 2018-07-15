@@ -16,7 +16,7 @@ lives-ok {$form.append('entry', $entry, 0)}, <Append to form>;
 
 $form.append('entry', $entry2, 0);
 
-lives-ok {$form.delete(1)}, 
+lives-ok {$form.delete(1)},
 
 is $form.padded, 0, <Get state: padded>;
 

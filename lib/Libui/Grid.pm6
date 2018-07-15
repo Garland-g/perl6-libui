@@ -21,7 +21,7 @@ method append(Libui::Control $control
 						 , int32 $vexpand
 						 , int32 $valign
 						 ) {
-	if $control.top-level {			
+	if $control.top-level {
 		note "cannot place {$control.WHAT} into a Libui::Container";
 	} else {
 	uiGridAppend($!grid
@@ -44,7 +44,7 @@ method insert(Libui::Control $control
 						 , int32 $vexpand
 						 , int32 $valign
 					 ) {
-	if $control.top-level {			
+	if $control.top-level {
 		note "cannot place {$control.WHAT} into a Libui::Container";
 	} else {
 	uiGridInsertAt($!grid
@@ -55,7 +55,7 @@ method insert(Libui::Control $control
 							 , $hexpand, $halign
 							 , $vexpand, $valign
 							 );
-	}	
+	}
 }
 
 multi method padded() returns int32 {

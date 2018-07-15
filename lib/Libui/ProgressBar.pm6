@@ -11,7 +11,7 @@ submethod BUILD() {
 
 #Method not implemented in upstream
 # TODO Enable when implemented
-#multi method value() returns int32 { 
+#multi method value() returns int32 {
 #	uiProgressBarValue($!pbar);
 #}
 

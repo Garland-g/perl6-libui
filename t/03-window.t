@@ -22,7 +22,7 @@ subtest 'before $window.show', {
 
 	$window.set-content($button);
 
-	is-deeply $button.parent, $window.Control, <Set the window's content> 
+	is-deeply $button.parent, $window.Control, <Set the window's content>
 		or bail-out "Must be able to set window's content";
 
 };
@@ -30,7 +30,7 @@ subtest 'before $window.show', {
 $window.show();
 
 subtest 'after $window.show', {
-	
+
 	my int32 $h;
 	my int32 $w;
 

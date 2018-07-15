@@ -6,7 +6,7 @@ Libui::Init();
 
 plan *;
 
-my Libui::Group $group .= new('test'); 
+my Libui::Group $group .= new('test');
 
 isa-ok $group, Libui::Group, <Create group>;
 
@@ -18,7 +18,7 @@ subtest <Set title>, {
 	is $group.title, 'title';
 }
 
-my Libui::Button $button .= new('label'); 
+my Libui::Button $button .= new('label');
 
 lives-ok { $group.set-child($button);}, <Set child>;
 
