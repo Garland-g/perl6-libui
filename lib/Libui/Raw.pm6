@@ -201,7 +201,7 @@ enum uiTableValueType is export(:table) (
 
 ##From time.h
 
-class Time is repr('CStruct') is export(:time) {
+class tm is repr('CStruct') is export(:time) {
   has int32 $tm_sec;   # seconds [0,61]
   has int32 $tm_min;   # minutes [0,59]
   has int32 $tm_hour;  # hour [0,23]
