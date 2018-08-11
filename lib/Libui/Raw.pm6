@@ -4,7 +4,7 @@ unit module Libui::Raw;
 
 use NativeCall;
 
-constant \LIB = 'ui';
+constant \LIB = %?RESOURCES<libraries/ui>;
 
 ## Enumerations
 
@@ -140,23 +140,37 @@ enum uiTextWeight is export(:text) (
   uiTextWeightMaximum => 1000,
 );
 
-enum uiTextItalic is export(:text) (
-  uiTextItalicNormal => 0,
-  uiTextItalicOblique => 1,
-  uiTextItalicItalic => 2,
-);
+enum uiTextItalic is export(:text) <
+  uiTextItalicNormal,
+  uiTextItalicOblique,
+  uiTextItalicItalic,
+>;
 
-enum uiTextStretch is export(:text) (
-  uiTextStretchUltraCondensed => 0,
-  uiTextStretchExtraCondensed => 1,
-  uiTextStretchCondensed => 2,
-  uiTextStretchSemiCondensed => 3,
-  uiTextStretchNormal => 4,
-  uiTextStretchSemiExpanded => 5,
-  uiTextStretchExpanded => 6,
-  uiTextStretchExtraExpanded => 7,
-  uiTextStretchUltraExpanded => 8,
-);
+enum uiTextStretch is export(:text) <
+  uiTextStretchUltraCondensed,
+  uiTextStretchExtraCondensed,
+  uiTextStretchCondensed,
+  uiTextStretchSemiCondensed,
+  uiTextStretchNormal,
+  uiTextStretchSemiExpanded,
+  uiTextStretchExpanded,
+  uiTextStretchExtraExpanded,
+  uiTextStretchUltraExpanded,
+>;
+
+enum uiUnderline is export(:text) <
+  uiUnderlineNone,
+  uiUnderlineSingle,
+  uiUnderlineDouble,
+  uiUnderlineSuggestion,
+>;
+
+enum uiUnderlineColor is export(:text) <
+  uiUnderlineColorCustom,
+  uiUnderlineColorSpelling,
+  uiUnderlineColorGrammar,
+  uiUnderlineColorAuxiliary,
+>;
 
 enum uiForEach is export(:foreach) (
   uiForEachContinue => 0,
@@ -175,6 +189,13 @@ enum uiAttributeType is export(:text) <
   uiAttributeTypeUnderlineColor
   uiAttrbuteTypeFeatures
 >;
+
+enum uiTableValueType is export(:table) (
+  uiTableValueTypeString => 0,
+  uiTableValueTypeImage => 1,
+  uiTableValueTypeInt => 2,
+  uiTableValueTypeColor => 3,
+);
 
 ## Structures
 
@@ -600,23 +621,23 @@ class uiDrawTextLayout is repr('CStruct') is export(:draw) {
   #Unix
   has Pointer $.layout; #PangoLayout
   #Windows
-  has Pointer $.format; #IDWriteTextFormat
-  has Pointer $.layout #IDWriteTextLayout
-  has Pointer $.backgroundParams;
-  has Pointer[size_t] $.u8tou16;
-  has size_t $.nUTF8;
-  has Pointer[size_t] $.u16tou8;
-  has size_t $.nUTF16;
+  #has Pointer $.format; #IDWriteTextFormat
+  #has Pointer $.layout #IDWriteTextLayout
+  #has Pointer $.backgroundParams;
+  #has Pointer[size_t] $.u8tou16;
+  #has size_t $.nUTF8;
+  #has Pointer[size_t] $.u16tou8;
+  #has size_t $.nUTF16;
   #Darwin
-  has Pointer[uiprivTextFrame] $.frame;
-  has Pointer[uiprivTextFrame] $.forLines;
-  has bool empty;
+  #has Pointer[uiprivTextFrame] $.frame;
+  #has Pointer[uiprivTextFrame] $.forLines;
+  #has bool empty;
   #has Pointer[size_t] $.u8tou16;
   #has size_t $.nUTF8;
   #has Pointer[size_t] $.u16tou8;
   #has size_t $.nUTF16;
 }
-class uiFontButton is repr('CStruct') is export(:text) {
+class uiFontButton is repr('CStruct') is export(:font) {
   has int32 $!placeholder;
 }
 class uiAreaMouseEvent is repr('CStruct') is export(:area) {
@@ -702,20 +723,11 @@ class uiTableValueUnion is repr('CUnion') {
   has uiTableValueUnionColor $.color;
 }
 
-class uiTableValue is repr('CStruct') is export {
-  has uiTableValueType $.type;
-  has uiTableValueUnion $.u;
-}
 
-class uiTableModel is repr('CStruct') is export {
-  #Unix
-  has Pointer[uiTableModelHandler] $.mh;
-  #Windows
-  #has Pointer[uiTableModelHandler] $.mh;
-  #has Pointer[uiTableModel] $.model;
-  #Darwin
-  #has Pointer[uiTableModelHandler] $.mh;
-  #1has Pointer[uiTableModel] $.m;
+
+class uiTableValue is repr('CStruct') is export {
+  has int32 $.type;
+  has uiTableValueUnion $.u;
 }
 
 class uiTableModelHandler is repr('CStruct') is export {
@@ -724,6 +736,17 @@ class uiTableModelHandler is repr('CStruct') is export {
   has Pointer $.NumRows;
   has Pointer $.CellValue;
   has Pointer $.SetCellValue;
+}
+
+class uiTableModel is repr('CStruct') is export {
+  #Unix
+  has uiTableModelHandler $.mh is rw;
+  #Windows
+  #has Pointer[uiTableModelHandler] $.mh;
+  #has Pointer[uiTableModel] $.model;
+  #Darwin
+  #has Pointer[uiTableModelHandler] $.mh;
+  #1has Pointer[uiTableModel] $.m;
 }
 
 class uiTableTextColumnOptionalParams is repr('CStruct') is export {
@@ -791,7 +814,7 @@ sub uiQueueMain(&f (Pointer), Pointer  $data)
   #timer accuracy is based on OS
   #initial tick register time unknown
   #may be better to use Perl6 timing mechanisms
-sub uiTimer(int32 $milliseconds, &f( --> int32), Pointer)
+sub uiTimer(int32 $milliseconds, &f ( --> int32), Pointer)
   is native(LIB)
   is export(:timer)
   {*}
@@ -1879,7 +1902,7 @@ sub uiFreeAttribute(uiAttribute $a)
   { * }
 
 sub uiAttributeGetType(uiAttribute $a)
-  returns uiAttributeType
+  returns int32
   is native(LIB)
   is export(:text)
   { * }
@@ -1908,38 +1931,38 @@ sub uiAttributeSize(uiAttribute $a)
   is export(:text)
   { * }
 
-sub uiNewWeightAttribute(uiTextWeight $weight)
+sub uiNewWeightAttribute(uint32 $weight)
   returns uiAttribute
   is native(LIB)
   is export(:text)
   { * }
 
 sub uiAttributeWeight(uiAttribute $a)
-  returns uiTextWeight
+  returns uint32
   is native(LIB)
   is export(:text)
   { * }
 
-sub uiNewItalicAttribute(uiTextItalic $italic)
+sub uiNewItalicAttribute(uint32 $italic)
   returns uiAttribute
   is native(LIB)
   is export(:text)
   { * }
 
 sub uiAttributeItalic(uiAttribute $a)
-  returns uiTextItalic
+  returns uint32
   is native(LIB)
   is export(:text)
   { * }
 
-sub uiNewStretchAttribute(uiTextStretch $stretch)
+sub uiNewStretchAttribute(uint32 $stretch)
   returns uiAttribute
   is native(LIB)
   is export(:text)
   { * }
 
 sub uiAttributeStretch(uiAttribute $a)
-  returns uiTextStretch
+  returns uint32
   is native(LIB)
   is export(:text)
   { * }
@@ -1966,26 +1989,26 @@ sub uiNewBackgroundAttribute(num64 $r, num64 $g, num64 $b, num64 $a)
   #is export(:text)
   #  { * }
 
-sub uiNewUnderlineAttribute(uiUnderline $u)
+sub uiNewUnderlineAttribute(int32 $u)
   returns uiAttribute
   is native(LIB)
   is export(:text)
   { * }
 
 sub uiAttributeUnderline(uiAttribute $a)
-  returns uiUnderline
+  returns uint32
   is native(LIB)
   is export(:text)
   { * }
 
-sub uiNewUnderlineColorAttribute(uiUnderlineColor $u, num64 $r, num64 $g, num64 $b, num64 $a)
+sub uiNewUnderlineColorAttribute(int32 $u, num64 $r, num64 $g, num64 $b, num64 $a)
   returns uiAttribute
   is native(LIB)
   is export(:text)
   { * }
 
 sub uiAttributeUnderlineColor(uiAttribute $a
-                             ,uiUnderlineColor $u is rw
+                             ,uint32 $u is rw
                              ,num64 $r is rw
                              ,num64 $g is rw
                              ,num64 $b is rw
@@ -2022,11 +2045,11 @@ sub uiOpenTypeFeaturesGet(uiOpenTypeFeatures $otf is rw
                          ,int8 $b
                          ,int8 $c
                          ,int8 $d
-                         ,uint $value is rw
+                         ,uint32 $value is rw
                          ) returns int32 is native(LIB) is export(:text) { * }
 
 sub uiOpenTypeFeaturesForEach(uiOpenTypeFeatures $otf
-                             ,&f( --> uiForEach)
+                             ,&f ( --> uiForEach)
                              ,Pointer $data
                              ) is native(LIB) is export(:text) { * }
 
@@ -2085,7 +2108,7 @@ sub uiAttributedStringSetAttribute(uiAttributedString $s is rw, uiAttribute $a i
   is export(:text)
   { * }
 
-sub uiAttributedStringForEachAttribute(uiAttributedString $s, &f( --> uiForEach), Pointer $data)
+sub uiAttributedStringForEachAttribute(uiAttributedString $s, &f ( --> uiForEach), Pointer $data)
   is native(LIB)
   is export(:text)
   { * }
@@ -2283,7 +2306,7 @@ sub uiFreeTableValue(uiTableValue $v)
   { * }
 
 sub uiTableValueGetType(uiTableValue $v)
-  returns(uiTableValueType)
+  returns uint32
   is native(LIB)
   is export(:table)
   { * }
@@ -2337,7 +2360,7 @@ sub uiTableValueColor(uiTableValue $v
                      ,num64 $a is rw
                      ) is native(LIB) is export { * }
 
-sub uiNewTableModel(uiTableHandler $mh is rw)
+sub uiNewTableModel(uiTableModelHandler $mh is rw)
   returns uiTableModel
   is native(LIB)
   is export(:table)
@@ -2391,7 +2414,7 @@ sub uiTableAppendCheckboxColumn(uiTable $t
 sub uiTableAppendCheckboxTextColumn(uiTable $t
                                    ,Str $name
                                    ,int32 $checkboxModelColumn
-                                   ,int32 $checkboxModelColumn
+                                   ,int32 $checkboxEditableModelColumn
                                    ,int32 $textModelColumn
                                    ,int32 $textEditableModelColumn
                                    ,uiTableTextColumnOptionalParams

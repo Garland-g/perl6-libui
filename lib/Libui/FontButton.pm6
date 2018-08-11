@@ -25,7 +25,7 @@ use Libui::Control;
 class Libui::FontButton does Libui::Control is export {
 
 	has uiFontButton $!button;
-	has uiDrawTextFontDescriptor $!desc;
+	has uiFontDescriptor $!desc;
 	has $!changed-supply;
 
 	submethod BUILD() {
@@ -37,7 +37,8 @@ class Libui::FontButton does Libui::Control is export {
 #}
 #
 	method font() {
-		uiDrawTextFontDescribe(uiFontButtonFont($!button), $!desc);
+		uiFontButtonFont($!button, $!desc);
+    return $!desc;
 	}
 ###Current Error: Cannot look up attributes in $!desc
 #	method family() returns Str {

@@ -37,11 +37,11 @@
     "Libui::Slider" : "lib/Libui/Slider.pm6",
     "Libui::Spinbox" : "lib/Libui/Spinbox.pm6",
     "Libui::Tab" : "lib/Libui/Tab.pm6",
+    "Libui::Time" : "lib/Libui/Time.pm6",
     "Libui::Window" : "lib/Libui/Window.pm6"
   },
   "resources" : [
-    "ui.dll",
-    "ui.dylib"
+    "libraries/ui"
   ],
   "source-url" : "https://gogs.templeoffirehazard.duckdns.org/Garland_g/Libui",
   "tags" : [ ],
