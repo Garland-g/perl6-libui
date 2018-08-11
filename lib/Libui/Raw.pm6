@@ -637,9 +637,7 @@ class uiDrawTextLayout is repr('CStruct') is export(:draw) {
   #has Pointer[size_t] $.u16tou8;
   #has size_t $.nUTF16;
 }
-class uiFontButton is repr('CStruct') is export(:font) {
-  has int32 $!placeholder;
-}
+
 class uiAreaMouseEvent is repr('CStruct') is export(:area) {
   has num64                         $.X; # double X
   has num64                         $.Y; # double Y
@@ -657,6 +655,30 @@ class uiAreaKeyEvent is repr('CStruct') is export(:area) {
   has uint32                   $.Modifier; # Typedef<uiModifiers>->«unsigned int» Modifier
   has uint32                   $.Modifiers; # Typedef<uiModifiers>->«unsigned int» Modifiers
   has int32                         $.Up; # int Up
+}
+
+class uiFontButton is repr('CStruct') is export(:font) {
+	also does autocast;
+	#Unix
+	has Pointer $.c;
+	has Pointer $.widget;
+	has Pointer $.button;
+	has Pointer $.fb;
+	has Pointer $.fc;
+	has Pointer $.onChanged;
+	has Pointer $.onChangedData;
+	#Windows
+	#has Pointer $.c;
+	has Pointer $.hwnd;
+	has Pointer $.params;
+	has bool $.already;
+	#has Pointer $.onChanged;
+	#has Pointer $.onChangedData;
+	#Darwin
+	#has Pointer $.c;
+	#has Pointer $.button;
+	#has Pointer $.onChanged;
+	#has Pointer $.onChangedData;
 }
 
 class uiColorButton is repr('CStruct') is export(:color) {
@@ -768,7 +790,7 @@ class uiTable is repr('CStruct') is export {
 
 
 sub uiInit(uiInitOptions $options)
-  returns Str 
+  returns Str
   is native(LIB)
   is export(:init)
   { * }
@@ -822,7 +844,7 @@ sub uiTimer(int32 $milliseconds, &f ( --> int32), Pointer)
 
 sub uiOnShouldQuit(&f (Pointer --> int32), Pointer $data)
   is native(LIB)
-  is export(:DEFAULT)
+  is export(:quit)
   { * }
 
 
@@ -1740,13 +1762,13 @@ sub uiDrawPathNewFigure(uiDrawPath $p, num64 $x, num64 $y)
   { * }
 
 
-sub uiDrawPathNewFigureWithArc(uiDrawPath $p 
-                              ,num64      $xCenter 
-                              ,num64      $yCenter 
-                              ,num64      $radius 
-                              ,num64      $startAngle 
-                              ,num64      $sweep 
-                              ,int32      $negative 
+sub uiDrawPathNewFigureWithArc(uiDrawPath $p
+                              ,num64      $xCenter
+                              ,num64      $yCenter
+                              ,num64      $radius
+                              ,num64      $startAngle
+                              ,num64      $sweep
+                              ,int32      $negative
                               ) is native(LIB) is export(:draw) { * }
 
 
@@ -1756,23 +1778,23 @@ sub uiDrawPathLineTo(uiDrawPath $p, num64 $x, num64 $y)
   { * }
 
 
-sub uiDrawPathArcTo(uiDrawPath $p 
-                   ,num64      $xCenter 
-                   ,num64      $yCenter 
-                   ,num64      $radius 
-                   ,num64      $startAngle 
-                   ,num64      $sweep 
-                   ,int32      $negative 
+sub uiDrawPathArcTo(uiDrawPath $p
+                   ,num64      $xCenter
+                   ,num64      $yCenter
+                   ,num64      $radius
+                   ,num64      $startAngle
+                   ,num64      $sweep
+                   ,int32      $negative
                    ) is native(LIB) is export(:draw) { * }
 
 
-sub uiDrawPathBezierTo(uiDrawPath $p 
-                      ,num64      $c1x 
-                      ,num64      $c1y 
-                      ,num64      $c2x 
-                      ,num64      $c2y 
-                      ,num64      $endX 
-                      ,num64      $endY 
+sub uiDrawPathBezierTo(uiDrawPath $p
+                      ,num64      $c1x
+                      ,num64      $c1y
+                      ,num64      $c2x
+                      ,num64      $c2y
+                      ,num64      $endX
+                      ,num64      $endY
                       ) is native(LIB) is export(:draw) { * }
 
 
@@ -2187,19 +2209,19 @@ sub uiFreeFontButtonFont(uiFontDescriptor $desc)
   { * }
 
 
-sub uiColorButtonColor(uiColorButton $b 
-                      ,num64         $r is rw 
-                      ,num64         $g is rw 
-                      ,num64         $bl is rw 
-                      ,num64         $a is rw 
+sub uiColorButtonColor(uiColorButton $b
+                      ,num64         $r is rw
+                      ,num64         $g is rw
+                      ,num64         $bl is rw
+                      ,num64         $a is rw
                       ) is native(LIB) is export(:color) { * }
 
 
-sub uiColorButtonSetColor(uiColorButton $b 
-                         ,num64         $r 
-                         ,num64         $g 
-                         ,num64         $bl 
-                         ,num64         $a 
+sub uiColorButtonSetColor(uiColorButton $b
+                         ,num64         $r
+                         ,num64         $g
+                         ,num64         $bl
+                         ,num64         $a
                          ) is native(LIB) is export(:color) { * }
 
 
@@ -2237,16 +2259,16 @@ sub uiFormSetPadded(uiForm $f, int32 $padded)
 
 
 
-sub uiGridAppend(uiGrid    $g 
-                ,uiControl $c 
-                ,int32     $left 
-                ,int32     $top 
-                ,int32     $xspan 
-                ,int32     $yspan 
-                ,int32     $hexpand 
-                ,uint32    $halign 
-                ,int32     $vexpand 
-                ,uint32    $valign 
+sub uiGridAppend(uiGrid    $g
+                ,uiControl $c
+                ,int32     $left
+                ,int32     $top
+                ,int32     $xspan
+                ,int32     $yspan
+                ,int32     $hexpand
+                ,uint32    $halign
+                ,int32     $vexpand
+                ,uint32    $valign
                 ) is native(LIB) is export(:grid) { * }
 
 

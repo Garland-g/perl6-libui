@@ -11,7 +11,7 @@ submethod BUILD() {
 }
 
 method append(Str $name, Libui::Control $control) {
-	if $control.top-level {			
+	if $control.top-level {
 		note "cannot place {$control.WHAT} into a Libui::Container";
 	} else {
 		uiTabAppend($!tab, $name, $control.Control);
@@ -19,7 +19,7 @@ method append(Str $name, Libui::Control $control) {
 }
 
 method insert(Str $name, int32 $before, Libui::Control $control) {
-	if $control.top-level {			
+	if $control.top-level {
 		note "cannot place {$control.WHAT} into a Libui::Container";
 	} else {
 		uiTabInsertAt($!tab, $name, $before, $control.Control);
@@ -51,7 +51,7 @@ multi method margined(Int $page) returns int32 {
 }
 
 multi method margined(Int $page, Int $margined) {
-	self.set-margined($page, $margined);	
+	self.set-margined($page, $margined);
 }
 method !WIDGET() {
 	return $!tab;

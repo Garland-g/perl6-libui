@@ -4,8 +4,8 @@ unit role Libui::Control;
 
 method !WIDGET() { ... }
 
-method Control( --> uiControl) { 
-	return uicontrol(self!WIDGET()); 
+method Control( --> uiControl) {
+	return uicontrol(self!WIDGET());
 }
 
 method destroy() {
@@ -17,7 +17,7 @@ multi method parent() returns uiControl {
 }
 
 method set-parent(Libui::Control $control)  {
-	uiControlSetParent(self.Control, $control.Control); 
+	uiControlSetParent(self.Control, $control.Control);
 }
 
 multi method parent(Libui::Control $control) {

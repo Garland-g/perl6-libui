@@ -15,7 +15,7 @@ isa-ok $entry.changed, Supply, <Get changed supply>;
 subtest <Set and Get entry text>, {
 	plan 1;
 	$entry.set-text("text");
-	is $entry.text(), "text", 
+	is $entry.text(), "text",
 };
 
 is $entry.read-only, 0, <Get state: read-only>;

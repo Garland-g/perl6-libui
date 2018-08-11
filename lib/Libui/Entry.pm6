@@ -49,7 +49,7 @@ role Libui::Entry-Common does Libui::Control {
 	}
 }
 
-class Libui::Entry does Libui::Entry-Common is export { 
+class Libui::Entry does Libui::Entry-Common is export {
 
 	submethod BUILD() {
 		$!entry = uiNewEntry();
@@ -58,7 +58,7 @@ class Libui::Entry does Libui::Entry-Common is export {
 
 class Libui::PasswordEntry does Libui::Entry-Common is export {
 	submethod BUILD() {
-		$!entry = uiNewPasswordEntry;	
+		$!entry = uiNewPasswordEntry;
 	}
 }
 

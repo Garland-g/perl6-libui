@@ -27,7 +27,7 @@ method toggled() returns Supply {
 		my $s = Supplier.new;
 		uiCheckboxOnToggled($!checkbox, -> $, $, {
 			$s.emit(self);
-			CATCH { default { note $_; } } 
+			CATCH { default { note $_; } }
 			},
 		Str);
 		return $s.Supply;

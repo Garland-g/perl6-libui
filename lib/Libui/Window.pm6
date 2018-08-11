@@ -1,7 +1,7 @@
 use Libui::Raw :window;
 use Libui::Container;
 
-unit class Libui::Window 
+unit class Libui::Window
 	does Libui::Container;
 
 has uiWindow $!window;
@@ -12,12 +12,12 @@ submethod BUILD(Str :$title, int32 :$width = 640, int32 :$height = 480, int32 :$
 	$!window = uiNewWindow($title, $width, $height, $has-menubar);
 }
 
-multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 1) { 
+multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 1) {
 	self.bless(:$title, :$width, :$height, :$has-menubar);
 }
 
 method set-content( Libui::Control $control) {
-	if $control.top-level {			
+	if $control.top-level {
 		note "cannot place {$control.WHAT} into a Libui::Container";
 	} else {
 		uiWindowSetChild($!window, $control.Control);

@@ -22,7 +22,7 @@ my $button3 = Libui::Button.new("test");
 
 lives-ok {$hbox.append($vbox, 0)}, <Single append>;
 
-lives-ok {$vbox.append-list(($button1, $button2, $button3), (1, 0))}, 
+lives-ok {$vbox.append-list(($button1, $button2, $button3), (1, 0))},
  <Multiple append with mismatched elems>;
 
 lives-ok {$vbox.delete-item(2);}, <Delete at $index>;
