@@ -1,4 +1,4 @@
-use Libui::Raw :picker, :time;
+use Libui::Raw :picker :time;
 use Libui::Control;
 
 role Libui::Picker does Libui::Control {
@@ -6,16 +6,16 @@ role Libui::Picker does Libui::Control {
 	has Supply $!changed-supply;
 
 	multi method time() {
-		my Time $time;
+		my Libui::Time $time .= new;
 		uiDateTimePickerTime($!picker, $time);
 		return $time;
 	}
 
-	method set-time(Time $time) {
+	method set-time(Libui::Time $time) {
 		uiDateTimePickerSetTime($!picker, $time);
 	}
 
-	multi method time(Time $time) {
+	multi method time(Libui::Time $time) {
 		self.set-time($time);
 	}
 
