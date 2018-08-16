@@ -5,51 +5,51 @@ unit role Libui::Control;
 method !WIDGET() { ... }
 
 method Control( --> uiControl) {
-	return uicontrol(self!WIDGET());
+  return uicontrol(self!WIDGET());
 }
 
 method destroy() {
-	uiControlDestroy(self.Control);
+  uiControlDestroy(self.Control);
 }
 
 multi method parent() returns uiControl {
-	return uiControlParent(self.Control);
+  return uiControlParent(self.Control);
 }
 
 method set-parent(Libui::Control $control)  {
-	uiControlSetParent(self.Control, $control.Control);
+  uiControlSetParent(self.Control, $control.Control);
 }
 
 multi method parent(Libui::Control $control) {
-	self.set-parent($control.Control);
+  self.set-parent($control.Control);
 }
 
 method top-level() returns int32 {
-	return uiControlToplevel(self.Control);
+  return uiControlToplevel(self.Control);
 }
 
 method visible() returns int32 {
-	return uiControlVisible(self.Control);
+  return uiControlVisible(self.Control);
 }
 
 method show() {
-	uiControlShow(self.Control);
+  uiControlShow(self.Control);
 }
 
 method hide() {
-	uiControlHide(self.Control);
+  uiControlHide(self.Control);
 }
 
 method enabled() returns int32 {
-	return uiControlEnabled(self.Control);
+  return uiControlEnabled(self.Control);
 }
 
 method enable() {
-	uiControlEnable(self.Control);
+  uiControlEnable(self.Control);
 }
 
 method disable() {
-	uiControlDisable(self.Control);
+  uiControlDisable(self.Control);
 }
 
 

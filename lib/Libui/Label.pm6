@@ -2,30 +2,30 @@ use Libui::Raw :label;
 use Libui::Control;
 
 unit class Libui::Label
-	does Libui::Control;
+  does Libui::Control;
 
 has uiLabel $!label;
 
 submethod BUILD(Str :$text) {
-	$!label = uiNewLabel($text);
+  $!label = uiNewLabel($text);
 }
 
 multi method new(Str $text){
-	self.bless(:$text);
+  self.bless(:$text);
 }
 
 multi method text() returns Str {
-	return uiLabelText($!label);
+  return uiLabelText($!label);
 }
 
 method set-text(Str $text) {
-	uiLabelSetText($!label, $text);
+  uiLabelSetText($!label, $text);
 }
 
 multi method text(Str $text) {
-	self.set-text($text);
+  self.set-text($text);
 }
 
 method !WIDGET() {
-	return $!label;
+  return $!label;
 }

@@ -7,37 +7,37 @@ has uiSlider $!slider;
 has $!value-changed;
 
 submethod BUILD(int32 :$min, int32 :$max) {
-	$!slider = uiNewSlider($min, $max);
+  $!slider = uiNewSlider($min, $max);
 }
 
 multi method new(Int $min, Int $max) {
-	self.bless(:$min, :$max);
+  self.bless(:$min, :$max);
 }
 
 multi method value() returns int32 {
-	uiSliderValue($!slider);
+  uiSliderValue($!slider);
 }
 
 method set-value(int32 $value) {
-	uiSliderSetValue($!slider, $value);
+  uiSliderSetValue($!slider, $value);
 }
 
 multi method value(Int $value) {
-	self.set-value($value);
+  self.set-value($value);
 }
 
 method changed() returns Supply {
-	$!value-changed //= do {
-		my $s = Supplier.new;
-		uiSliderOnChanged($!slider, -> $, $ {
-			$s.emit(self);
-			CATCH { default { note $_; } }
-		},
-		Str);
-		return $s.Supply;
-	}
+  $!value-changed //= do {
+    my $s = Supplier.new;
+    uiSliderOnChanged($!slider, -> $, $ {
+      $s.emit(self);
+      CATCH { default { note $_; } }
+    },
+    Str);
+    return $s.Supply;
+  }
 }
 
 method !WIDGET() {
-	return $!slider;
+  return $!slider;
 }

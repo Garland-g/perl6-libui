@@ -7,37 +7,37 @@ has uiRadioButtons $!radio-buttons;
 has $!selected-supply;
 
 submethod BUILD() {
-	$!radio-buttons = uiNewRadioButtons();
+  $!radio-buttons = uiNewRadioButtons();
 }
 
 method append(Str $text) {
-	uiRadioButtonsAppend($!radio-buttons, $text);
+  uiRadioButtonsAppend($!radio-buttons, $text);
 }
 
 multi method selected() returns int32 {
-	uiRadioButtonsSelected($!radio-buttons);
+  uiRadioButtonsSelected($!radio-buttons);
 }
 
 method set-selected(int32 $n) {
-	uiRadioButtonsSetSelected($!radio-buttons, $n);
+  uiRadioButtonsSetSelected($!radio-buttons, $n);
 }
 
 multi method selected(Int $n) {
-	self.set-selected($n);
+  self.set-selected($n);
 }
 
 method changed() {
-	$!selected-supply //= do {
-		my $s = Supplier.new;
-		uiRadioButtonsOnSelected($!radio-buttons, -> $, $ {
-			$s.emit(self);
-			CATCH { default { note $_; } }
-		},
-		Str);
-		return $s.Supply;
-	}
+  $!selected-supply //= do {
+    my $s = Supplier.new;
+    uiRadioButtonsOnSelected($!radio-buttons, -> $, $ {
+      $s.emit(self);
+      CATCH { default { note $_; } }
+    },
+    Str);
+    return $s.Supply;
+  }
 }
 
 method !WIDGET() {
-	return $!radio-buttons;
+  return $!radio-buttons;
 }

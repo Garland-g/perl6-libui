@@ -7,37 +7,37 @@ has uiButton $!button;
 has $!clicked-supply;
 
 submethod BUILD(Str :$label!) {
-	$!button = uiNewButton($label);
+  $!button = uiNewButton($label);
 }
 
 multi method new(Str $label) {
-	self.bless(:$label);
+  self.bless(:$label);
 }
 
 multi method text() returns Str {
-	return uiButtonText($!button);
+  return uiButtonText($!button);
 }
 
 method set-text(Str $label) {
-	uiButtonSetText($!button, $label);
+  uiButtonSetText($!button, $label);
 }
 
 multi method text(Str $label) {
-	self.set-text($label);
+  self.set-text($label);
 }
 
 method clicked() returns Supply {
-	$!clicked-supply //= do {
-		my $s = Supplier.new;
-		uiButtonOnClicked($!button, -> $, $ {
-			$s.emit(self);
-			CATCH { default { note $_; } }
-			},
-		Str);
-		return $s.Supply;
-	}
+  $!clicked-supply //= do {
+    my $s = Supplier.new;
+    uiButtonOnClicked($!button, -> $, $ {
+      $s.emit(self);
+      CATCH { default { note $_; } }
+      },
+    Str);
+    return $s.Supply;
+  }
 }
 
 method !WIDGET() {
-	return $!button;
+  return $!button;
 }
