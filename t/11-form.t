@@ -21,9 +21,9 @@ lives-ok {$form.delete(1)},
 is $form.padded, 0, <Get state: padded>;
 
 subtest <Set state: padded>, {
-	plan 1;
-	$form.set-padded(1);
-	is $form.padded, 1;
+  plan 1;
+  $form.set-padded(1);
+  is $form.padded, 1;
 };
 
 done-testing;

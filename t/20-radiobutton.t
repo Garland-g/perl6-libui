@@ -16,9 +16,9 @@ $button.append('choice 2');
 }, <Append choice>;
 
 subtest <Get and Set selected>, {
-	plan 1;
-	$button.set-selected(1);
-	is $button.selected, 1;
+  plan 1;
+  $button.set-selected(1);
+  is $button.selected, 1;
 };
 
 

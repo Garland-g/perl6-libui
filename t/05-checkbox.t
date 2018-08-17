@@ -13,19 +13,19 @@ isa-ok $checkbox.toggled, Supply, <Get checkbox's supply>;
 is $checkbox.text(), 'text', <Get checkbox's text>;
 
 subtest {
-	plan 1;
-	$checkbox.set-text('test');
+  plan 1;
+  $checkbox.set-text('test');
 
-	is $checkbox.text(), 'test';
+  is $checkbox.text(), 'test';
 }, <Set checkbox's text>;
 
 is $checkbox.checked, 0, <Get checkbox's state>;
 
 subtest {
-	plan 1;
-	$checkbox.set-checked(1);
+  plan 1;
+  $checkbox.set-checked(1);
 
-	is $checkbox.checked, 1;
+  is $checkbox.checked, 1;
 }, <Set checkbox's state>;
 
 done-testing;

@@ -30,9 +30,9 @@ lives-ok {$vbox.delete-item(2);}, <Delete at $index>;
 is $vbox.padded(), 0, <Get state: padded>;
 
 subtest <Set state: padded>, {
-	plan 1;
-	$hbox.set-padded(1);
-	is $hbox.padded, 1;
+  plan 1;
+  $hbox.set-padded(1);
+  is $hbox.padded, 1;
 };
 
 done-testing;

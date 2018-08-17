@@ -21,23 +21,23 @@ my Libui::MenuItem $check-item = $menu.append-check-item('Fullscreen');
 is $check-item.checked, 0, <Get state: checked>;
 
 subtest <Set state: checked>, {
-	plan 1;
-	$check-item.set-checked(1);
-	is $check-item.checked, 1;
+  plan 1;
+  $check-item.set-checked(1);
+  is $check-item.checked, 1;
 };
 
 lives-ok {
-	my Libui::MenuItem $pref-item = $menu.append-preferences-item;
+  my Libui::MenuItem $pref-item = $menu.append-preferences-item;
 }, <Create preferences item>;
 
 lives-ok {
-	my Libui::MenuItem $quit-item = $menu.append-quit-item;
+  my Libui::MenuItem $quit-item = $menu.append-quit-item;
 }, <Create quit item>;
 
 my Libui::Menu $menu2 .= new('Help');
 
 lives-ok {
-	my Libui::MenuItem $about-item = $menu2.append-about-item;
+  my Libui::MenuItem $about-item = $menu2.append-about-item;
 }, <Create about item>;
 
 done-testing;

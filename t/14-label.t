@@ -13,9 +13,9 @@ isa-ok $label, Libui::Label, <Create a label>;
 is $label.text, 'text', <Get text>;
 
 subtest <Set text>, {
-	plan 1;
-	$label.set-text('value');
-	is $label.text, 'value';
+  plan 1;
+  $label.set-text('value');
+  is $label.text, 'value';
 };
 
 done-testing;

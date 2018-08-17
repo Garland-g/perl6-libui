@@ -13,9 +13,9 @@ isa-ok $slider.changed, Supply, <Get changed supply>;
 is $slider.value, 0, <Get slider value>;
 
 subtest <Set slider value>, {
-	plan 1;
-	$slider.set-value(40);
-	is $slider.value, 40;
+  plan 1;
+  $slider.set-value(40);
+  is $slider.value, 40;
 };
 
 

@@ -15,10 +15,10 @@ isa-ok $combobox.changed, Supply, <Get changed supply>;
 lives-ok { $combobox.append("test") }, <Append item to combobox>;
 
 subtest 'selections', {
-	plan 2;
-	$combobox.append("2");
-	lives-ok { $combobox.set-selected(1) }, <Select item in combobox>;
-	is $combobox.selected, 1, <Get selected item in combobox>;
+  plan 2;
+  $combobox.append("2");
+  lives-ok { $combobox.set-selected(1) }, <Select item in combobox>;
+  is $combobox.selected, 1, <Get selected item in combobox>;
 };
 
 

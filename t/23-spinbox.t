@@ -13,9 +13,9 @@ isa-ok $spinbox.changed, Supply, <Get changed supply>;
 is $spinbox.value, 0, <Get spinbox value>;
 
 subtest <Set spinbox value>, {
-	plan 1;
-	$spinbox.set-value(40);
-	is $spinbox.value, 40;
+  plan 1;
+  $spinbox.set-value(40);
+  is $spinbox.value, 40;
 };
 
 

@@ -16,9 +16,9 @@ lives-ok { $combobox.append("text")}, <Append text>;
 
 
 subtest <Get and Set current text>, {
-	plan 1;
-	$combobox.set-text('value');
-	is $combobox.text, 'value', <Set current text>;
+  plan 1;
+  $combobox.set-text('value');
+  is $combobox.text, 'value', <Set current text>;
 };
 
 done-testing;

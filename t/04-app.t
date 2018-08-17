@@ -8,7 +8,7 @@ my Libui::App $app;
 Libui::Init();
 
 lives-ok {$app .= new('test'); }, 'Create a Libui::App'
-	or bail-out "Cannot proceed without an app";
+  or bail-out "Cannot proceed without an app";
 
 isa-ok $app.root, Libui::Window, 'Get the root window';
 
