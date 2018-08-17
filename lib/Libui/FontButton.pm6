@@ -1,26 +1,8 @@
 use Libui::Raw :draw, :font;
 use Libui::Control;
 
-############################################################
-#                                                          #
-#                  (Version 0.3.5-alpha)                   #
-#          Not fully implemented in libui yet!             #
-#      Can spawn a widget, but cannot get data out.        #
-#                                                          #
-#                                                          #
-############################################################
-
-#class Lubui::FontDescriptor {
-#  has $!desc;
-#
-#  submethod BUILD(uiFontDescriptor :$desc) {
-#    $!desc = $desc;
-#  }
-#
-#  method family returns Str {
-#    return $!desc
-#  }
-#}
+#TODO:
+#SetFont is not implemented in libui yet
 
 class Libui::FontButton does Libui::Control is export {
 
@@ -30,36 +12,35 @@ class Libui::FontButton does Libui::Control is export {
 
   submethod BUILD() {
     $!button = uiNewFontButton();
+    $!desc .= new;
   }
 
-#submethod DESTROY() {
-#  uiFreeFontButtonFont($!desc);
-#}
-#
+#  submethod DESTROY() {
+#    uiFreeFontButtonFont($!desc);
+#  }
+
   method font() {
     uiFontButtonFont($!button, $!desc);
-    return $!desc;
   }
-###Current Error: Cannot look up attributes in $!desc
-#  method family() returns Str {
-#    return $!desc.Family();
-#  }
+  method family() returns Str {
+    return $!desc.Family();
+  }
 
-#  method size() returns num64 {
-#    return $!desc.Size();
-#  }
+  method size() returns num64 {
+    return $!desc.Size();
+  }
 
-#  method weight() returns uint32 {
-#    return $!desc.Weight();
-#  }
+  method weight() returns uint32 {
+    return $!desc.Weight();
+  }
 
-#  method italic() returns uint32 {
-#    return $!desc.Italic();
-#  }
+  method italic() returns uint32 {
+    return $!desc.Italic();
+  }
 
-#  method stretch() returns uint32 {
-#    return $!desc.Stretch();
-#  }
+  method stretch() returns uint32 {
+    return $!desc.Stretch();
+  }
 
   method changed() {
     $!changed-supply //= do {

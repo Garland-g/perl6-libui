@@ -24,12 +24,12 @@ use Libui::Tab;
 use Libui::Window;
 
 module Libui is export {
-	our sub Init($options = uiInitOptions.new) {
-		my Str $err = uiInit($options);
-		if $err {
-			die $err;
-		}
-	}
+  our sub Init($options = uiInitOptions.new) {
+    my Str $err = uiInit($options);
+    if $err {
+      die $err;
+    }
+  }
 }
 
 
@@ -39,14 +39,14 @@ module Libui is export {
 
 =head2 Perl6 binding to L<andlabs/libui|https://github.com/andlabs/libui>
 
-andlabs/libui is currently alpha software. This binding works with the current release, alpha3.5.
+andlabs/libui is currently alpha software. This binding works with the current release, 0.0.4.
 It does not have full functionality, and is subject to change as andlabs/libui changes underneath it.
-
+The raw bindings accessible in Libui::Raw should be feature-complete, but only some widgets have an object-oriented implementation.
 
 =head3 Cross-platform: Windows, Mac, Linux
 
 This library provides an object-oriented interface to libui.
-A DLL and a dylib are provided in resources.
+Shared libraries ui.dll, libui.dylib, and libui.so are provided in resources.
 
 =head3 Basic Use:
 
@@ -73,15 +73,15 @@ $app.run();
  ColorButton | A button for selecting a color
  EditableCombobox | A combobox that can be edited
  Entry | Text input, can be disabled
- FontButton | A button for selecting a font (incomplete, cannot get data out)
+ FontButton | A button for selecting a font (Incomplete: Cannot set programmatically)
  Form | A container that takes labels for its contents
  Grid | A container that aligns widgets for window design
  Group | A container that provides a title for a set of items
  Label | Displays a single line of text
  Menu | Creates a single column of an application menu
  MultilineEntry | An entry that allows multiple lines
- Time and Date Choosers | Allows choosing of a date and/or time (incomplete, cannot get data out)
- ProgressBar | Displays a progress bar (incomplete, can only set progress)
+ Time and Date Choosers | Allows choosing of a date and/or time
+ ProgressBar | Displays a progress bar
  RadioButton | A set of radio buttons with a callback
  Separator | A simple vertical or horizontal separator
  Slider | A draggable slider for choosing a value in a range
