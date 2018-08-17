@@ -10,14 +10,14 @@ role Libui::Picker does Libui::Control {
     uiDateTimePickerTime($!picker, $time);
     return $time;
   }
-
-  method set-time(Libui::Time $time) {
-    uiDateTimePickerSetTime($!picker, $time);
-  }
-
-  multi method time(Libui::Time $time) {
-    self.set-time($time);
-  }
+#TODO: re-enable next rakudo release
+#  method set-time(Libui::Time $time) {
+#    uiDateTimePickerSetTime($!picker, $time);
+#  }
+#
+#  multi method time(Libui::Time $time) {
+#    self.set-time($time);
+#  }
 
   method changed() returns Supply {
     $!changed-supply //= do {
