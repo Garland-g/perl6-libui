@@ -1457,6 +1457,13 @@ sub uiNewSlider(int64 $min, int64 $max)
 
 
 
+sub uiProgressBarValue(uiProgressBar $p)
+  returns int32
+  is native(LIB)
+  is export(:progbar)
+  { * }
+
+
 sub uiProgressBarSetValue(uiProgressBar $p, int32 $n)
   is native(LIB)
   is export(:progbar)
