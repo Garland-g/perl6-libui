@@ -115,4 +115,8 @@ L<./examples/controlgallery-macos.png>
 
 L<Artistic License 2.0|./LICENSE>
 
+=head3 Author
+
+Travis Gibson
+
 =end pod

@@ -59,3 +59,7 @@ Examples:
 
 [Artistic License 2.0](./LICENSE)
 
+### Author
+
+Travis Gibson
+
