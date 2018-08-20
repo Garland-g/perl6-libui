@@ -651,26 +651,46 @@ class uiDrawStrokeParams is repr('CStruct') is export(:draw) {
   has num64                         $.DashPhase; # double DashPhase
 }
 
-class uiAttribute is repr('CStruct') is export {
-  has int32 $.ownedByUser;
-  has size_t $.refcount;
-  has int32 $.type;
-}
-
-class feature is repr('CStruct') is export {
+class uiOTFeature is repr('CStruct') {
   has int8 $.a;
   has int8 $.b;
   has int8 $.c;
   has int8 $.d;
 }
 
-class uiOpenTypeFeatures is repr('CStruct') {
-  has feature $.data;
+class uiOpenTypeFeatures is repr('CStruct') is export(:text){
+  has uiOTFeature $.data;
   has size_t $.len;
   has size_t $.cap;
 }
 
-class uiAttributedString is repr('CStruct') {
+class uiUColor is repr('CStruct') {
+  has num64 $.r;
+  has num64 $.g;
+  has num64 $.b;
+  has num64 $.a;
+  has int32 $.underlineColor;
+}
+
+class uiAttrType is repr('CUnion') {
+  has Str $.family;
+  has num64 $.size;
+  has int32 $.weight;
+  has int32 $.italic;
+  has int32 $.stretch;
+  HAS uiUColor $.color;
+}
+
+class uiAttribute is repr('CStruct') is export(:text) {
+  has int32 $.ownedByUser;
+  has size_t $.refcount;
+  has int32 $.type;
+  HAS uiAttrType $.u;
+  has int32 $.underline;
+  has Pointer[uiOpenTypeFeatures] $.features;
+}
+
+class uiAttributedString is repr('CStruct') is export(:text) {
   has Str $.s;
   has size_t $len;
 }
@@ -2008,7 +2028,7 @@ sub uiAttributeGetType(uiAttribute $a)
   is export(:text)
   { * }
 
-sub uiNewAttributeFamily(Str $family)
+sub uiNewFamilyAttribute(Str $family)
   returns uiAttribute
   is native(LIB)
   is export(:text)
@@ -2183,7 +2203,7 @@ sub uiAttributedStringString(uiAttributedString $s)
   is export(:text)
   { * }
 
-sub uiAttributedStringLength(uiAttributedString $s)
+sub uiAttributedStringLen(uiAttributedString $s)
   returns size_t
   is native(LIB)
   is export(:text)
@@ -2204,7 +2224,7 @@ sub uiAttributedStringDelete(uiAttributedString $s is rw, size_t $start, size_t 
   is export(:text)
   { * }
 
-sub uiAttributedStringSetAttribute(uiAttributedString $s is rw, uiAttribute $a is rw, size_t $start)
+sub uiAttributedStringSetAttribute(uiAttributedString $s is rw, uiAttribute $a is rw, size_t $start, size_t $end)
   is native(LIB)
   is export(:text)
   { * }
@@ -2214,7 +2234,8 @@ sub uiAttributedStringForEachAttribute(uiAttributedString $s, &f ( --> uiForEach
   is export(:text)
   { * }
 
-sub uiAttributedStringNumGraphemes(uiAttributedString $s is rw) #TODO Make Const when reimplemented
+#TODO Make Const when reimplemented
+sub uiAttributedStringNumGraphemes(uiAttributedString $s is rw)
   returns size_t
   is native(LIB)
   is export(:text)
