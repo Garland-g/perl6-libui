@@ -55,7 +55,6 @@ enum Libui::TextUnderlineColor (
 
 class Libui::AttributedString is export {
   has uiAttributedString $.attrstr;
-  has @.uiFeatures;
 
   submethod BUILD(Str :$init!) {
     $!attrstr = uiNewAttributedString($init);
