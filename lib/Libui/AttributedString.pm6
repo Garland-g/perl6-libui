@@ -261,9 +261,4 @@ class Libui::AttributedString is export {
     my $attr = uiNewUnderlineColorAttribute($underline-color, $r.Num, $g.Num, $b.Num, $a.Num);
     self.set-attribute-chars($attr, $range);
   }
-
-  method features() {
-    return uiNewOpenTypeFeatures();
-  }
 }
-
