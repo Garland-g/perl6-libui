@@ -60,6 +60,10 @@ class Libui::AttributedString is export {
     $!attrstr = uiNewAttributedString($init);
   }
 
+  method ACCEPTS($s2) {
+    return self eq $s2;
+  }
+
   method new(Str $init) {
     self.bless(:$init);
   }

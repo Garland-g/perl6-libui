@@ -12,6 +12,8 @@ my Libui::AttributedString $attrstr3 .= new("Hello World");
 #Basic Strng attributes
 is $attrstr3.Str, "Hello World", <Get String>;
 
+is $attrstr3 ~~ "Hello World", True, <Smartmatch AttributedStrings>;
+
 is $attrstr.chars, 77, <Get number of characters>;
 
 is $attrstr.codes, 77, <Get number of codes>;
