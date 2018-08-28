@@ -1,108 +1,172 @@
 use Libui::Raw :text;
+use Libui::StringStyle;
 
-constant TextWeight is export = do {
-my enum Libui::TextWeight (
-  Minimum => 0,
-  Thin => 100,
-  UltraLight => 200,
-  Light => 300,
-  Book => 350,
-  Normal => 400,
-  Medium => 500,
-  SemiBold => 600,
-  Bold => 700,
-  UltraBold => 800,
-  Heavy => 900,
-  UltraHeavy => 950,
-  Maximum => 1000,
-); Libui::TextWeight }
+class Libui::TaggedStr is Str {
+  has Libui::Style $.style is rw;
 
-constant TextItalic is export = do {
-my enum Libui::TextItalic (
-  Normal => 0,
-  Oblique => 1,
-  Italic => 2,
-); Libui::TextItalic }
+  submethod BUILD(Str :$value, Libui::Style :$style) {
+    $!style = $style;
+  }
 
-constant TextStretch is export = do {
-my enum Libui::TextStretch is export (
-  UltraCondensed => 0,
-  ExtraCondensed => 1,
-  Condensed => 2,
-  SemiCondensed => 3,
-  Normal => 4,
-  SemiExpanded => 5,
-  Expanded => 6,
-  ExtraExpanded => 7,
-  UltraExpanded => 8,
-); Libui::TextStretch }
+  multi method new(Str $value, Libui::Style $style) {
+    self.bless(:$value, :$style);
+  }
 
-constant TextUnderline is export = do {
-enum Libui::TextUnderline (
-  None => 0,
-  Single => 1,
-  Double => 2,
-  Suggestion => 3,
-); Libui::TextUnderline }
+  multi method new(Str :$value, Libui::Style :$style) {
+    self.bless(:$value, :$style);
+  }
 
-constant TextUnderlineColor is export = do {
-enum Libui::TextUnderlineColor (
-  Custom => 0,
-  Spelling => 1,
-  Grammar => 2,
-  Auxiliary => 3,
-); Libui::TextUnderlineColor }
+  method perl() {
+    "Libui::TaggedStr.new(value => {callsame()}, style => {$!style.perl})"
+  }
+}
 
 class Libui::AttributedString is export {
-  has uiAttributedString $.attrstr;
+  has Libui::TaggedStr @.str;
 
-  submethod BUILD(Str :$init!) {
-    $!attrstr = uiNewAttributedString($init);
+  multi submethod BUILD() {
   }
 
-  method ACCEPTS($s2) {
-    return self eq $s2;
+  multi submethod BUILD(Libui::TaggedStr :$init!) {
   }
 
-  method new(Str $init) {
+  multi submethod BUILD(Str :$init!, Libui::Style :$style!) {
+  }
+
+  multi submethod BUILD(Str :$init!) {
+  }
+
+  multi submethod BUILD(Libui::AttributedString :$str!) {
+    @!str = $str.str;
+  }
+
+  multi submethod TWEAK() {
+  }
+
+  multi submethod TWEAK(Libui::TaggedStr :$init!) {
+    @!str.append($init);
+  }
+
+  multi submethod TWEAK(Str :$init!, Libui::Style :$style ) {
+    @!str.append(Libui::TaggedStr.new(value => $init, :$style));
+  }
+
+  multi submethod TWEAK(Str :$init!) {
+    @!str.append(Libui::TaggedStr.new(value => $init, style => Libui::Style.new));
+  }
+
+  multi submethod TWEAK(Libui::AttributedString :$str) {
+  }
+
+  multi method new() {
+    self.bless();
+  }
+
+  multi method new(Str $init, Libui::Style $style) {
+    self.bless(:$init, :$style);
+  }
+
+  multi method new(Libui::TaggedStr $init) {
     self.bless(:$init);
   }
 
+  multi method new(Str $init) {
+    self.bless(:$init);
+  }
+
+  multi method new(Libui::AttributedString $str) {
+    self.bless(:$str);
+  }
+
+  #|Render a Libui::AttributedString
+  method uiAttributedString() {
+    my $attrstr = uiNewAttributedString("");
+    my @attr;
+    my $total-len = 0;
+    for @!str -> $str {
+      uiAttributedStringAppendUnattributed($attrstr, $str.Str);
+      my $len = $str.encode.bytes;
+      if $str.style.defined {
+        if $str.style.size.defined {
+          @attr.append: uiNewSizeAttribute($str.style.size.value.Num)
+        }
+        if $str.style.family.defined {
+          @attr.append: uiNewFamilyAttribute($str.style.family.value)
+        }
+        if $str.style.weight.defined {
+          @attr.append: uiNewWeightAttribute($str.style.weight.value)
+        }
+        if $str.style.underline.defined {
+          @attr.append: uiNewUnderlineAttribute($str.style.underline.value)
+        }
+        if $str.style.stretch.defined {
+          @attr.append: uiNewStretchAttribute($str.style.stretch.value)
+        }
+        if $str.style.italic.defined {
+          @attr.append: uiNewItalicAttribute($str.style.italic.value)
+        }
+        if $str.style.color.defined {
+          my $color = $str.style.color.value;
+          @attr.append: uiNewColorAttribute($color.r.Num, $color.g.Num, $color.b.Num, $color.a.Num)
+        }
+        if $str.style.background-color.defined {
+          my $color = $str.style.background-color.value;
+          @attr.append: uiNewBackgroundAttribute($color.r.Num, $color.g.Num, $color.b.Num, $color.a.Num)
+        }
+        if $str.style.underline-color.defined {
+          my $color = $str.style.underline-color.value;
+          my $type = $str.style.underline-color.type;
+          @attr.append: uiNewUnderlineColorAttribute($type, $color.r.Num, $color.g.Num, $color.b.Num, $color.a.Num)
+        }
+        if $str.style.features.defined {
+          my $otf = uiNewOpenTypeFeatures();
+          say $str.style.features.features.WHAT;
+          for $str.style.features.features.kv -> $key, $value {
+            my ($a, $b, $c, $d) = $key.comb>>.ord;
+            uiOpenTypeFeaturesAdd($otf, $a, $b, $c, $d, $value);
+          }
+          @attr.append: uiNewFeaturesAttribute($otf);
+        }
+        for @attr -> $attr {
+          self.set-attribute-chars($attrstr, $attr, $total-len..($total-len + $len));
+        }
+      }
+      $total-len += $len;
+      @attr = [];
+    }
+    return $attrstr;
+  }
+
   method Str() {
-    return uiAttributedStringString($!attrstr);
+    return @!str.join;
   }
 
   method chars() {
-    return self.Str.chars;
+    return @!str.join.chars;
   }
 
   method codes() {
-    return self.Str.codes;
+    return @!str.join.codes;
   }
 
   #| N.B AttributedStrings are always UTF-8
   method encode() {
-    return self.Str.encode;
-  }
-
-  #| Convenience function
-  method substr(|args) {
-    return self.Str.substr(|args);
+    return @!str.join.encode;
   }
 
   #| Full conversion from perl6 substr semantics to C-String UTF8 byte array
-  multi method chars-to-bytes(UInt $start-char, UInt $chars) {
+  multi method chars-to-bytes(Str $str, UInt $start-char, UInt $chars) {
     my $end-char = self.chars-to-end($start-char, $chars)[1];
-    my $start-byte = self.substr(0, $start-char).encode.bytes;
-    my $end-byte = self.substr(0, $end-char).encode.bytes;
+    my $start-byte = $str.substr(0, $start-char).encode.bytes;
+    my $end-byte = $str.substr(0, $end-char).encode.bytes;
     return ($start-byte, $end-byte);
   }
 
   #| Full conversion from perl6 Range to C-String UTF8 byte array
-  multi method chars-to-bytes(Range $r) {
+  multi method chars-to-bytes(Str $str, Range $r) {
     my ($start-char, $end-char) = self.chars-to-end($r);
-    my $start-byte = self.substr(0, $start-char).encode.bytes;
-    my $end-byte = self.substr(0, $end-char).encode.bytes;
+    my $start-byte = $str.substr(0, $start-char).encode.bytes;
+    my $end-byte = $str.substr(0, $end-char).encode.bytes;
     return ($start-byte, $end-byte);
   }
 
@@ -116,152 +180,37 @@ class Libui::AttributedString is export {
     return $r.int-bounds Z+ (0, 1);
   }
 
-  method append(Str $str) {
-    uiAttributedStringAppendUnattributed($!attrstr, $str);
+  method append-attributed(Str $str, Libui::Style $style) {
+    @!str.append(Libui::TaggedStr.new($str, $style));
   }
 
-  method set-attribute-bytes(uiAttribute $attr is rw, UInt $start, UInt $end) {
-    uiAttributedStringSetAttribute($!attrstr, $attr, $start, $end);
+  multi method append(Str $str) {
+    @!str.append(Libui::TaggedStr.new($str, Libui::Style));
   }
 
-#  method set-attribute-codes(uiAttribute $attr is rw, Int $start, Int $end) {
-#    my Str $str = $!attrstr.Str;
-#  }
+  multi method append(Libui::AttributedString $other) {
+    my @newstr.append(@!str).append($other.str);
+  self.append($other.Str);
+    return Libui::NewString;
+  }
+
+  method set-attribute-bytes(uiAttributedString $attrstr, uiAttribute $attr, UInt $start, UInt $end) {
+    uiAttributedStringSetAttribute($attrstr, $attr, $start, $end);
+  }
+
 
   #| Use Perl 6 Str semantics
-  multi method set-attribute-chars(uiAttribute $attr is rw, UInt $start, UInt $chars) {
-    my ($s, $e) = self.chars-to-bytes($start, $chars);
-    self.set-attribute-bytes($attr, $s, $e);
+  multi method set-attribute-chars(uiAttributedString $attrstr, uiAttribute $attr, UInt $start, UInt $chars) {
+    my ($s, $e) = self.chars-to-bytes($attrstr.Str, $start, $chars);
+    self.set-attribute-bytes($attrstr, $attr, $s, $e);
   }
-  multi method set-attribute-chars(uiAttribute $attr is rw, Range $r ) {
-    my ($s, $e) = self.chars-to-bytes($r);
-    self.set-attribute-bytes($attr, $s, $e);
+  multi method set-attribute-chars(uiAttributedString $attrstr, uiAttribute $attr, Range $r ) {
+    my ($s, $e) = self.chars-to-bytes($attrstr.Str,  $r);
+    self.set-attribute-bytes($attrstr, $attr, $s, $e);
   }
+}
+multi sub infix:<~> (Libui::AttributedString $attrstr, Libui::AttributedString $to-add ) is export {
+}
 
-  #| Insert unattributed text, moves existing attributes to follow existing text
-  method insert(Str $str, UInt $char-at) {
-    my $at = $!attrstr.substr(0, $char-at).encode.bytes;
-    uiAttributedStringInsertAtUnattributed($!attrstr, $str, $at);
-  }
-
-  multi method delete(UInt $start, UInt $chars) {
-    my ($s, $e) = self.chars-to-bytes($start, $chars);
-    uiAttributedStringDelete($!attrstr, $s, $e);
-  }
-
-  multi method delete(Range $r) {
-    my ($s, $e) = self.chars-to-bytes($r);
-    uiAttributedStringDelete($!attrstr, $s, $e);
-  }
-
-  #|( Run a callback on each attribute
-      Cannot modify the underlying string
-      Cannot free or save the attribute for later
-    )
-  method for-each-attribute(Callable $f) {
-    uiAttributedStringForEachAttribute($!attrstr, $f, Str);
-  }
-
-  multi method family(Str $family, UInt $start, UInt $chars) {
-    my $attr = uiNewFamilyAttribute($family);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method family(Str $family, Range $r) {
-    my $attr = uiNewFamilyAttribute($family);
-    self.set-attribute-chars($family, $r);
-  }
-
-  multi method size(Numeric $size, UInt $start, UInt $chars) {
-    my $attr = uiNewSizeAttribute($size.Num);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method size(Numeric $size, Range $r) {
-    my $attr = uiNewSizeAttribute($size.Num);
-    self.set-attribute-chars($attr, $r);
-  }
-
-  multi method weight(Int(Libui::TextWeight) $weight where 0 <= * <= 1000, UInt $start, UInt $chars) {
-    my $attr = uiNewWeightAttribute($weight);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method weight(Int(Libui::TextWeight) $weight where 0 <= * <= 1000, Range $r) {
-    my $attr = uiNewWeightAttribute($weight);
-    self.set-attribute-chars($attr, $r);
-  }
-
-  multi method italic(Libui::TextItalic $italic, UInt $start, UInt $chars) {
-    my $attr = uiNewItalicAttribute($italic);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method italic(Libui::TextItalic $italic, Range $r) {
-    my $attr = uiNewItalicAttribute($italic);
-    self.set-attribute-chars($attr, $r);
-  }
-
-  multi method stretch(Libui::TextStretch $stretch, UInt $start, UInt $chars) {
-    my $attr = uiNewStretchAttribute($stretch);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method stretch(Libui::TextStretch $stretch, Range $r) {
-    my $attr = uiNewStretchAttribute($stretch);
-    self.set-attribute-chars($attr, $r);
-  }
-
-  multi method color(Numeric $r, Numeric $g, Numeric $b, Numeric $a, UInt $start, UInt $chars) {
-    my $attr = uiNewColorAttribute($r.Num, $g.Num, $b.Num, $a.Num);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method color(Numeric $r, Numeric $g, Numeric $b, Numeric $a, Range $range) {
-    my $attr = uiNewColorAttribute($r.Num, $g.Num, $b.Num, $a.Num);
-    self.set-attribute-chars($attr, $range);
-  }
-
-  multi method background(Numeric $r, Numeric $g, Numeric $b, Numeric $a, UInt $start, UInt $chars) {
-    my $attr = uiNewBackgroundAttribute($r.Num, $g.Num, $b.Num, $a.Num);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method background(Numeric $r, Numeric $g, Numeric $b, Numeric $a, Range $range) {
-    my $attr = uiNewBackgroundAttribute($r.Num, $g.Num, $b.Num, $a.Num);
-    self.set-attribute-chars($attr, $range);
-  }
-
-  multi method underline(Libui::TextUnderline $underline, UInt $start, UInt $chars) {
-    my $attr = uiNewUnderlineAttribute($underline);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method underline(Libui::TextUnderline $underline, Range $r) {
-    my $attr = uiNewUnderlineAttribute($underline);
-    self.set-attribute-chars($attr, $r);
-  }
-
-  multi method underline-color(Libui::TextUnderlineColor $underline-color
-                        ,Numeric $r
-                        ,Numeric $g
-                        ,Numeric $b
-                        ,Numeric $a
-                        ,UInt $start
-                        ,UInt $chars
-                        ) {
-    my $attr = uiNewUnderlineColorAttribute($underline-color, $r.Num, $g.Num, $b.Num, $a.Num);
-    self.set-attribute-chars($attr, $start, $chars);
-  }
-
-  multi method underline-color(Libui::TextUnderlineColor $underline-color
-                        ,Numeric $r
-                        ,Numeric $g
-                        ,Numeric $b
-                        ,Numeric $a
-                        ,Range $range
-                        ) {
-    my $attr = uiNewUnderlineColorAttribute($underline-color, $r.Num, $g.Num, $b.Num, $a.Num);
-    self.set-attribute-chars($attr, $range);
-  }
+multi sub infix:<~> (Libui::AttributedString $attrstr, Str $str --> Libui::AttributedString) is export {
 }

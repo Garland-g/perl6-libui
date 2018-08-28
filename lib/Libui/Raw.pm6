@@ -693,6 +693,22 @@ class uiAttribute is repr('CStruct') is export(:text) {
 class uiAttributedString is repr('CStruct') is export(:text) {
   has Str $.s;
   has size_t $len;
+  has Pointer $.attrs;
+  has Pointer[uint16] $.u16;
+  has size_t $.u16len;
+  has Pointer[size_t] $.u8tou16;
+  has Pointer[size_t] $.u16tou8;
+
+  has Pointer $.graphemes;
+
+  method Str {
+    return uiAttributedStringString(self);
+  }
+
+  #|This takes byte start and end positions, not grapheme ranges
+  method set-attribute-byte-range(uiAttribute $attr, Int $start, Int $end) {
+    uiAttributedStringSetAttribute(self, $attr, $start, $end);
+  }
 }
 
 class uiFontDescriptor is repr('CStruct') is export(:font) {
