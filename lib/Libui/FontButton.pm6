@@ -15,12 +15,9 @@ class Libui::FontButton does Libui::Control is export {
     $!desc .= new;
   }
 
-#  submethod DESTROY() {
-#    uiFreeFontButtonFont($!desc);
-#  }
-
   method font() {
     uiFontButtonFont($!button, $!desc);
+    return $!desc;
   }
   method family() returns Str {
     return $!desc.Family();
@@ -47,6 +44,7 @@ class Libui::FontButton does Libui::Control is export {
       my $s = Supplier.new;
       uiFontButtonOnChanged($!button, -> $, $ {
         $s.emit(self);
+        uiFreeFontButtonFont($!desc);
         CATCH { default { note $_; } }
       },
       Str);
