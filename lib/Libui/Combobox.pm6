@@ -14,15 +14,15 @@ method append(Str $text) {
   uiComboboxAppend($!combobox, $text);
 }
 
-multi method selected() returns int32 {
+multi method selected() returns uint32 {
   return uiComboboxSelected($!combobox);
 }
 
-method set-selected(int32 $n) {
+method set-selected(uint32 $n) {
   uiComboboxSetSelected($!combobox, $n);
 }
 
-multi method selected(Int $n) {
+multi method selected(UInt $n) {
   self.set-selected($n);
 }
 
