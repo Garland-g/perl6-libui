@@ -36,6 +36,7 @@
     "Libui::Separator" : "lib/Libui/Separator.pm6",
     "Libui::Slider" : "lib/Libui/Slider.pm6",
     "Libui::Spinbox" : "lib/Libui/Spinbox.pm6",
+    "Libui::StringStyle" : "lib/Libui/StringStyle.pm6",
     "Libui::Tab" : "lib/Libui/Tab.pm6",
     "Libui::Window" : "lib/Libui/Window.pm6"
   },
