@@ -19,6 +19,10 @@ class Libui::TaggedStr is Str {
   method perl() {
     "Libui::TaggedStr.new(value => {callsame()}, style => {$!style.perl})"
   }
+
+  method ACCEPTS(Libui::TaggedStr $str) {
+    return self.perl ~~ $str.perl;
+  }
 }
 
 class Libui::AttributedString is export {
@@ -147,6 +151,10 @@ class Libui::AttributedString is export {
 
   method codes() {
     return @!str.join.codes;
+  }
+
+  method ACCEPTS(Libui::AttributedString $attrstr) {
+    return @!str ~~ $attrstr.str;
   }
 
   #| N.B AttributedStrings are always UTF-8

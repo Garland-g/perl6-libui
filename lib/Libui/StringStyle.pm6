@@ -59,7 +59,7 @@ role Attribute[::T] {
 
 subset RGBA of Numeric where 0 <= * <= 1;
 
-class Color is export {
+class Color {
   has RGBA $.r is rw;
   has RGBA $.g is rw;
   has RGBA $.b is rw;
@@ -113,7 +113,7 @@ class TextColor {
 
 subset OpenTypeFeature of Pair where { .key.chars == 4 and .value ~~ UInt};
 
-class Feature is export {
+class Feature {
   also does Attribute[OpenTypeFeature];
 
   submethod BUILD(OpenTypeFeature :$value) {
@@ -133,7 +133,7 @@ class Feature is export {
   }
 }
 
-class Features is export {
+class Features {
   has Feature %.features;
 
   multi submethod BUILD(Features :$features) {
