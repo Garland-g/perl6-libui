@@ -14,8 +14,10 @@ isa-ok $button.changed, Supply, <Get changed supply>;
 
 lives-ok {$button.font(); }, <Get font>;
 
-is $button.family, 'Sans', <Get font family>;
-is $button.size, 12, <Get font size>;
+#Default Font name and size depends on platform
+isa-ok $button.family, Str, <Get font family>;
+isa-ok $button.size, Num, <Get font size>;
+
 is $button.weight, 400, <Get font weight>;
 is $button.italic, 0, <Get font italic>;
 is $button.stretch, 4, <Get font stretch>;
