@@ -14,8 +14,12 @@ multi method new(Str $text) {
   self.bless(:$text);
 }
 
-method text() returns Str {
+multi method text() returns Str {
   return uiCheckboxText($!checkbox);
+}
+
+multi method text(Str $text) {
+  uiCheckboxSetText($!checkbox, $text);
 }
 
 method set-text(Str $text) {
