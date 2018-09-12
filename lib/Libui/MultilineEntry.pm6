@@ -19,7 +19,7 @@ role Libui::MultilineEntry-Common {
     self.set-text($text);
   }
 
-  method append($text) {
+  method append(Str $text) {
     uiMultilineEntryAppend($!entry, $text);
   }
 
