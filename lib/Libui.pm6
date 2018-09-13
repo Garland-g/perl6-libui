@@ -1,6 +1,5 @@
 use Libui::Raw :init, :time;
 use Libui::App;
-use Libui::AttributedString;
 use Libui::Button;
 use Libui::Box;
 use Libui::Checkbox;
