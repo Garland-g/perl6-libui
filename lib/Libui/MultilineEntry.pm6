@@ -65,3 +65,39 @@ class Libui::NonWrappingMultilineEntry does Libui::MultilineEntry-Common {
     $!entry = uiNewNonWrappingMultilineEntry();
   }
 }
+
+=begin MultilineEntry
+=head2 Libui::MultilineEntry Libui::NonWrappingMultilineEntry
+
+An entry that spans multiple lines.
+
+=head3 Methods
+
+C<new()>
+
+Creates a MultilineEntry.
+
+C<text() returns Str>
+
+Returns the text content of the MultilineEntry.
+
+C<set-text(Str $text)> or C<text(Str $text)>
+
+Sets the text content of the MultilineEntry.
+
+C<append(Str $text)>
+
+Appends $text to the MultilineEntry.
+
+C<changed() returns Supply>
+
+Returns a Supply. An event is emitted whenever the text is changed.
+
+C<read-only() returns int32>
+
+Returns 1 if the Entry is read-only.
+
+C<set-read-only(int32 $read-only)> or C<read-only(Int $read-only)>
+
+Sets the read-only property of the Entry.
+=end MultilineEntry

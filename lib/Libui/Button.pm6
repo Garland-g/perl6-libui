@@ -41,3 +41,27 @@ method clicked() returns Supply {
 method !WIDGET() {
   return $!button;
 }
+
+=begin Button
+=head2 Libui::Button
+
+A button with a label.
+
+=head3 Methods
+
+C<new(Str :$label)>
+
+Creates a new Libui::Button.
+
+C<text() returns Str>
+
+Returns the label.
+
+C<text(Str $label)> or C<set-text(Str $label)>
+
+Sets the label.
+
+C<clicked() returns Supply>
+
+Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the button is pressed.
+=end Button

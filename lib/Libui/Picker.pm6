@@ -53,3 +53,23 @@ class Libui::TimePicker does Libui::Picker is export {
     $!picker = uiNewTimePicker();
   }
 }
+
+=begin DateTimePicker
+=head2 Libui::DateTimePicker, Libui::DatePicker, Libui::TimePicker
+
+A widget to allow setting a Date and/or Time
+
+=head3 Methods
+
+C<new()>
+
+Creates a Picker.
+
+C<time() returns Libui::Time>
+
+Returns a L<Time|https://github.com/Garland-g/perl6-libui/wiki/Time> object.
+
+C<changed() returns Supply>
+
+Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the value is changed.
+=end DateTimePicker

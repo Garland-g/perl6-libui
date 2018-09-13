@@ -29,3 +29,23 @@ multi method text(Str $text) {
 method !WIDGET() {
   return $!label;
 }
+
+=begin Label
+=head2 Libui::Label
+
+A label for displaying text
+
+=head3Methods
+
+C<new(Str $text)>
+
+Creates a Libui::Label
+
+C<text() returns Str>
+
+Returns the text content of the Label.
+
+C<set-text(Str $text)> or C<text(Str $text)>
+
+Sets the text content of the Label.
+=end Label

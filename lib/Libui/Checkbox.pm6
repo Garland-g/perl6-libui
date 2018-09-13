@@ -53,3 +53,36 @@ method set-checked(int32 $checked) {
 method !WIDGET() {
   return $!checkbox;
 }
+
+=begin Checkbox
+=head2 Libui::Checkbox
+
+A standard checkbox.
+
+=head3 Methods
+
+C<new(Str $text)>
+
+Creates a new Checkbox.
+
+C<text() returns Str>
+
+Returns the text of the Checkbox.
+
+C<set-text(Str $text)> or C<text(Str $text)>
+
+Sets the text of the Checkbox.
+
+C<toggled() returns Supply>
+
+Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the Checkbox is toggled.
+
+C<checked() returns int32>
+
+Returns 0 if not checked, and returns 1 if checked.
+
+C<set-checked(int32 $checked)> or C<checked(Int $checked)>
+
+Sets the state of the checkbox. 0 means not checked, and 1 means checked.
+
+=end Checkbox

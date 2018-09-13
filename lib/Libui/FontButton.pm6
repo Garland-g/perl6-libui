@@ -56,3 +56,43 @@ class Libui::FontButton does Libui::Control is export {
     return $!button;
   }
 }
+
+=begin FontButton
+=head2 Libui::FontButton
+
+A button for selecting a font.
+
+=head3 Methods
+
+C<new()>
+
+Creates a FontButton.
+
+C<font() returns uiFontDescriptor>
+
+Gets the current font displayed by the button. Stores it for further use and returns it.
+
+C<family() returns Str>
+
+Returns the L<family|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#family> of the font cached by C<font()>.
+
+C<size() returns num64>
+
+Returns the L<size|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#size> of the font cached by C<font()>.
+
+C<weight() returns uint32>
+
+Returns the L<weight|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#weight> of the font cached by C<font()>.
+
+C<italic() returns uint32>
+
+Returns the L<italic|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#italic> property of the font cached by C<font()>.
+
+C<stretch() returns uint32>
+
+Returns the L<stretch|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#stretch> property of the font cached by C<font()>.
+
+C<changed() returns Supply>
+
+Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the font is changed.
+=end FontButton

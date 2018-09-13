@@ -24,3 +24,23 @@ multi method value(Int $value) {
 method !WIDGET() {
   return $!pbar;
 }
+
+=begin ProgressBar
+=head2 Libui::ProgressBar
+
+A progress bar. Shows a percentage of completion, or an indeterminate ProgressBar.
+
+=head3 Methods
+
+C<new()>
+
+Creates a ProgressBar.
+
+C<value() returns int32>
+
+Returns the current value of the ProgressBar.
+
+C<set-value(int32 $value)> or C<value(Int $value)>
+
+Sets the value of the ProgressBar. Values between 0 and 100 displays that percentage, and -1 displays an indeterminate ProgressBar.
+=end ProgressBar

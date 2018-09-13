@@ -41,3 +41,31 @@ method changed() {
 method !WIDGET() {
   return $!radio-buttons;
 }
+
+=begin RadioButtons
+=head2 Libui::RadioButton
+
+A set of buttons where only one option can be chosen.
+
+=head3 Methods
+
+C<new()>
+
+Creates a new set of RadioButtons.
+
+C<append(Str $text)>
+
+Adds another RadioButton to the set.
+
+C<selected() returns int32>
+
+Returns the index of the currently selected RadioButton.
+
+C<set-selected(int32 $n)> or C<selected(Int $n)>
+
+Sets the selected RadioButton
+
+C<changed() returns Supply>
+
+Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the selected RadioButton changes.
+=end RadioButtons

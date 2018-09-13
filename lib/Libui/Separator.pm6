@@ -20,3 +20,9 @@ class Libui::VSeparator does Libui::Separator {
     $!separator = uiNewVerticalSeparator();
   }
 }
+
+=begin Separator
+=head2 Libui::HSeparator, Libui::VSeparator
+
+Separator widget. Adds a horizontal or vertical line.
+=end Separator

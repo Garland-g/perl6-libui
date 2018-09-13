@@ -41,3 +41,28 @@ method changed() returns Supply {
 method !WIDGET() {
   return $!slider;
 }
+
+=begin Slider
+=head2 Libui::Slider
+
+A slider to select a number inside a given range.
+
+=head3 Methods
+
+C<new(Int $min, Int $max)>
+
+Create a new Slider.
+
+C<value() returns int32>
+
+Returns the value of the Slider.
+
+C<set-value(int32 $value)> or C<value(Int $value)>
+
+Sets the value of the Slider.
+
+C<changed() returns Supply>
+
+Returns a Supply. An event is emitted whenever the value is changed.
+
+=end Slider

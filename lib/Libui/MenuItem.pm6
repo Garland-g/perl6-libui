@@ -73,3 +73,31 @@ class Libui::QuitItem is Libui::MenuItem {
     }
   }
 }
+
+=begin MenuItem
+=head2 Libui::MenuItem
+
+An item in a L<Menu|https://github.com/Garland-g/perl6-libui/wiki/Menu>. They can only be created by Menu methods.
+
+=head3 Methods
+
+C<enable()>
+
+Enables the MenuItem, allowing it to be clicked.
+
+C<disable()>
+
+Disables the MenuItem, preventing it from being clicked.
+
+C<clicked() returns Supply>
+
+Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the MenuItem is clicked.
+
+C<checked() returns int32>
+
+Returns 1 if the MenuItem is checked and 0 if it is unchecked.
+
+C<set-checked(int32 $checked)> or C<checked(Int $checked)>
+
+Sets the MenuItem's checked state.
+=end MenuItem

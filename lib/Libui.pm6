@@ -39,7 +39,7 @@ module Libui is export {
 
 =head2 Perl6 binding to L<andlabs/libui|https://github.com/andlabs/libui>
 
-andlabs/libui is currently alpha software. This binding works with the current release, 0.0.4.
+andlabs/libui is currently alpha software. This binding works with the current release, 0.4.1.
 It does not have full functionality, and is subject to change as andlabs/libui changes underneath it.
 The raw bindings accessible in Libui::Raw should be feature-complete, but only some widgets have an object-oriented implementation.
 
@@ -67,9 +67,9 @@ $app.run();
 =begin table
  Widget | Description
  =====================
- Button   | A simple button with a label and a callback
- Checkbox | A checkbox with a label and a callback
- Combobox | A simple combobox with a callback
+ Button   | A button with a label
+ Checkbox | A checkbox with a label
+ Combobox | A simple combobox
  ColorButton | A button for selecting a color
  EditableCombobox | A combobox that can be edited
  Entry | Text input, can be disabled
@@ -80,20 +80,26 @@ $app.run();
  Label | Displays a single line of text
  Menu | Creates a single column of an application menu
  MultilineEntry | An entry that allows multiple lines
- Time and Date Choosers | Allows choosing of a date and/or time
+ Time and Date Pickers | Allows choosing of a date and/or time
  ProgressBar | Displays a progress bar
- RadioButton | A set of radio buttons with a callback
+ RadioButton | A set of radio buttons
  Separator | A simple vertical or horizontal separator
  Slider | A draggable slider for choosing a value in a range
  Spinbox | A numerical input with a minimum and maximum range
  Tab | A set named tabs for placing items in
- Window | Contains all the other widgets, cannot be embedded in a container
+ Window | Contains any other widget, cannot be embedded in a container
  VBox, HBox | A vertical or horizontal box for grouping items
 =end table
 
 =head4 Install from CPAN with:
 
 C<zef install Libui>
+
+=head4 Documentation
+
+View on the web: L<https://github.com/Garland-g/perl6-libui/wiki>
+
+Use p6doc: e.g. C<p6doc Libui::Button>
 
 =head2 Examples:
 

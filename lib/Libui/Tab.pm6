@@ -56,3 +56,39 @@ multi method margined(Int $page, Int $margined) {
 method !WIDGET() {
   return $!tab;
 }
+
+=begin Tab
+=head2 Libui::Tab
+
+A set of named pages for placing items in.
+
+=head3 Methods
+
+C<new()>
+
+Creates a Tab.
+
+C<set-content(Str $name, Libui::Control $control> or C<append(Str $name, Libui::Control $control)>
+
+Appends a new page and places the widget $control inside it.
+
+C<insert(Str $name, int32 $before, Libui::Control $control)>
+
+Inserts a new page into slot $before and places the widget $control inside it.
+
+C<delete-item(int32 $page)>
+
+Deletes the page in slot $page.
+
+C<pages() returns int32>
+
+Returns the number of pages.
+
+C<margined(Int $page) returns int32>
+
+Returns the margined property of page $page.
+
+C<set-margined(int32 $page, int32 $margined)> or C<margined(Int $page, Int $margined)>
+
+Sets the margined property of page $page.
+=end Tab

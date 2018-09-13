@@ -41,3 +41,26 @@ method changed() returns Supply {
 method !WIDGET() {
   return $!spinbox;
 }
+=begin Spinbox
+=head2 Libui::Spinbox
+
+A slider to select a number inside a given range.
+
+=head3 Methods
+
+C<new(Int $min, Int $max)>
+
+Create a new Spinbox.
+
+C<value() returns int32>
+
+Returns the value of the Spinbox.
+
+C<set-value(int32 $value)> or C<value(Int $value)>
+
+Sets the value of the Spinbox.
+
+C<changed() returns Supply>
+
+Returns a Supply. An event is emitted whenever the value is changed.
+=end Spinbox
