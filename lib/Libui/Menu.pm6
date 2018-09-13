@@ -66,12 +66,15 @@ Example:
     my Libui::Menu $help .= new("Help");
     my Libui::MenuItem $help-item = $help.append-item("Help");
     my Libui::MenuItem $about = $help.append-about-item;
+
+    my Libui::App $app .= new("Application");
+    ...
 =end code
 
 This will create:
-* "File" menu with "Open", "Save", and "Quit" items
-* "Edit" menu with a "Preferences" item
-* "Help" menu with a "Help" item and an "About" item
+=item "File" menu with "Open", "Save", and "Quit" items
+=item "Edit" menu with a "Preferences" item
+=item "Help" menu with a "Help" item and an "About" item
 
 Laid out in the menubar like this:
 
