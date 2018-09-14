@@ -3,7 +3,9 @@
     "Travis Gibson"
   ],
   "build-depends" : [ ],
-  "depends" : [ ],
+  "depends" : [
+    "Color"
+  ],
   "description" : "NativeCall binding to libui",
   "license" : "Artistic-2.0",
   "name" : "Libui",
