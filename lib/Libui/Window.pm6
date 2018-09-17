@@ -220,7 +220,7 @@ C<open() returns Str>
 
 Opens a native file chooser for opening files. Returns a Str that is the path to the chosen file.
 
-C<save()>
+C<save() returns Str>
 
 Opens a native file chooser for saving files. Returns a Str that is the path to the chosen file.
 
