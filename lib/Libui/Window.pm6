@@ -8,15 +8,15 @@ has uiWindow $!window;
 has Supply $!size-changed-supply;
 has Supply $!closing-supply;
 
-submethod BUILD(Str :$title, int32 :$width = 640, int32 :$height = 480, int32 :$has-menubar = 1) {
+submethod BUILD(Str :$title, Int :$width = 640, Int :$height = 480, Bool(Int) :$has-menubar = 1) {
   $!window = uiNewWindow($title, $width, $height, $has-menubar);
 }
 
-multi method new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 1) {
+multi method new(Str $title, Int $width = 640, Int $height = 480, Bool(Int) $has-menubar = 1) {
   self.bless(:$title, :$width, :$height, :$has-menubar);
 }
 
-method set-content( Libui::Control $control) {
+method set-content( Libui::Control:D $control) {
   if $control.top-level {
     note "cannot place {$control.WHAT} into a Libui::Container";
   } else {
@@ -42,61 +42,67 @@ multi method title(Str $title) {
 }
 
 
-method content-size(int32 $width is rw, int32 $height is rw) {
+multi method content-size($width is rw where Int ~~ *, $height is rw where Int ~~ *) {
+  my int32 ($h, $w);
+  uiWindowContentSize($!window, $w, $h);
+  ($height, $width) = ($h, $w);
+}
+
+multi method content-size(int32 $width is rw, int32 $height is rw) {
   uiWindowContentSize($!window, $width, $height);
 }
 
-method width() {
+method width() returns UInt {
   my int32 $height;
   my int32 $width;
   self.content-size($width, $height);
   return $width;
 }
 
-method height() {
+method height() returns UInt {
   my int32 $height;
   my int32 $width;
   self.content-size($width, $height);
   return $height;
 }
 
-method set-content-size(int32 $width, int32 $height) {
+method set-content-size(UInt:D $width, UInt:D $height) {
   uiWindowSetContentSize($!window, $width, $height);
 }
 
-multi method fullscreen() {
-  return uiWindowFullscreen($!window);
+multi method fullscreen() returns Bool {
+  return uiWindowFullscreen($!window).Bool;
 }
 
-method set-fullscreen(int32 $fullscreen) {
+method set-fullscreen(Bool:D(Int) $fullscreen) {
   uiWindowSetFullscreen($!window, $fullscreen);
 }
 
-multi method fullscreen(Int $fullscreen) {
+multi method fullscreen(Bool:D(Int) $fullscreen) {
   self.set-fullscreen($fullscreen);
 }
 
-multi method borderless() returns int32 {
-  return uiWindowBorderless($!window);
+multi method borderless() returns Bool {
+  return uiWindowBorderless($!window).Bool;
 }
 
-method set-borderless(int32 $borderless) {
+method set-borderless(Bool:D(Int) $borderless) {
   uiWindowSetBorderless($!window, $borderless);
 }
 
-multi method borderless(Int $borderless) {
+multi method borderless(Bool:D(Int) $borderless) {
   self.set-borderless($borderless);
 }
 
-multi method margined() returns int32 {
-  return uiWindowMargined($!window);
+multi method margined() returns Bool {
+  return uiWindowMargined($!window).Bool;
 }
 
-method set-margined(int32 $margined) {
+method set-margined(Bool:D(Int) $margined) {
   uiWindowSetMargined($!window, $margined);
 }
 
-multi method margined(Int $margined) {
+multi method margined(Bool:D(Int) $margined) {
   self.set-margined($margined);
 }
 
@@ -156,11 +162,11 @@ Cannot be placed into other controls.
 
 =head3 Methods
 
-C<new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 1)>
+C<new(Str $title, Int $width = 640, Int $height = 480, Bool(Int) $has-menubar = 1)>
 
 Creates a window.
 
-C<set-content(Libui::Control $control)>
+C<set-content(Libui::Control:D $control)>
 
 Sets the child widget of the Window.
 
@@ -172,39 +178,43 @@ C<set-title(Str $title)> or C<title(Str $title)>
 
 Sets the title of the window.
 
-C<width()>
+C<content-size(int32 $width, int32 $height)> or C<content-size($width is rw where Int ~~ *, $height is rw where Int ~~ *)>
+
+Sets the value of $width and $height to the width and height of the Window.
+
+C<set-content-size(UInt $width, UInt $height)>
+
+Sets the width and height of the Window. Does nothing until the L<show()|https://github.com/Garland-g/perl6-libui/wiki/Control#safe-method> is run
+
+C<width() returns UInt>
 
 Returns the width of the Window. Returns 1 until L<show()|https://github.com/Garland-g/perl6-libui/wiki/Control#safe-methods> has been run.
 
-C<height()>
+C<height() returns UInt>
 
 Returns the height of the Window. Returns 1 until L<show()|https://github.com/Garland-g/perl6-libui/wiki/Control#safe-methods> has been run.
 
-C<set-content-size(int32 $width, int32 $height)>
-
-Sets the width and height of the Window. Does nothing until the L<App|https://github.com/Garland-g/perl6-libui/wiki/App> is run
-
-C<fullscreen() returns int32>
+C<fullscreen() returns Bool>
 
 Returns the value of the fullscreen property.
 
-C<set-fullscreen(int32 $fullscreen)> or C<fullscreen(Int $fullscreen)>
+C<set-fullscreen(Int $fullscreen)> or C<fullscreen(Int $fullscreen)>
 
 Sets the value of the fullscreen property.
 
-C<borderless() returns int32>
+C<borderless() returns Bool>
 
 Returns the value of the borderless property.
 
-C<set-borderless(int32 $borderless)> or C<borderless(Int $borderless)>
+C<set-borderless(Bool:D(Int) $borderless)> or C<borderless(Bool:D(Int) $borderless)>
 
 Sets the value of the borderless property.
 
-C<margined() returns int32>
+C<margined() returns Bool>
 
 Returns the value of the margined property.
 
-C<set-margined(int32 $margined)> or C<margined(Int $margined)>
+C<set-margined(Bool:D(Int) $margined)> or C<margined(Bool:D(Int) $margined)>
 
 Sets the value of the margined property.
 

@@ -19,7 +19,7 @@ subtest 'before $window.show', {
   is 'window', $window.title(), <Set the window's title>;
 
   my $button = Libui::Button.new('test');
-
+  dies-ok {$window.set-content(Libui::Button)}, <Set type object as content>;
   $window.set-content($button);
 
   is-deeply $button.parent, $window.Control, <Set the window's content>
@@ -54,8 +54,8 @@ subtest 'after $window.show', {
   subtest {
     $window.set-content-size(300, 200);
 
-    $w = 300;
-    $h = 200;
+    my $w = 300;
+    my $h = 200;
 
     plan 2;
     is $window.height(), $h;
@@ -63,28 +63,28 @@ subtest 'after $window.show', {
   }, <Set window's content size>;
 
 
-  is $window.fullscreen, 0, <Get window's state: fullscreen>;
+  is $window.fullscreen, False, <Get window's state: fullscreen>;
 
   subtest <set-fullscreen>, {
     plan 1;
     $window.set-fullscreen(1);
-    is $window.fullscreen, 1;
+    is $window.fullscreen, True;
   }
 
-  is $window.borderless, 0, <Get window's state: borderless>;
+  is $window.borderless, False, <Get window's state: borderless>;
 
   subtest <set-borderless>, {
     plan 1;
     $window.set-borderless(1);
-    is $window.borderless, 1;
+    is $window.borderless, True;
   }
 
-  is $window.margined, 0, <Get window's state: margined>;
+  is $window.margined, False, <Get window's state: margined>;
 
   subtest <set-margined>, {
     plan 1;
     $window.set-margined(1);
-    is $window.margined, 1;
+    is $window.margined, True;
   }
 }
 

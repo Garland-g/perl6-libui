@@ -23,6 +23,7 @@ my Libui::Window $window .= new("window");
 my Libui::App $app2;
 lives-ok {$app2 .= new($window)}, <Create application with existing window>;
 
+dies-ok {Libui::App.new(Libui::Window)}, <App with Null window>;
 
 done-testing;
 

@@ -1,9 +1,9 @@
 use Libui::Raw :color;
 use Libui::Control;
+use Libui::Types;
 
 use Color;
 
-subset RGBA of Num where 0 <= * <= 1;
 
 unit class Libui::ColorButton does Libui::Control;
 

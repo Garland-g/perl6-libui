@@ -6,7 +6,7 @@ unit class Libui::Slider does Libui::Control;
 has uiSlider $!slider;
 has $!value-changed;
 
-submethod BUILD(int32 :$min, int32 :$max) {
+submethod BUILD(Int :$min, Int :$max) {
   $!slider = uiNewSlider($min, $max);
 }
 
@@ -14,11 +14,11 @@ multi method new(Int $min, Int $max) {
   self.bless(:$min, :$max);
 }
 
-multi method value() returns int32 {
+multi method value() returns Int {
   uiSliderValue($!slider);
 }
 
-method set-value(int32 $value) {
+method set-value(Int $value) {
   uiSliderSetValue($!slider, $value);
 }
 
@@ -53,11 +53,11 @@ C<new(Int $min, Int $max)>
 
 Create a new Slider.
 
-C<value() returns int32>
+C<value() returns Int>
 
 Returns the value of the Slider.
 
-C<set-value(int32 $value)> or C<value(Int $value)>
+C<set-value(Int $value)> or C<value(Int $value)>
 
 Sets the value of the Slider.
 

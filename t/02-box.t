@@ -22,18 +22,30 @@ my $button3 = Libui::Button.new("test");
 
 lives-ok {$hbox.append($vbox, 0)}, <Single append>;
 
-lives-ok {$vbox.append-list(($button1, $button2, $button3), (1, 0))},
- <Multiple append with mismatched elems>;
+$vbox.append($button1, 1);
+$vbox.append($button2, 0);
+$vbox.append($button3, 0);
 
-lives-ok {$vbox.delete-item(2);}, <Delete at $index>;
+#lives-ok {$vbox.append-list(($button1, $button2, $button3), (1, 0))},
+# <Multiple append with mismatched elems>;
 
-is $vbox.padded(), 0, <Get state: padded>;
+lives-ok {$vbox.delete-item(2)}, <Delete at $index>;
+
+#If we get past this test, no segfault can happen with deleting an item
+#This also checks the off-by-one error of item number vs array indexing
+throws-like {$vbox.delete-item(2)}, Exception, <Delete out of range>;
+
+is $vbox.padded(), False, <Get state: padded>;
 
 subtest <Set state: padded>, {
   plan 1;
   $hbox.set-padded(1);
-  is $hbox.padded, 1;
+  is $hbox.padded, True;
 };
+
+dies-ok {$vbox.delete-item(-1)}, <Delete negative position>;
+
+dies-ok {$vbox.append(Libui::Button)}, <Append type object>;
 
 done-testing;
 # vi:syntax=perl6

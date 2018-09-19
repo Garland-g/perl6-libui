@@ -9,11 +9,11 @@ submethod BUILD() {
   $!pbar = uiNewProgressBar();
 }
 
-multi method value() returns int32 {
+multi method value() returns Int {
   uiProgressBarValue($!pbar);
 }
 
-method set-value(int32 $value) {
+method set-value(Int $value where -1 <= * <= 100) {
   uiProgressBarSetValue($!pbar, $value);
 }
 
@@ -36,11 +36,11 @@ C<new()>
 
 Creates a ProgressBar.
 
-C<value() returns int32>
+C<value() returns Int>
 
 Returns the current value of the ProgressBar.
 
-C<set-value(int32 $value)> or C<value(Int $value)>
+C<set-value(Int $value)> or C<value(Int $value)>
 
 Sets the value of the ProgressBar. Values between 0 and 100 displays that percentage, and -1 displays an indeterminate ProgressBar.
 =end ProgressBar

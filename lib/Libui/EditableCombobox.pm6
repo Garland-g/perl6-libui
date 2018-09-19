@@ -10,7 +10,7 @@ submethod BUILD() {
   $!combobox = uiNewEditableCombobox();
 }
 
-method append(Str $text) {
+method append(Str:D $text) {
   uiEditableComboboxAppend($!combobox, $text);
 }
 
@@ -18,11 +18,11 @@ multi method text() returns Str {
   return uiEditableComboboxText($!combobox);
 }
 
-method set-text(Str $text) {
+method set-text(Str:D $text) {
   uiEditableComboboxSetText($!combobox, $text);
 }
 
-multi method text(Str $text) {
+multi method text(Str:D $text) {
   self.set-text($text);
 }
 
@@ -53,7 +53,7 @@ C<new()>
 
 Creates a new EditableCombobox.
 
-C<append(Str $text)>
+C<append(Str:D $text)>
 
 Adds another row containing $text to the Combobox.
 
@@ -61,7 +61,7 @@ C<text() returns Str>
 
 Returns the currently selected text.
 
-C<set-text(Str $text)> or C<text(Str $text)>
+C<set-text(Str:D $text)> or C<text(Str:D $text)>
 
 Sets the text field of the currently selected item to $text.
 

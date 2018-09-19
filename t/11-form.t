@@ -18,13 +18,19 @@ $form.append('entry', $entry2, 0);
 
 lives-ok {$form.delete-item(1)},
 
-is $form.padded, 0, <Get state: padded>;
+is $form.padded, False, <Get state: padded>;
 
 subtest <Set state: padded>, {
   plan 1;
   $form.set-padded(1);
-  is $form.padded, 1;
+  is $form.padded, True;
 };
+
+throws-like {$form.delete-item(300)}, Exception, <Die when deleting out of range>;
+
+throws-like {$form.delete(-2)}, Exception, <Die when deleting negative number>;
+
+lives-ok {$form.append(Str, Libui::VBox.new, True)}, <Append with null label>;
 
 done-testing;
 # vi:syntax=perl6

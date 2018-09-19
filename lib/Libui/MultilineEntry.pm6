@@ -11,15 +11,15 @@ role Libui::MultilineEntry-Common {
     uiMultilineEntryText($!entry);
   }
 
-  method set-text(Str $text) {
+  method set-text(Str:D $text) {
     uiMultilineEntrySetText($!entry, $text);
   }
 
-  multi method text(Str $text) {
+  multi method text(Str:D $text) {
     self.set-text($text);
   }
 
-  method append(Str $text) {
+  method append(Str:D $text) {
     uiMultilineEntryAppend($!entry, $text);
   }
 
@@ -35,15 +35,15 @@ role Libui::MultilineEntry-Common {
     }
   }
 
-  multi method read-only() returns int32 {
-    return uiMultilineEntryReadOnly($!entry);
+  multi method read-only() returns Bool {
+    return uiMultilineEntryReadOnly($!entry).Bool;
   }
 
-  method set-read-only(int32 $read-only) {
+  method set-read-only(Bool:D(Int) $read-only) {
     uiMultilineEntrySetReadOnly($!entry, $read-only);
   }
 
-  multi method read-only(Int $read-only) {
+  multi method read-only(Bool:D(Int) $read-only) {
     self.read-only($read-only);
   }
 
@@ -81,11 +81,11 @@ C<text() returns Str>
 
 Returns the text content of the MultilineEntry.
 
-C<set-text(Str $text)> or C<text(Str $text)>
+C<set-text(Str:D $text)> or C<text(Str:D $text)>
 
 Sets the text content of the MultilineEntry.
 
-C<append(Str $text)>
+C<append(Str:D $text)>
 
 Appends $text to the MultilineEntry.
 
@@ -93,11 +93,11 @@ C<changed() returns Supply>
 
 Returns a Supply. An event is emitted whenever the text is changed.
 
-C<read-only() returns int32>
+C<read-only() returns Bool>
 
-Returns 1 if the Entry is read-only.
+Returns True if the Entry is read-only.
 
-C<set-read-only(int32 $read-only)> or C<read-only(Int $read-only)>
+C<set-read-only(Bool:D(Int) $read-only)> or C<read-only(Bool:D(Int) $read-only)>
 
 Sets the read-only property of the Entry.
 =end MultilineEntry

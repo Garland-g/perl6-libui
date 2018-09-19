@@ -38,15 +38,15 @@ method toggled() returns Supply {
   }
 }
 
-multi method checked() returns int32 {
-  uiCheckboxChecked($!checkbox);
+multi method checked() returns Bool {
+  uiCheckboxChecked($!checkbox).Bool;
 }
 
-multi method checked(Int $checked) {
+multi method checked(Bool:D(Int) $checked) {
   self.set-checked($checked);
 }
 
-method set-checked(int32 $checked) {
+method set-checked(Bool:D(Int) $checked) {
   uiCheckboxSetChecked($!checkbox, $checked);
 }
 
@@ -77,12 +77,12 @@ C<toggled() returns Supply>
 
 Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the Checkbox is toggled.
 
-C<checked() returns int32>
+C<checked() returns Bool>
 
-Returns 0 if not checked, and returns 1 if checked.
+Returns True if checked.
 
-C<set-checked(int32 $checked)> or C<checked(Int $checked)>
+C<set-checked(Bool:D(Int) $checked)> or C<checked(Bool:D(Int) $checked)>
 
-Sets the state of the checkbox. 0 means not checked, and 1 means checked.
+Sets the checked state of the checkbox.
 
 =end Checkbox

@@ -6,7 +6,7 @@ also does Libui::Container;
 
 has uiGroup $!group;
 
-submethod BUILD(Str :$title) {
+submethod BUILD(Str:D :$title) {
   $!group = uiNewGroup($title);
 }
 
@@ -14,15 +14,19 @@ multi method new(Str $title) {
   self.bless(:$title);
 }
 
+multi method new(Str :$title) {
+  self.bless(:$title);
+}
+
 multi method title() returns Str {
   uiGroupTitle($!group);
 }
 
-method set-title(Str $title) {
+method set-title(Str:D $title) {
   uiGroupSetTitle($!group, $title);
 }
 
-multi method title(Str $title) {
+multi method title(Str:D $title) {
   self.set-title($title);
 }
 
@@ -38,15 +42,15 @@ method set-content(Libui::Control $control) {
   self.set-child($control);
 }
 
-multi method margined() returns int32 {
-  return uiGroupMargined($!group);
+multi method margined() returns Bool {
+  return uiGroupMargined($!group).Bool;
 }
 
-method set-margined(int32 $margined) {
+method set-margined(Bool:D(Int) $margined) {
   uiGroupSetMargined($!group, $margined);
 }
 
-multi method margined(Int $margined) {
+multi method margined(Bool:D(Int) $margined) {
   self.set-margined($margined);
 }
 
@@ -76,11 +80,11 @@ C<set-child(Libui::Control $control)> or C<set-content(Libui::Control $control)>
 
 Sets $control as the child of the Group.
 
-C<margined() returns int32>
+C<margined() returns Bool>
 
 Returns the value of the margined property.
 
-C<set-margined(int32 $margined)> or C<margined(Int $margined)>
+C<set-margined(Bool:D(Int) $margined)> or C<margined(Bool:D(Int) $margined)>
 
 Sets the value of the margined property.
 

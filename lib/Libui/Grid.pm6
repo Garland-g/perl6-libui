@@ -1,5 +1,6 @@
 use Libui::Raw :grid;
 use Libui::Container;
+use Libui::Types;
 
 unit class Libui::Grid is export;
 also does Libui::Container;
@@ -12,14 +13,14 @@ submethod BUILD() {
 }
 
 method append(Libui::Control $control
-             , int32 $left
-             , int32 $top
-             , int32 $xspan
-             , int32 $yspan
-             , int32 $hexpand
-             , int32 $halign
-             , int32 $vexpand
-             , int32 $valign
+             , UInt:D $left
+             , UInt:D $top
+             , UInt:D $xspan
+             , UInt:D $yspan
+             , Bool:D(Int) $hexpand
+             , Align $halign
+             , Bool:D(Int) $vexpand
+             , Align $valign
              ) {
   if $control.top-level {
     note "cannot place {$control.WHAT} into a Libui::Container";
@@ -36,13 +37,13 @@ method append(Libui::Control $control
 
 method insert(Libui::Control $control
              , Libui::Control $existing
-             , int32 $at
-             , int32 $xspan
-             , int32 $yspan
-             , int32 $hexpand
-             , int32 $halign
-             , int32 $vexpand
-             , int32 $valign
+             , At $at
+             , UInt:D $xspan
+             , UInt:D $yspan
+             , Bool:D(Int) $hexpand
+             , Align $halign
+             , Bool:D(Int) $vexpand
+             , Align $valign
            ) {
   if $control.top-level {
     note "cannot place {$control.WHAT} into a Libui::Container";
@@ -58,28 +59,28 @@ method insert(Libui::Control $control
   }
 }
 
-multi method padded() returns int32 {
-  return uiGridPadded($!grid);
+multi method padded() returns Bool {
+  return uiGridPadded($!grid).Bool;
 }
 
-method set-padded(int32 $padded) {
+method set-padded(Bool:D(Int) $padded) {
   uiGridSetPadded($!grid, $padded);
 }
 
 method set-content(Libui::Control $control
-             , int32 $left
-             , int32 $top
-             , int32 $xspan
-             , int32 $yspan
-             , int32 $hexpand
-             , int32 $halign
-             , int32 $vexpand
-             , int32 $valign
+             , UInt:D $left
+             , UInt:D $top
+             , UInt:D $xspan
+             , UInt:D $yspan
+             , Bool:D(Int) $hexpand
+             , Align $halign
+             , Bool:D(Int) $vexpand
+             , Align $valign
              )  {
 self.append($control, $left, $top, $xspan, $yspan, $hexpand, $halign, $vexpand, $valign);
 }
 
-multi method padded(Int $padded) {
+multi method padded(Bool:D(Int) $padded) {
   self.set-padded($padded);
 }
 
@@ -98,48 +99,48 @@ C<new()>
 
 Creates a Grid.
 
-C<append(Libui::Control $control, int32 $left, int32 $top, int32 $xspan, int32 $yspan, int32 $hexpand, int32 $halign, int32 $vexpand, int32 $valign)>
+C<append(Libui::Control $control, UInt:D $left, UInt:D $top, UInt:D $xspan, UInt:D $yspan, Bool:D(Int) $hexpand, Align $halign, Bool:D(Int) $vexpand, Align $valign)>
 
 Appends a widget to the Grid:
 =item $left columns from the left
 =item $top rows from the right
 =item stretches across $xspan columns
 =item stretches across $yspan rows
-=item expand horizontally if $hexpand == 1
+=item expand horizontally if $hexpand
 =item set horizontal L<alignment|#alignment> to $halign
-=item expand vertically if $vexpand == 1
+=item expand vertically if $vexpand
 =item set vertical L<alignment|#alignment> to $valign
 
 
-C<set-content(Libui::Control $control, int32 $left, int32 $top, int32 $xspan, int32 $yspan, int32 $hexpand, int32 $halign, int32 $vexpand, int32 $valign)>
+C<set-content(Libui::Control $control, UInt:D $left, UInt:D $top, UInt:D $xspan, UInt:D $yspan, Bool:D(Int) $hexpand, Align $halign, Bool:D(Int) $vexpand, Align $valign)>
 
 Appends a widget to the Grid:
 =item $left columns from the left
 =item $top rows from the right
 =item stretches across $xspan columns
 =item stretches across $yspan rows
-=item expand horizontally if $hexpand == 1
+=item expand horizontally if $hexpand
 =item set horizontal L<alignment|#Alignment> to $halign
-=item expand vertically if $vexpand == 1
+=item expand vertically if $vexpand
 =item set vertical L<alignment|#Alignment> to $valign
 
 
-C<insert(Libui::Control $control, Libui::Control $existing, int32 $at, int32 $xspan, int32 $yspan, int32 $hexpand, int32 $halign, int32 $vexpand, int32 $valign)>
+C<insert(Libui::Control $control, Libui::Control $existing, At $at, UInt:D $xspan, UInt:D $yspan, Bool:D(Int) $hexpand, Align $halign, Bool:D(Int) $vexpand, Align $valign)>
 
 Inserts a widget to the Grid near $existing:
 =item Positioned next to $existing based on the L<value|#positioning> of $at
 =item stretches across $xspan columns
 =item stretches across $yspan rows
-=item expand horizontally if $hexpand == 1
+=item expand horizontally if $hexpand
 =item set horizontal L<alignment|#alignment> to $halign
-=item expand vertically if $vexpand == 1
+=item expand vertically if $vexpand
 =item set vertical L<alignment|#alignment> to $valign
 
-C<padded() returns int32>
+C<padded() returns Bool>
 
 Returns the value of the padded property.
 
-C<set-padded(int32 $padded)> or C<padded(Int $padded)>
+C<set-padded(Bool:D(Int) $padded)> or C<padded(Bool:D(Int) $padded)>
 
 Sets the value of the padded property.
 

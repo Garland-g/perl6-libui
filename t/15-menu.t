@@ -21,6 +21,8 @@ isa-ok $menu.append-about-item, Libui::MenuItem, <Append about item>;
 
 isa-ok $menu.append-quit-item, Libui::MenuItem, <Append quit item>;
 
+dies-ok {Libui::Menu.new(Str)}, <Null Str Menu>;
+
 #Multiple menus are just new menus made after the first
 my Libui::Menu $menu2 .= new('Edit');
 

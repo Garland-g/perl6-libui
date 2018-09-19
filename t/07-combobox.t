@@ -21,6 +21,11 @@ subtest 'selections', {
   is $combobox.selected, 1, <Get selected item in combobox>;
 };
 
+lives-ok {$combobox.set-selected(-1)}, <Can select -1>;
+
+dies-ok {$combobox.set-selected(-2)}, <Cannot select less than -1>;
+
+dies-ok {$combobox.append(Str)}, <Append null text>;
 
 done-testing;
 # vi:syntax=perl6

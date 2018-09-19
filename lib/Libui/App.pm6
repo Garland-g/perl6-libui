@@ -7,21 +7,21 @@ unit class Libui::App;
 has Libui::Window $!window;
 
 multi submethod BUILD(Str :$title!
-               ,Int :$width where { $width > 0 } = 640
-               ,Int  :$height where { $height > 0 } = 480
-               ,Int :$has-menubar = 1
+               ,UInt :$width where { $width > 0 } = 640
+               ,UInt  :$height where { $height > 0 } = 480
+               ,Bool(Int) :$has-menubar = 1
                ) {
   $!window = Libui::Window.new(title => $title, width => $width, height => $height, has-menubar => $has-menubar);
 }
 
-multi submethod BUILD(Libui::Window :$window) {
+multi submethod BUILD(Libui::Window:D :$window) {
   $!window = $window;
 }
 
 multi method new( Str $title
-                , Int $width  = 640
-                , Int $height = 480
-                , Int $has-menubar = 1
+                , UInt $width  = 640
+                , UInt $height = 480
+                , Bool(Int) $has-menubar = 1
                 ) {
   self.bless(:$title, :$width, :$height, :$has-menubar);
 }
@@ -52,7 +52,7 @@ method exit() {
   uiQuit();
 }
 
-method set-content(Libui::Control $control) {
+method set-content(Libui::Control:D $control) {
   $!window.set-content($control);
 }
 
@@ -63,11 +63,11 @@ App facilitates the creation of a GUI application with Libui, providing methods 
 
 =head3 Methods
 
-C<new(Str $title, Int $width = 640, Int $height = 480, Int $has-menubar = 1)> or C<new(Libui::Window $window)>
+C<new(Str $title, UInt $width = 640, UInt $height = 480, Bool(Int) $has-menubar = 1)> or C<new(Libui::Window:D $window)>
 
 Creates a new App.
 
-C<root()> or C<window()>
+C<root() returns Libui::Window > or C<window() returns Libui::Window>
 
 Returns the Window.
 
@@ -83,7 +83,7 @@ C<exit()>
 
 Closes the App, but does not terminate the program.
 
-C<set-content(Libui::Control $control)>
+C<set-content(Libui::Control:D $control)>
 
 Sets the content of the Window.
 =end App

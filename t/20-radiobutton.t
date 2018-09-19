@@ -21,6 +21,10 @@ subtest <Get and Set selected>, {
   is $button.selected, 1;
 };
 
+lives-ok {$button.set-selected(-1)}, <Set selected to -1>;
+dies-ok {$button.set-selected(-300)}, <Block smaller values>;
+
+lives-ok {$button.append(Str)}, <Append null Str button>;
 
 
 done-testing;

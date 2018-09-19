@@ -6,7 +6,7 @@ unit class Libui::Spinbox does Libui::Control;
 has uiSpinbox $!spinbox;
 has $!value-changed;
 
-submethod BUILD(int32 :$min, int32 :$max) {
+submethod BUILD(Int :$min, Int :$max) {
   $!spinbox = uiNewSpinbox($min, $max);
 }
 
@@ -14,11 +14,11 @@ multi method new(Int $min, Int $max) {
   self.bless(:$min, :$max);
 }
 
-multi method value() returns int32 {
+multi method value() returns Int {
   uiSpinboxValue($!spinbox);
 }
 
-method set-value(int32 $value) {
+method set-value(Int $value) {
   uiSpinboxSetValue($!spinbox, $value);
 }
 
@@ -52,11 +52,11 @@ C<new(Int $min, Int $max)>
 
 Create a new Spinbox.
 
-C<value() returns int32>
+C<value() returns Int>
 
 Returns the value of the Spinbox.
 
-C<set-value(int32 $value)> or C<value(Int $value)>
+C<set-value(Int $value)> or C<value(Int $value)>
 
 Sets the value of the Spinbox.
 

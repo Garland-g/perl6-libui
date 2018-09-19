@@ -2,7 +2,7 @@ use v6;
 use Test;
 use Libui;
 
-plan 4;
+plan 5;
 Libui::Init();
 my $button = Libui::Button.new('test');
 
@@ -18,6 +18,9 @@ $button.set-text($text);
 
 is $button.text, $text, <Set the label>;
 
+#null tests
+
+lives-ok { $button = Libui::Button.new(Str)}, <Null String button>;
 
 
 

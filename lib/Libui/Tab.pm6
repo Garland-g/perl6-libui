@@ -10,7 +10,7 @@ submethod BUILD() {
   $!tab = uiNewTab();
 }
 
-method append(Str $name, Libui::Control $control) {
+method append(Str:D $name, Libui::Control $control) {
   if $control.top-level {
     note "cannot place {$control.WHAT} into a Libui::Container";
   } else {
@@ -18,7 +18,7 @@ method append(Str $name, Libui::Control $control) {
   }
 }
 
-method insert(Str $name, int32 $before, Libui::Control $control) {
+method insert(Str:D $name, UInt $before, Libui::Control $control) {
   if $control.top-level {
     note "cannot place {$control.WHAT} into a Libui::Container";
   } else {
@@ -30,27 +30,27 @@ method set-content(Str $name, Libui::Control $control) {
   self.append($name, $control);
 }
 
-method delete-item(int32 $page) {
-  uiTabDelete($!tab, $page);
+method delete-item(UInt $page) {
+  if $page < self.pages {
+    uiTabDelete($!tab, $page);
+  } else {
+    die "This tab has {self.pages} page(s). Cannot delete page $page.";
+  }
 }
 
-method pages() returns int32 {
+method pages() returns UInt {
   uiTabNumPages($!tab);
 }
 
-method !margined(int32 $page) returns int32 {
-  uiTabMargined($!tab, $page);
+multi method margined(UInt $page) returns Bool {
+  uiTabMargined($!tab, $page).Bool;
 }
 
-method set-margined(int32 $page, int32 $margined) {
+method set-margined(UInt $page, Bool:D(Int) $margined) {
   uiTabSetMargined($!tab, $page, $margined);
 }
 
-multi method margined(Int $page) returns int32 {
-  self!margined($page);
-}
-
-multi method margined(Int $page, Int $margined) {
+multi method margined(Int $page, Bool:D(Int) $margined) {
   self.set-margined($page, $margined);
 }
 method !WIDGET() {
@@ -72,23 +72,23 @@ C<set-content(Str $name, Libui::Control $control> or C<append(Str $name, Libui::
 
 Appends a new page and places the widget $control inside it.
 
-C<insert(Str $name, int32 $before, Libui::Control $control)>
+C<insert(Str $name, UInt $before, Libui::Control $control)>
 
 Inserts a new page into slot $before and places the widget $control inside it.
 
-C<delete-item(int32 $page)>
+C<delete-item(UInt $page)>
 
 Deletes the page in slot $page.
 
-C<pages() returns int32>
+C<pages() returns UInt>
 
 Returns the number of pages.
 
-C<margined(Int $page) returns int32>
+C<margined(UInt $page) returns Bool>
 
 Returns the margined property of page $page.
 
-C<set-margined(int32 $page, int32 $margined)> or C<margined(Int $page, Int $margined)>
+C<set-margined(UInt $page, Bool:D(Int) $margined)> or C<margined(Int $page, Bool:D(Int) $margined)>
 
 Sets the margined property of page $page.
 =end Tab

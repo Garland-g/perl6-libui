@@ -1,5 +1,6 @@
 use Libui::Raw :radiobutton;
 use Libui::Control;
+use Libui::Types;
 
 unit class Libui::RadioButton does Libui::Control;
 
@@ -14,11 +15,11 @@ method append(Str $text) {
   uiRadioButtonsAppend($!radio-buttons, $text);
 }
 
-multi method selected() returns int32 {
+multi method selected() returns SSIZE_T {
   uiRadioButtonsSelected($!radio-buttons);
 }
 
-method set-selected(int32 $n) {
+method set-selected(SSIZE_T $n) {
   uiRadioButtonsSetSelected($!radio-buttons, $n);
 }
 
@@ -57,15 +58,18 @@ C<append(Str $text)>
 
 Adds another RadioButton to the set.
 
-C<selected() returns int32>
+C<selected() returns SSIZE_T>
 
 Returns the index of the currently selected RadioButton.
 
-C<set-selected(int32 $n)> or C<selected(Int $n)>
+C<set-selected(SSIZE_T $n)> or C<selected(Int $n)>
 
 Sets the selected RadioButton
 
 C<changed() returns Supply>
 
 Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the selected RadioButton changes.
+
+See L<SSIZE_T|https://github.com/Garland-g/perl6-Libui/wiki/Types>.
+
 =end RadioButtons

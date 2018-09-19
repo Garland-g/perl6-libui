@@ -5,36 +5,43 @@ unit class Libui::Form;
 also does Libui::Container;
 
 has uiForm $!form;
+has UInt $!items = 0;
 
 submethod BUILD() {
   $!form = uiNewForm();
 }
 
-method append(Str $label, Libui::Control $c, int32 $stretchy) {
+method append(Str $label, Libui::Control $c, Bool:D(Int) $stretchy) {
   if $c.top-level() {
     note "cannot place {$c.WHAT} into a Libui::Container";
   } else {
     uiFormAppend($!form, $label, $c.Control, $stretchy);
+    $!items++;
   }
 }
 
-method set-content(Str $label, Libui::Control $c, Int $stretchy) {
+method set-content(Str $label, Libui::Control $c, Bool:D(Int) $stretchy) {
   self.append($label, $c, $stretchy);
 }
 
-method delete-item(int32 $index) {
-  uiFormDelete($!form, $index);
+method delete-item(UInt $index) {
+  if $index < $!items {
+    uiFormDelete($!form, $index);
+    $!items--;
+  } else {
+    die "No item at index $index";
+  }
 }
 
-multi method padded() returns int32 {
-  return uiFormPadded($!form);
+multi method padded() returns Bool {
+  return uiFormPadded($!form).Bool;
 }
 
-method set-padded(int32 $padded) {
+method set-padded(Bool:D(Int) $padded) {
   uiFormSetPadded($!form, $padded);
 }
 
-multi method padded(Int $padded) {
+multi method padded(Bool:D(Int) $padded) {
   self.set-padded($padded);
 }
 
@@ -45,27 +52,27 @@ method !WIDGET() {
 =begin Form
 =head2 Libui::Form
 
-A box that holds several widgets. Both Vertical and Horizontal are available.
+A container that assigns a label to each widget.
 
 =head3 Methods
 
 C<new()>
 
-Create a Box.
+Create a Form.
 
-C<append(Str $label, Libui::Control $control, int32 $stretchy)> or C<set-content(Str $label, Libui::Control $control, int32 $stretchy)>
+C<append(Str $label, Libui::Control $control, Bool:D(Int) $stretchy)> or C<set-content(Str $label, Libui::Control $control, Bool:D(Int) $stretchy)>
 
-Appends a widget to the Box. Stretchy determines whether the widget should stretch to fill the available space or not.
+Appends a widget to the Form. Stretchy determines whether the widget should stretch to fill the available space or not.
 
-C<delete-item(int32 $index)>
+C<delete-item(UInt $index)>
 
 Deletes the widget at index $index.
 
-C<padded() returns int32>
+C<padded() returns Bool>
 
 Returns the value of the padded property.
 
-C<set-padded(int32:D $padded)> or C<padded(Int $padded)>
+C<set-padded(Bool:D(Int) $padded)> or C<padded(Bool:D(Int) $padded)>
 
 Sets the value of the padded property.
 =end Form

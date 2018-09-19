@@ -38,15 +38,15 @@ class Libui::MenuItem does Libui::Control {
     }
   }
 
-  multi method checked() returns int32 {
-    uiMenuItemChecked($!item);
+  multi method checked() returns Bool {
+    uiMenuItemChecked($!item).Bool;
   }
 
-  method set-checked(int32 $checked) {
+  method set-checked(Bool:D(Int) $checked) {
     uiMenuItemSetChecked($!item, $checked);
   }
 
-  multi method checked(Int $checked) {
+  multi method checked(Bool:D(Int) $checked) {
     self.set-checked($checked);
   }
 
@@ -93,11 +93,11 @@ C<clicked() returns Supply>
 
 Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the MenuItem is clicked.
 
-C<checked() returns int32>
+C<checked() returns Bool>
 
-Returns 1 if the MenuItem is checked and 0 if it is unchecked.
+Returns True if the MenuItem is checked.
 
-C<set-checked(int32 $checked)> or C<checked(Int $checked)>
+C<set-checked(Bool:D(Int) $checked)> or C<checked(Bool:D(Int) $checked)>
 
 Sets the MenuItem's checked state.
 =end MenuItem

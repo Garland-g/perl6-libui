@@ -21,5 +21,7 @@ subtest <Get and Set current text>, {
   is $combobox.text, 'value', <Set current text>;
 };
 
+dies-ok {$combobox.append(Str)}, <Append null text>;
+
 done-testing;
 # vi:syntax=perl6

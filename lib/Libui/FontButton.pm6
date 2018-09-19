@@ -15,6 +15,10 @@ class Libui::FontButton does Libui::Control is export {
     $!desc .= new;
   }
 
+  submethod TWEAK() {
+    self.font;
+  }
+
   method font() {
     uiFontButtonFont($!button, $!desc);
     return $!desc;
@@ -23,19 +27,19 @@ class Libui::FontButton does Libui::Control is export {
     return $!desc.Family();
   }
 
-  method size() returns num64 {
+  method size() returns Num {
     return $!desc.Size();
   }
 
-  method weight() returns uint32 {
+  method weight() returns UInt {
     return $!desc.Weight();
   }
 
-  method italic() returns uint32 {
+  method italic() returns UInt {
     return $!desc.Italic();
   }
 
-  method stretch() returns uint32 {
+  method stretch() returns UInt {
     return $!desc.Stretch();
   }
 
@@ -76,19 +80,19 @@ C<family() returns Str>
 
 Returns the L<family|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#family> of the font cached by C<font()>.
 
-C<size() returns num64>
+C<size() returns Num>
 
 Returns the L<size|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#size> of the font cached by C<font()>.
 
-C<weight() returns uint32>
+C<weight() returns UInt>
 
 Returns the L<weight|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#weight> of the font cached by C<font()>.
 
-C<italic() returns uint32>
+C<italic() returns UInt>
 
 Returns the L<italic|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#italic> property of the font cached by C<font()>.
 
-C<stretch() returns uint32>
+C<stretch() returns UInt>
 
 Returns the L<stretch|https://github.com/Garland-g/perl6-libui/wiki/StringStyle#stretch> property of the font cached by C<font()>.
 

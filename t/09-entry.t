@@ -18,12 +18,12 @@ subtest <Set and Get entry text>, {
   is $entry.text(), "text",
 };
 
-is $entry.read-only, 0, <Get state: read-only>;
+is $entry.read-only, False, <Get state: read-only>;
 
 subtest <Set state: read-only>, {
   plan 1;
-  $entry.set-read-only(1);
-  is $entry.read-only, 1;
+  $entry.set-read-only(True);
+  is $entry.read-only, True;
 };
 
 my $pwentry = Libui::PasswordEntry.new;
@@ -31,6 +31,9 @@ isa-ok $pwentry, Libui::PasswordEntry, <Create password entry>;
 
 my $searchentry = Libui::SearchEntry.new;
 isa-ok $searchentry, Libui::SearchEntry, <Create password entry>;
+
+
+dies-ok {Libui::Entry.new.set-text(Str)}, <Null Text>;
 
 done-testing;
 # vi:syntax=perl6

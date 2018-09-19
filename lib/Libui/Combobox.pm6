@@ -1,5 +1,6 @@
 use Libui::Raw :combobox;
 use Libui::Control;
+use Libui::Types;
 
 unit class Libui::Combobox does Libui::Control;
 
@@ -10,19 +11,19 @@ submethod BUILD() {
   $!combobox = uiNewCombobox();
 }
 
-method append(Str $text) {
+method append(Str:D $text) {
   uiComboboxAppend($!combobox, $text);
 }
 
-multi method selected() returns uint32 {
+multi method selected() returns SSIZE_T {
   return uiComboboxSelected($!combobox);
 }
 
-method set-selected(uint32 $n) {
+method set-selected(SSIZE_T $n) {
   uiComboboxSetSelected($!combobox, $n);
 }
 
-multi method selected(UInt $n) {
+multi method selected(SSIZE_T $n) {
   self.set-selected($n);
 }
 
@@ -53,15 +54,15 @@ C<new()>
 
 Creates a new Libui::Combobox.
 
-C<append(Str $text)>
+C<append(Str:D $text)>
 
 Adds another row to the Combobox containing $text.
 
-C<selected() returns uint32>
+C<selected() returns SSIZE_T>
 
 Returns the number of the row of selected text.
 
-C<selected(UInt $n)> or C<set-selected(uint32 $n)>
+C<selected(SSIZE_T $n)> or C<set-selected(SSIZE_T $n)>
 
 Sets the selected row to the given value.
 

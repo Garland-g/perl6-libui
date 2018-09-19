@@ -11,11 +11,11 @@ role Libui::Entry-Common does Libui::Control {
     return uiEntryText($!entry);
   }
 
-  method set-text(Str $text) {
+  method set-text(Str:D $text) {
     uiEntrySetText($!entry, $text);
   }
 
-  multi method text(Str $text) {
+  multi method text(Str:D $text) {
     self.set-text($text);
   }
 
@@ -32,15 +32,15 @@ role Libui::Entry-Common does Libui::Control {
   }
 
 
-  multi method read-only() returns int32 {
-    return uiEntryReadOnly($!entry);
+  multi method read-only() returns Bool {
+    return uiEntryReadOnly($!entry).Bool;
   }
 
-  method set-read-only(int32 $read-only) {
+  method set-read-only(Bool:D(Int) $read-only) {
     uiEntrySetReadOnly($!entry, $read-only);
   }
 
-  multi method read-only(Int $read-only) {
+  multi method read-only(Bool:D(Int) $read-only) {
     self.set-read-only($read-only);
   }
 
@@ -84,19 +84,19 @@ C<text() returns Str>
 
 Returns the text content of the Entry.
 
-C<set-text(Str $text)` or `text(Str $text)>
+C<set-text(Str:D $text)> or C<text(Str:D $text)>
 
 Sets the text content of the Entry.
 
-C<`changed() returns Supply>
+C<changed() returns Supply>
 
 Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the text is changed.
 
-C<read-only() returns int32>
+C<read-only() returns Bool>
 
-Returns 1 if the Entry is read-only.
+Returns True if the Entry is read-only.
 
-C<set-read-only(int32 $read-only)> or C<read-only(Int $read-only)>
+C<set-read-only(Bool:D(Int) $read-only)> or C<read-only(Bool:D(Int) $read-only)>
 
 Sets the read-only property of the Entry.
 

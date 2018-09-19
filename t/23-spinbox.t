@@ -18,6 +18,9 @@ subtest <Set spinbox value>, {
   is $spinbox.value, 40;
 };
 
+lives-ok {$spinbox.set-value(-10)}, <Set outside of given range>;
+
+is $spinbox.value, 0, <Sets to closest possible value>;
 
 
 done-testing;

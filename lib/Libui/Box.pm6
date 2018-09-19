@@ -6,46 +6,39 @@ role Libui::Box {
   also does Libui::Container;
 
   has uiBox $!box;
+  has UInt $!items = 0;
 
-  method append-list(@control, @stretchy = (0,)) {
-    for @control.kv -> $i, $control {
-      if $control.top-level {
-        note "cannot place {$control.WHAT} into a Libui::Container";
-      } else {
-        if $i < @stretchy.elems {
-          uiBoxAppend(self!WIDGET, $control.Control, @stretchy[$i]);
-        }  else {
-          uiBoxAppend(self!WIDGET, $control.Control, @stretchy[*-1]);
-        }
-      }
-    }
-  }
-
-  method append(Libui::Control $control, int32 $stretchy) {
+  method append(Libui::Control:D $control, Bool:D(Int) $stretchy) {
     if $control.top-level() {
       note "cannot place {$control.WHAT} into a Libui::Box";
     } else {
       uiBoxAppend($!box, $control.Control, $stretchy);
+      $!items += 1;
     }
   }
 
-  method delete-item(int32:D $index) {
-    uiBoxDelete($!box, $index);
+  method delete-item(UInt:D $index) {
+    if $!items > $index {
+      uiBoxDelete($!box, $index);
+      $!items -= 1;
+    } else {
+      die "No item at index $index";
+    }
   }
 
-  method set-content(Libui::Control $control, int32:D :$stretchy) {
+  method set-content(Libui::Control:D $control, Bool:D(Int) :$stretchy) {
     self.append($control, $stretchy);
   }
 
-  multi method padded() returns int32 {
-    return uiBoxPadded($!box);
+  multi method padded() returns Bool {
+    return uiBoxPadded($!box).Bool;
   }
 
-  method set-padded(int32:D $padded) {
+  method set-padded(Bool:D(Int) $padded) {
     uiBoxSetPadded($!box, $padded);
   }
 
-  multi method padded(Int $padded) {
+  multi method padded(Bool:D(Int) $padded) {
     self.set-padded($padded);
   }
 
@@ -81,19 +74,19 @@ C<new()>
 
 Create a Box.
 
-C<append(Libui::Control $control, int32 $stretchy)> or C<set-content(Libui::Control $control, int32 $stretchy)>
+C<append(Libui::Control:D $control, Bool:D(Int) $stretchy)> or C<set-content(Libui::Control:D $control, Bool:D(Int) $stretchy)>
 
 Appends a widget to the Box. Stretchy determines whether the widget should stretch to fill the available space or not.
 
-C<delete-item(int32:D $index)>
+C<delete-item(UInt:D $index)>
 
 Deletes the widget at index $index.
 
-C<padded() returns int32>
+C<padded() returns Bool>
 
 Returns the value of the padded property.
 
-C<set-padded(int32:D $padded)> or C<padded(Int $padded)>
+C<set-padded(Bool:D(Int) $padded)> or C<padded(Bool:D(Int) $padded)>
 
 Sets the value of the padded property.
 =end Box

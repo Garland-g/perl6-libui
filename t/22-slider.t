@@ -18,6 +18,9 @@ subtest <Set slider value>, {
   is $slider.value, 40;
 };
 
+lives-ok {$slider.set-value(-10)}, <Set outside of given range>;
+
+is $slider.value, 0, <Sets to closest possible value>;
 
 
 done-testing;

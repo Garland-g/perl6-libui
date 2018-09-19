@@ -25,12 +25,12 @@ multi method parent(Libui::Control $control) {
   self.set-parent($control.Control);
 }
 
-method top-level() returns int32 {
-  return uiControlToplevel(self.Control);
+method top-level() returns Bool {
+  return uiControlToplevel(self.Control).Bool;
 }
 
-method visible() returns int32 {
-  return uiControlVisible(self.Control);
+method visible() returns Bool {
+  return uiControlVisible(self.Control).Bool;
 }
 
 method show() {
@@ -41,8 +41,8 @@ method hide() {
   uiControlHide(self.Control);
 }
 
-method enabled() returns int32 {
-  return uiControlEnabled(self.Control);
+method enabled() returns Bool {
+  return uiControlEnabled(self.Control).Bool;
 }
 
 method enable() {
@@ -62,7 +62,7 @@ The methods C<show()>, C<hide()>, C<visible()>, C<enable()>, C<disable()>, C<ena
 
 =head3 Safe Methods
 
-C<visible() returns int32>
+C<visible() returns Bool>
 
 Returns the value of the visible property of the Control.
 
@@ -74,7 +74,7 @@ C<hide()>
 
 Makes the Control invisible.
 
-C<enabled() returns int32>
+C<enabled() returns Bool>
 
 Returns the value of the enabled property of the Control.
 
@@ -86,7 +86,7 @@ C<disable()>
 
 Disables the Control.
 
-C<top-level() returns int32>
+C<top-level() returns Bool>
 
 Returns the value of the top-level property of the Control. Only Windows are top-level.
 

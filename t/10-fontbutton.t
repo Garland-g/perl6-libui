@@ -12,6 +12,14 @@ isa-ok $button, Libui::FontButton, <Create fontbutton>;
 
 isa-ok $button.changed, Supply, <Get changed supply>;
 
+subtest {
+lives-ok {$button.family}, <Family>;
+lives-ok {$button.size}, <Size>;
+lives-ok {$button.weight}, <Weight>;
+lives-ok {$button.italic}, <Italic>;
+lives-ok {$button.stretch}, <Stretch>;
+
+}, <Get font attributes before manually caching desc>;
 lives-ok {$button.font(); }, <Get font>;
 
 #Default Font name and size depends on platform
