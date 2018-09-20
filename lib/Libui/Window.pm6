@@ -8,7 +8,7 @@ has uiWindow $!window;
 has Supply $!size-changed-supply;
 has Supply $!closing-supply;
 
-submethod BUILD(Str :$title, Int :$width = 640, Int :$height = 480, Bool(Int) :$has-menubar = 1) {
+submethod BUILD(Str:D :$title, Int :$width = 640, Int :$height = 480, Bool(Int) :$has-menubar = 1) {
   $!window = uiNewWindow($title, $width, $height, $has-menubar);
 }
 
@@ -32,12 +32,12 @@ multi method title() returns Str {
   return uiWindowTitle($!window);
 }
 
-method set-title(Str $title) {
+method set-title(Str:D $title) {
   uiWindowSetTitle($!window, $title);
 }
 
 
-multi method title(Str $title) {
+multi method title(Str:D $title) {
   self.set-title($title);
 }
 
@@ -162,7 +162,7 @@ Cannot be placed into other controls.
 
 =head3 Methods
 
-C<new(Str $title, Int $width = 640, Int $height = 480, Bool(Int) $has-menubar = 1)>
+C<new(Str:D $title, Int $width = 640, Int $height = 480, Bool(Int) $has-menubar = 1)>
 
 Creates a window.
 
@@ -174,7 +174,7 @@ C<title() returns Str>
 
 Returns the title of the Window.
 
-C<set-title(Str $title)> or C<title(Str $title)>
+C<set-title(Str:D $title)> or C<title(Str:D $title)>
 
 Sets the title of the window.
 

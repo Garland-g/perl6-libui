@@ -11,7 +11,7 @@ submethod BUILD() {
   $!form = uiNewForm();
 }
 
-method append(Str $label, Libui::Control $c, Bool:D(Int) $stretchy) {
+method append(Str:D $label, Libui::Control $c, Bool:D(Int) $stretchy) {
   if $c.top-level() {
     note "cannot place {$c.WHAT} into a Libui::Container";
   } else {
@@ -20,7 +20,7 @@ method append(Str $label, Libui::Control $c, Bool:D(Int) $stretchy) {
   }
 }
 
-method set-content(Str $label, Libui::Control $c, Bool:D(Int) $stretchy) {
+method set-content(Str:D $label, Libui::Control $c, Bool:D(Int) $stretchy) {
   self.append($label, $c, $stretchy);
 }
 
@@ -60,7 +60,7 @@ C<new()>
 
 Create a Form.
 
-C<append(Str $label, Libui::Control $control, Bool:D(Int) $stretchy)> or C<set-content(Str $label, Libui::Control $control, Bool:D(Int) $stretchy)>
+C<append(Str:D $label, Libui::Control $control, Bool:D(Int) $stretchy)> or C<set-content(Str:D $label, Libui::Control $control, Bool:D(Int) $stretchy)>
 
 Appends a widget to the Form. Stretchy determines whether the widget should stretch to fill the available space or not.
 

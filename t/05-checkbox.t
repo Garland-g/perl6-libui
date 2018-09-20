@@ -28,7 +28,7 @@ subtest {
   is $checkbox.checked, True;
 }, <Set checkbox's state>;
 
-lives-ok {Libui::Checkbox.new(Str)}, <Checkbox with Null Str>;
+dies-ok {Libui::Checkbox.new(Str)}, <Checkbox with Null Str>;
 
 done-testing;
 # vi:syntax=perl6

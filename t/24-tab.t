@@ -42,9 +42,9 @@ subtest <Delete tab>, {
 };
 
 #Tab names cannot be changed, so null Str should be an error.
-dies-ok {$tab.append(Str, Libui::Button.new(Str))}, <Append null Str>;
+dies-ok {$tab.append(Str, Libui::Button.new('test'))}, <Append null Str>;
 
-dies-ok {$tab.insert(Str, 0, Libui::Button.new(Str))}, <Insert null Str>;
+dies-ok {$tab.insert(Str, 0, Libui::Button.new('test'))}, <Insert null Str>;
 
 dies-ok {$tab.append('test', Libui::Button)}, <Null control>;
 

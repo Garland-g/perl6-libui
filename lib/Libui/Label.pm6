@@ -6,7 +6,7 @@ unit class Libui::Label
 
 has uiLabel $!label;
 
-submethod BUILD(Str :$text) {
+submethod BUILD(Str:D :$text) {
   $!label = uiNewLabel($text);
 }
 
@@ -18,11 +18,11 @@ multi method text() returns Str {
   return uiLabelText($!label);
 }
 
-method set-text(Str $text) {
+method set-text(Str:D $text) {
   uiLabelSetText($!label, $text);
 }
 
-multi method text(Str $text) {
+multi method text(Str:D $text) {
   self.set-text($text);
 }
 
@@ -35,17 +35,17 @@ method !WIDGET() {
 
 A label for displaying text
 
-=head3Methods
+=head3 Methods
 
-C<new(Str $text)>
+C<new(Str:D $text)>
 
-Creates a Libui::Label
+Creates a Label
 
 C<text() returns Str>
 
 Returns the text content of the Label.
 
-C<set-text(Str $text)> or C<text(Str $text)>
+C<set-text(Str:D $text)> or C<text(Str:D $text)>
 
 Sets the text content of the Label.
 =end Label

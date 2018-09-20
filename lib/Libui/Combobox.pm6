@@ -70,4 +70,6 @@ C<changed() returns Supply>
 
 Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the selection is changed.
 
+See L<SSIZE_T|https://github.com/Garland-g/perl6-Libui/wiki/Types#ssize_t>.
+
 =end Combobox

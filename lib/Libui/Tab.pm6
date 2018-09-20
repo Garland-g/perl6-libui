@@ -26,7 +26,7 @@ method insert(Str:D $name, UInt $before, Libui::Control $control) {
   }
 }
 
-method set-content(Str $name, Libui::Control $control) {
+method set-content(Str:D $name, Libui::Control $control) {
   self.append($name, $control);
 }
 
@@ -68,11 +68,11 @@ C<new()>
 
 Creates a Tab.
 
-C<set-content(Str $name, Libui::Control $control> or C<append(Str $name, Libui::Control $control)>
+C<set-content(Str:D $name, Libui::Control $control> or C<append(Str $name, Libui::Control $control)>
 
 Appends a new page and places the widget $control inside it.
 
-C<insert(Str $name, UInt $before, Libui::Control $control)>
+C<insert(Str:D $name, UInt $before, Libui::Control $control)>
 
 Inserts a new page into slot $before and places the widget $control inside it.
 

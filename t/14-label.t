@@ -18,7 +18,7 @@ subtest <Set text>, {
   is $label.text, 'value';
 };
 
-lives-ok {Libui::Label.new(Str)}, <Null label>;
+dies-ok {Libui::Label.new(Str)}, <Null label>;
 
 done-testing;
 # vi:syntax=perl6

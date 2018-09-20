@@ -30,7 +30,6 @@ multi method new(Libui::Window $window) {
   self.bless(:$window);
 }
 
-#| Get the Libui::Window
 method root() returns Libui::Window {
   return $!window;
 }

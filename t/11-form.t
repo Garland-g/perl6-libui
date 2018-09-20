@@ -30,7 +30,7 @@ throws-like {$form.delete-item(300)}, Exception, <Die when deleting out of range
 
 throws-like {$form.delete(-2)}, Exception, <Die when deleting negative number>;
 
-lives-ok {$form.append(Str, Libui::VBox.new, True)}, <Append with null label>;
+dies-ok {$form.append(Str, Libui::VBox.new, True)}, <Append with null label>;
 
 done-testing;
 # vi:syntax=perl6

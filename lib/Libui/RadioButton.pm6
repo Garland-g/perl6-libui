@@ -11,7 +11,7 @@ submethod BUILD() {
   $!radio-buttons = uiNewRadioButtons();
 }
 
-method append(Str $text) {
+method append(Str:D $text) {
   uiRadioButtonsAppend($!radio-buttons, $text);
 }
 
@@ -54,7 +54,7 @@ C<new()>
 
 Creates a new set of RadioButtons.
 
-C<append(Str $text)>
+C<append(Str:D $text)>
 
 Adds another RadioButton to the set.
 
@@ -70,6 +70,6 @@ C<changed() returns Supply>
 
 Returns a L<Supply|https://docs.perl6.org/type/Supply>. An event is emitted whenever the selected RadioButton changes.
 
-See L<SSIZE_T|https://github.com/Garland-g/perl6-Libui/wiki/Types>.
+See L<SSIZE_T|https://github.com/Garland-g/perl6-Libui/wiki/Types#ssize_t>.
 
 =end RadioButtons

@@ -6,7 +6,7 @@ unit class Libui::Button does Libui::Control;
 has uiButton $!button;
 has $!clicked-supply;
 
-submethod BUILD(Str :$label!) {
+submethod BUILD(Str:D :$label!) {
   $!button = uiNewButton($label);
 }
 
@@ -18,11 +18,11 @@ multi method text() returns Str {
   return uiButtonText($!button);
 }
 
-method set-text(Str $label) {
+method set-text(Str:D $label) {
   uiButtonSetText($!button, $label);
 }
 
-multi method text(Str $label) {
+multi method text(Str:D $label) {
   self.set-text($label);
 }
 
@@ -49,7 +49,7 @@ A button with a label.
 
 =head3 Methods
 
-C<new(Str :$label)>
+C<new(Str:D :$label)>
 
 Creates a new Libui::Button.
 
@@ -57,7 +57,7 @@ C<text() returns Str>
 
 Returns the label.
 
-C<text(Str $label)> or C<set-text(Str $label)>
+C<text(Str:D $label)> or C<set-text(Str:D $label)>
 
 Sets the label.
 

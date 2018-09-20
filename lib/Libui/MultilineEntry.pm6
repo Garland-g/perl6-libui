@@ -67,7 +67,7 @@ class Libui::NonWrappingMultilineEntry does Libui::MultilineEntry-Common {
 }
 
 =begin MultilineEntry
-=head2 Libui::MultilineEntry Libui::NonWrappingMultilineEntry
+=head2 Libui::MultilineEntry, Libui::NonWrappingMultilineEntry
 
 An entry that spans multiple lines.
 

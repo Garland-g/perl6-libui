@@ -6,7 +6,7 @@ unit class Libui::Checkbox does Libui::Control;
 has uiCheckbox $!checkbox;
 has $!toggled-supply;
 
-submethod BUILD(Str :$text) {
+submethod BUILD(Str:D :$text) {
   $!checkbox = uiNewCheckbox($text);
 }
 
@@ -18,11 +18,11 @@ multi method text() returns Str {
   return uiCheckboxText($!checkbox);
 }
 
-multi method text(Str $text) {
+multi method text(Str:D $text) {
   uiCheckboxSetText($!checkbox, $text);
 }
 
-method set-text(Str $text) {
+method set-text(Str:D $text) {
   uiCheckboxSetText($!checkbox, $text);
 }
 
@@ -61,7 +61,7 @@ A standard checkbox.
 
 =head3 Methods
 
-C<new(Str $text)>
+C<new(Str:D $text)>
 
 Creates a new Checkbox.
 
@@ -69,7 +69,7 @@ C<text() returns Str>
 
 Returns the text of the Checkbox.
 
-C<set-text(Str $text)> or C<text(Str $text)>
+C<set-text(Str:D $text)> or C<text(Str:D $text)>
 
 Sets the text of the Checkbox.
 

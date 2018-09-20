@@ -144,13 +144,15 @@ C<set-padded(Bool:D(Int) $padded)> or C<padded(Bool:D(Int) $padded)>
 
 Sets the value of the padded property.
 
-=head4 Alignment:
+
+
+=head4 L<Alignment|https://github.com/Garland-g/perl6-libui/wiki/Types#align>:
 =item 0: Fill
 =item 1: Start
 =item 2: Center
 =item 3: End
 
-=head4 Positioning:
+=head4 L<Positioning|https://github.com/Garland-g/perl6-libui/wiki/Types#at>:
 =item 0: Left
 =item 1: Top
 =item 2: Right

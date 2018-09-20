@@ -20,7 +20,7 @@ is $button.text, $text, <Set the label>;
 
 #null tests
 
-lives-ok { $button = Libui::Button.new(Str)}, <Null String button>;
+dies-ok { $button = Libui::Button.new(Str)}, <Null String button>;
 
 
 
