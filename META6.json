@@ -46,6 +46,8 @@
   ],
   "source-url" : "https://github.com/Garland-g/perl6-libui",
   "tags" : [ ],
-  "test-depends" : [ ],
+  "test-depends" : [
+    "Color"
+  ],
   "version" : "0.0.1"
 }
