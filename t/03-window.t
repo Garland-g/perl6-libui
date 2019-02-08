@@ -2,15 +2,17 @@ use v6;
 use Test;
 use Libui;
 
-'if $*KERNEL ~~ "linux" {
-        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-                exit 0;
-        }
-}'
-plan *;
+plan 2;
+
+if $*KERNEL ~~ "linux" {
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    skip-rest;
+    exit;
+  }
+}
 
 Libui::Init();
-  my $window = Libui::Window.new('test');
+my $window = Libui::Window.new('test');
 
 subtest 'before $window.show', {
 

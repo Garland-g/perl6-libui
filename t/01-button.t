@@ -2,13 +2,15 @@ use v6;
 use Test;
 use Libui;
 
+plan 5;
+
 if $*KERNEL ~~ "linux" {
-	unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-		exit 0;
-	}
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    skip-rest;
+    exit;
+  }
 }
 
-plan 5;
 Libui::Init();
 my $button = Libui::Button.new('test');
 

@@ -2,13 +2,14 @@ use v6;
 use Test;
 use Libui;
 
-'if $*KERNEL ~~ "linux" {
-        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-                exit 0;
-        }
-}'
-plan *;
+plan 7;
 
+if $*KERNEL ~~ "linux" {
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    skip-rest;
+    exit 0;
+  }
+}
 Libui::Init();
 
 my $combobox = Libui::Combobox.new;

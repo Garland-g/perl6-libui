@@ -2,14 +2,16 @@ use v6;
 use Test;
 use Libui;
 
-Libui::Init();
+plan 22;
 
-'if $*KERNEL ~~ "linux" {
-        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-                exit 0;
-        }
-}'
-plan *;
+if $*KERNEL ~~ "linux" {
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    skip-rest;
+    exit 0;
+  }
+}
+
+Libui::Init();
 
 my Libui::DateTimePicker $dtpicker .= new();
 
@@ -52,8 +54,8 @@ my Libui::TimePicker $tpicker .= new();
 
 isa-ok $tpicker, Libui::TimePicker, <Create a TimePicker>;
 #TODO: Re-enable next rakudo release
-#$tpicker.time($time);
-#is $tpicker.time.minute, 37, <Set time of TimePicker>;
+$tpicker.time($time);
+is $tpicker.time.minute, 37, <Set time of TimePicker>;
 
 my Libui::DatePicker $dpicker .= new();
 

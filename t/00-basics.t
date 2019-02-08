@@ -2,14 +2,15 @@ use v6;
 use Test;
 use Libui;
 
-if $*KERNEL ~~ "linux" {
-	unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-		diag("Cannot continue without DISPLAY, skipping");
-		exit 0;
-	}
-}
-
 plan 1;
+
+if $*KERNEL ~~ "linux" {
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    diag("Cannot continue without DISPLAY, skipping");
+    skip-rest;
+    exit;
+  }
+}
 
 my $app;
 

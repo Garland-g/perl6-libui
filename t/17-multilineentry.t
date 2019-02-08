@@ -2,15 +2,16 @@ use v6;
 use Test;
 use Libui;
 
+plan 10;
+
+if $*KERNEL ~~ "linux" {
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    skip-rest;
+    exit 0;
+  }
+}
+
 Libui::Init();
-
-'if $*KERNEL ~~ "linux" {
-        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-                exit 0;
-        }
-}'
-plan *;
-
 
 my Libui::MultilineEntry $entry;
 

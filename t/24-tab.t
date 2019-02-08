@@ -2,14 +2,16 @@ use v6;
 use Test;
 use Libui;
 
-Libui::Init();
+plan 11;
 
-'if $*KERNEL ~~ "linux" {
-        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-                exit 0;
-        }
-}'
-plan *;
+if $*KERNEL ~~ "linux" {
+  unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+    skip-rest;
+    exit 0;
+  }
+}
+
+Libui::Init();
 
 my Libui::Tab $tab .= new;
 
