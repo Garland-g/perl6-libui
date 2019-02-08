@@ -4,6 +4,11 @@ use Libui;
 
 Libui::Init();
 
+'if $*KERNEL ~~ "linux" {
+        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+                exit 0;
+        }
+}'
 plan *;
 
 my Libui::Spinbox $spinbox .= new(100, 0);

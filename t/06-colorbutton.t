@@ -4,6 +4,11 @@ use Test;
 use Libui;
 use Color;
 
+'if $*KERNEL ~~ "linux" {
+        unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
+                exit 0;
+        }
+}'
 plan *;
 
 Libui::Init();
