@@ -10,7 +10,13 @@ andlabs/libui is currently alpha software. This binding works with the current r
 
 This library provides an object-oriented interface to libui. Shared libraries ui.dll, libui.dylib, and libui.so are provided in resources.
 
-Windows requires the [64-bit 2015 Visual C++ Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=53587) to properly function.
+#### Windows Windows requires the [64-bit 2015 Visual C++ Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=53587) to properly function.
+
+#### Linux
+
+Linux requires GTK3.
+
+Debian: `apt install libgtk-3-0`
 
 ### Basic Use:
 
