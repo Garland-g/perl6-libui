@@ -2,7 +2,7 @@ use v6;
 use Test;
 use Libui;
 
-plan 22;
+plan 21;
 
 if $*KERNEL ~~ "linux" {
   unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
@@ -12,7 +12,7 @@ if $*KERNEL ~~ "linux" {
 }
 
 Libui::Init();
-
+{
 my Libui::DateTimePicker $dtpicker .= new();
 
 isa-ok $dtpicker, Libui::DateTimePicker, <Create a DateTimePicker>;
@@ -49,18 +49,20 @@ is $time.month, 3, <Set month>;
 is $time.year + 1900, 2015, <Set year>;
 is $time.weekday, 3, <Set weekday>;
 is $time.is-dst, 0, <Set DST flag>;
-
+}
+{
 my Libui::TimePicker $tpicker .= new();
 
 isa-ok $tpicker, Libui::TimePicker, <Create a TimePicker>;
+}
 #TODO: Re-enable next rakudo release
-$tpicker.time($time);
-is $tpicker.time.minute, 37, <Set time of TimePicker>;
-
+#$tpicker.time($time);
+#is $tpicker.time.minute, 37, <Set time of TimePicker>;
+{
 my Libui::DatePicker $dpicker .= new();
 
 isa-ok $dpicker, Libui::DatePicker, <Create a DatePicker>;
-
+}
 
 done-testing;
 # vi:syntax=perl6
