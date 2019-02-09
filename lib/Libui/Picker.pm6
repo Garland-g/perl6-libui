@@ -5,10 +5,13 @@ role Libui::Picker does Libui::Control {
   has uiDateTimePicker $!picker;
   has Supply $!changed-supply;
 
-  multi method time() {
+	method !time-extract(Libui::Time $time) {...}
+
+  method time() {
+
     my Libui::Time $time .= new;
     uiDateTimePickerTime($!picker, $time);
-    return $time;
+    return self!time-extract($time);
   }
 #TODO: re-enable next rakudo release
 #  method set-time(Libui::Time $time) {
@@ -40,18 +43,43 @@ class Libui::DateTimePicker does Libui::Picker is export {
   submethod BUILD() {
     $!picker = uiNewDateTimePicker();
   }
+	method !time-extract(Libui::Time $time) {
+		return DateTime.new(
+			year => $time.year,
+			month => $time.month,
+			day => $time.day-of-month,
+			hour => $time.hour,
+			minute => $time.minute,
+			second => $time.second,
+			#Timezone is set to $*TZ by default
+		);
+	}
 }
 
 class Libui::DatePicker does Libui::Picker is export {
   submethod BUILD() {
     $!picker = uiNewDatePicker();
   }
+	method !time-extract(Libui::Time $time) {
+		return Date.new(
+			year => $time.year,
+			month => $time.month,
+			day => $time.day-of-month,
+		);
+	}
 }
 
 class Libui::TimePicker does Libui::Picker is export {
   submethod BUILD() {
     $!picker = uiNewTimePicker();
   }
+	method !time-extract(Libui::Time $time) {
+		return DateTime.now.clone(
+			hour => $time.hour,
+			minute => $time.minute,
+			second => $time.second,
+		);
+	}
 }
 
 =begin DateTimePicker

@@ -211,6 +211,8 @@ class Libui::Time is repr('CStruct') is export(:time) {
   has int32 $!tm_wday;  # day of week [0-6], (Sunday = 0)
   has int32 $!tm_yday;  # day of year [0,365]
   has int32 $!tm_isdst; # daylight savings flag
+  has long  $!tm_gmtoff;
+  has Str   $!tm_zone;
 
   multi method second() {
     return $!tm_sec;
