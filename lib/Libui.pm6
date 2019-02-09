@@ -47,8 +47,15 @@ The raw bindings accessible in Libui::Raw should be feature-complete, but only s
 
 This library provides an object-oriented interface to libui.
 Shared libraries ui.dll, libui.dylib, and libui.so are provided in resources.
-
+=head4 Windows
 Windows requires the L<64-bit 2015 Visual C++ Redistributable|https://www.microsoft.com/en-us/download/details.aspx?id=53587> to properly function.
+
+
+=head4 Linux
+
+Linux requires GTK3.
+
+Debian: C<apt install libgtk-3-0>
 
 =head3 Basic Use:
 
