@@ -6,7 +6,7 @@ plan 1;
 
 if $*KERNEL ~~ "linux" {
   unless %*ENV<DISPLAY> || %*ENV<WAYLAND_DISPLAY> {
-    diag("Cannot continue without DISPLAY, skipping");
+    diag("Cannot test without DISPLAY, skipping");
     skip-rest;
     exit;
   }
