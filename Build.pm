@@ -55,11 +55,8 @@ class Build {
         say "windows";
         mkdir "$*TMPDIR/libui-$ext";
         chdir "$*TMPDIR/libui-$ext";
-        my $proc = run("powershell", "--version", :out) or die("Need powershell");
-        #Check if powershell is version 5.0.0 or higher (needed for Expand-Archive)
-        die("Need Powershell 5.0.0") unless $proc.out.slurp(:close).split(' ')[1].split('.')[0] >= 5;
-        run("powershell", "-command", "Invoke-WebRequest -Uri $WIN-URL -OutFile $WIN-FILE");
-        run("powershell", "-command", "Expand-Archive -Path $WIN-FILE");
+        run("powershell", "-command", "Invoke-WebRequest -Uri $WIN-URL -OutFile $WIN-FILE") or die("Powershell 5.0 needed");
+        run("powershell", "-command", "Expand-Archive -Path $WIN-FILE") or die("Powershell 5.0 needed");
         copy("libui-windows/libui.dll", "$dir/resources/libraries/ui.dll");
         chdir "$dir";
       }
