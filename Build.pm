@@ -55,7 +55,7 @@ class Build {
         say "windows";
         mkdir "$*TMPDIR/libui-$ext";
         chdir "$*TMPDIR/libui-$ext";
-        run("powershell", "-command", "Invoke-WebRequest -Uri $WIN-URL -OutFile $WIN-FILE") or die("Powershell 5.0 needed");
+        run("powershell", "-command", "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri $WIN-URL -OutFile $WIN-FILE") or die("Powershell 5.0 needed");
         run("powershell", "-command", "Expand-Archive -Path $WIN-FILE") or die("Powershell 5.0 needed");
         copy("libui-windows/libui.dll", "$dir/resources/libraries/ui.dll");
         chdir "$dir";
