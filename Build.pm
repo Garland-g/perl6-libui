@@ -27,7 +27,7 @@ class Build {
               proceed;
             }
         try {
-          run("cmake", "--help"); 
+          run("cmake", "--help");
           CATCH{ default { die "You must have CMake installed and in your PATH";} }
         }
           run("git", "clone", "https://github.com/andlabs/libui.git", "/tmp/libui-$ext") or die "git clone failed";
@@ -35,8 +35,10 @@ class Build {
           run("git", "checkout", $VERSION) or die "could not check out $VERSION";
           mkdir "/tmp/libui-$ext/build" unless "$dir/libui-$ext/build".IO.e;
           chdir("/tmp/libui-$ext/build");
-          run("cmake", "..", :out, :err) or die "Cmake failed";
-          run("make", :out, :err) or die "make failed";
+          my $proc = run("cmake", "..", :out, :err);
+          die "Cmake failed: {$proc.out.slurp(:close)}" if $proc.exitcode != 0;
+          $proc = run("make", :out, :err);
+          die "make failed: {$proc.out.slurp(:close)}" if $proc.exitcode != 0;
           copy("out/libui.so.0", "$dir/resources/libraries/libui.so");
           chdir "$dir";
       }
