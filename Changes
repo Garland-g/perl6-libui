@@ -2,5 +2,11 @@ Revision history for Libui
 
 {{$NEXT}}
 
+0.0.2  2019-03-17T20:11:42-07:00
+  - Pickers return DateTime objects
+  - Update tests to pass without a DISPLAY
+  - Update dependency information
+  - Add a Build script
+
 0.0.1  2018-09-19T20:16:06-07:00
   - Initial version
