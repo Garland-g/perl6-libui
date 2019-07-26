@@ -1,7 +1,47 @@
-use Libui::Raw :slider;
+use Libui::Raw :lib;
 use Libui::Control;
 
+use NativeCall;
+
 unit class Libui::Slider does Libui::Control;
+
+class uiSlider is repr('CStruct') is export(:raw) {
+  also does autocast;
+#  has Pointer $.widget;
+#  has Pointer $.range;
+#  has Pointer $.scale;
+  has Pointer $.uiSliderValue;
+  has Pointer $.uiSliderSetValue;
+#  has Pointer $.uiSliderOnChanged;
+  has Pointer $.onChangedData;
+  has Pointer $.uiNewSlider;
+}
+
+sub uiSliderValue(uiSlider $s)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiSliderSetValue(uiSlider $s, int64 $value)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiSliderOnChanged(uiSlider $s, &f (uiSlider, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewSlider(int64 $min, int64 $max)
+  returns uiSlider
+  is native(LIB)
+  is export(:raw)
+  { * }
+
 
 has uiSlider $!slider;
 has $!value-changed;

@@ -1,7 +1,59 @@
-use Libui::Raw :checkbox;
+use Libui::Raw :lib;
 use Libui::Control;
 
+use NativeCall;
+
 unit class Libui::Checkbox does Libui::Control;
+
+class uiCheckbox is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiCheckboxText;
+  has Pointer $.uiCheckboxSetText;
+  has Pointer $.uiCheckboxOnToggled;
+  has Pointer $.uiCheckboxChecked;
+  has Pointer $.uiCheckboxSetChecked;
+  has Pointer $uiNewCheckbox;
+}
+
+sub uiCheckboxText(uiCheckbox $c)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiCheckboxSetText(uiCheckbox $c, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiCheckboxOnToggled(uiCheckbox $c, &f (uiCheckbox, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiCheckboxChecked(uiCheckbox $c)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiCheckboxSetChecked(uiCheckbox $c, int32 $checked)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewCheckbox(Str $text)
+  returns uiCheckbox
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 has uiCheckbox $!checkbox;
 has $!toggled-supply;

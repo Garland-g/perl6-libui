@@ -1,5 +1,70 @@
-use Libui::Raw :multientry;
+use Libui::Raw :lib;
 use Libui::Control;
+
+use NativeCall;
+
+class uiMultilineEntry is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiMultilineEntryText;
+  has Pointer $.uiMultilineEntrySetText;
+  has Pointer $.uiMultilineEntrAppend;
+  has Pointer $.uiMultilineEntryOnChanged;
+  has Pointer $.uiMultilineEntryReadOnly;
+  has Pointer $.uiMultilineEntrySetReadOnly;
+  has Pointer $.uiNewMultilineEntry;
+  has Pointer $.uiNewNonWrappingMultilineEntry;
+}
+
+sub uiMultilineEntryText(uiMultilineEntry $e)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMultilineEntrySetText(uiMultilineEntry $e, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMultilineEntryAppend(uiMultilineEntry $e, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMultilineEntryOnChanged(uiMultilineEntry $e, &f (uiMultilineEntry, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMultilineEntryReadOnly(uiMultilineEntry $e)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMultilineEntrySetReadOnly(uiMultilineEntry $e, int32 $readonly)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewMultilineEntry()
+  returns uiMultilineEntry
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewNonWrappingMultilineEntry()
+  returns uiMultilineEntry
+  is native(LIB)
+  is export(:raw)
+  { * }
 
 role Libui::MultilineEntry-Common {
   also does Libui::Control;

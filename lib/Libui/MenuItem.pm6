@@ -1,6 +1,57 @@
-use Libui::Raw :menu, :quit;
+use Libui::Raw :lib;
+use Libui::Main :quit;
 use Libui::Control;
 use NativeCall;
+
+class uiMenuItem is repr('CStruct') is export(:raw) {
+  has Str $.name;
+  has int $.type;
+  has Pointer $.onClicked;
+  has Pointer $.onClickedData;
+  has Pointer $.gtype;
+  has Pointer $.disabled;
+  has Pointer $.checked;
+  has Pointer $.windows;
+  has Pointer $.uiMenuItemEnable;
+  has Pointer $.uiMenuItemDisable;
+  has Pointer $.uiMenuItemOnClicked;
+  has Pointer $.uiMenuItemChecked;
+  has Pointer $.uiMenuItemSetChecked;
+}
+
+sub uiMenuItemEnable(uiMenuItem $m)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuItemDisable(uiMenuItem $m)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuItemOnClicked(uiMenuItem $m, &f (uiMenuItem, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuItemChecked(uiMenuItem $m)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuItemSetChecked(uiMenuItem $m, int32 $checked)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+
+
 
 class Libui::MenuItem does Libui::Control {
 

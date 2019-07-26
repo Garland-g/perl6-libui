@@ -1,8 +1,73 @@
-use Libui::Raw :tab;
+use Libui::Raw :lib;
+use Libui::Control;
 use Libui::Container;
+
+use NativeCall;
 
 unit class Libui::Tab;
 also does Libui::Container;
+
+class uiTab is repr('CStruct') is export(:raw) {
+  also does autocast;
+  #has Pointer $.c;
+  #has Pointer $.widget;
+  #has Pointer $.container;
+  #has Pointer $.notebook;
+  #has Pointer $.pages;
+  has Pointer $.uiTabAppend;
+  has Pointer $.uiTabInsertAt;
+  has Pointer $.uiTabDelete;
+  has Pointer $.uiTabNumPages;
+  has Pointer $.uiTabMargined;
+  has Pointer $.uiNewTab;
+}
+
+sub uiTabAppend(uiTab $t, Str $name, uiControl $c)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiTabInsertAt(uiTab $t, Str $name, uint32 $before, uiControl $c)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiTabDelete(uiTab $t, uint32 $index)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiTabNumPages(uiTab $t)
+  returns uint32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiTabMargined(uiTab $t, uint32 $page)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiTabSetMargined(uiTab $t, uint32 $page, int32 $margined)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewTab()
+  returns uiTab
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+
 
 has uiTab $!tab;
 

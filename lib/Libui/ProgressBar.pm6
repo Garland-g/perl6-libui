@@ -1,7 +1,35 @@
-use Libui::Raw :progbar;
+use Libui::Raw :lib;
 use Libui::Control;
 
+use NativeCall;
+
 unit class Libui::ProgressBar does Libui::Control;
+
+class uiProgressBar is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiProgressBarValue;
+  has Pointer $.uiProgressBarSetValue;
+  has Pointer $.uiNewProgressBar;
+}
+
+sub uiProgressBarValue(uiProgressBar $p)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiProgressBarSetValue(uiProgressBar $p, int32 $n)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewProgressBar()
+  returns uiProgressBar
+  is native(LIB)
+  is export(:raw)
+  { * }
 
 has uiProgressBar $!pbar;
 

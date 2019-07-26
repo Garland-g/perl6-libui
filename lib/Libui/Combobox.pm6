@@ -1,8 +1,52 @@
-use Libui::Raw :combobox;
+use Libui::Raw :lib;
 use Libui::Control;
 use Libui::Types;
 
+use NativeCall;
+
 unit class Libui::Combobox does Libui::Control;
+
+class uiCombobox is repr('CStruct') is export(:combobox) {
+  also does autocast;
+  has Pointer $.uiComboboxAppend;
+  has Pointer $.uiComboboxSelected;
+  has Pointer $.uiComboboxSetSelected;
+  has Pointer $.uiComboBoxOnSelected;
+  has Pointer $.uiNewCombobox;
+}
+
+sub uiComboboxAppend(uiCombobox $c, Str $text)
+  is native(LIB)
+  is export(:combobox)
+  { * }
+
+
+sub uiComboboxSelected(uiCombobox $c)
+  returns int64
+  is native(LIB)
+  is export(:combobox)
+  { * }
+
+
+sub uiComboboxSetSelected(uiCombobox $c, int64 $n)
+  is native(LIB)
+  is export(:combobox)
+  { * }
+
+
+sub uiComboboxOnSelected(uiCombobox $c, &f (uiCombobox, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:combobox)
+  { * }
+
+
+sub uiNewCombobox()
+  returns uiCombobox
+  is native(LIB)
+  is export(:combobox)
+  { * }
+
+
 
 has uiCombobox $!combobox;
 has $!changed-supply;

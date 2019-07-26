@@ -1,7 +1,76 @@
-use Libui::Raw :menu;
+use Libui::Raw :lib;
 use Libui::MenuItem;
 use Libui::Control;
+
+use NativeCall;
+
 unit class Libui::Menu does Libui::Control;
+
+class uiMenu is repr('CStruct') is export(:raw) {
+  has Str $.name;
+  has Pointer $.items;
+  has Pointer $.uiMenuAppendItem;
+  has Pointer $.uiMenuAppendCheckItem;
+  has Pointer $.uiMenuAppendQuitItem;
+  has Pointer $.uiMenuAppendPreferencesItem;
+  has Pointer $.uiMenuAppendAboutItem;
+  has Pointer $.uiMenuAppendSeparator;
+  has Pointer $.uiNewMenu;
+
+  has Pointer $.uiOpenFile;
+  has Pointer $.uiSaveFile;
+  has Pointer $.uiMsgBox;
+  has Pointer $.uiMsgBoxError;
+}
+
+sub uiMenuAppendItem(uiMenu $m, Str $name)
+  returns uiMenuItem
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuAppendCheckItem(uiMenu $m, Str $name)
+  returns uiMenuItem
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuAppendQuitItem(uiMenu $m)
+  returns uiMenuItem
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuAppendPreferencesItem(uiMenu $m)
+  returns uiMenuItem
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuAppendAboutItem(uiMenu $m)
+  returns uiMenuItem
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiMenuAppendSeparator(uiMenu $m)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewMenu(Str $name)
+  returns uiMenu
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 has uiMenu $!menu;
 

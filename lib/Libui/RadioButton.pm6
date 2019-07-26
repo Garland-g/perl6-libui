@@ -1,8 +1,50 @@
-use Libui::Raw :radiobutton;
+use Libui::Raw :lib;
 use Libui::Control;
 use Libui::Types;
 
+use NativeCall;
+
 unit class Libui::RadioButton does Libui::Control;
+
+class uiRadioButtons is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiRadioButtonsAppend;
+  has Pointer $.uiRadioButtonsSelected;
+  has Pointer $.uiRadioButtonsSetSelected;
+  has Pointer $.uiRadioButtonsOnSelected;
+  has Pointer $.uiNewRadioButtons;
+}
+
+sub uiRadioButtonsAppend(uiRadioButtons $r, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewRadioButtons()
+  returns uiRadioButtons
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiRadioButtonsSelected(uiRadioButtons  $r)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiRadioButtonsSetSelected(uiRadioButtons $r, int32 $n)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiRadioButtonsOnSelected(uiRadioButtons  $r, &f (uiRadioButtons, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
 
 has uiRadioButtons $!radio-buttons;
 has $!selected-supply;

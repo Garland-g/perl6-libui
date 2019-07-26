@@ -1,7 +1,52 @@
-use Libui::Raw :e-combobox;
+use Libui::Raw :lib;
 use Libui::Control;
 
+use NativeCall;
+
 unit class Libui::EditableCombobox does Libui::Control;
+
+class uiEditableCombobox is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiEditableComboboxAppend;
+  has Pointer $.uiEditableComboboxText;
+  has Pointer $.uiEditableComboboxSetText;
+  has Pointer $.uiEditableComboboxOnChanged;
+  has Pointer $.uiNewEditableCombobox;
+}
+
+sub uiEditableComboboxAppend(uiEditableCombobox $c, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiEditableComboboxText(uiEditableCombobox $c)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiEditableComboboxSetText(uiEditableCombobox $c, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+
+sub uiEditableComboboxOnChanged(uiEditableCombobox $c, &f (uiEditableCombobox, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewEditableCombobox()
+  returns uiEditableCombobox
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 has uiEditableCombobox $!combobox;
 has $!changed-supply;

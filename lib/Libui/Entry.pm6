@@ -1,5 +1,72 @@
-use Libui::Raw :entry;
+use Libui::Raw :lib;
 use Libui::Control;
+
+use NativeCall;
+
+class uiEntry is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiEntryText;
+  has Pointer $.uiEntrySetText;
+  has Pointer $.uiEntrOnChanged;
+  has Pointer $.uiEntryReadOnly;
+  has Pointer $.uiEntrySetReadOnly;
+  has Pointer $.uiNewEntry;
+  has Pointer $.uiNewPasswordEntry;
+  has Pointer $.uiNewSearchEntry;
+}
+
+sub uiEntryText(uiEntry $e)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiEntrySetText(uiEntry $e, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiEntryOnChanged(uiEntry $e, &f (uiEntry, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiEntryReadOnly(uiEntry $e)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiEntrySetReadOnly(uiEntry $e, int32 $readonly)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewEntry()
+  returns uiEntry
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewPasswordEntry()
+  returns uiEntry
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiNewSearchEntry()
+  returns uiEntry
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 role Libui::Entry-Common does Libui::Control {
 

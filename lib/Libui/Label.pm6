@@ -1,8 +1,42 @@
-use Libui::Raw :label;
+use Libui::Raw :lib;
 use Libui::Control;
+
+use NativeCall;
 
 unit class Libui::Label
   does Libui::Control;
+
+class uiLabel is repr('CStruct') is export(:raw) {
+  also does autocast;
+  #has Pointer $.c;
+  #has Pointer $.widget;
+  #has Pointer $.misc;
+  #has Pointer $.label;
+  has Pointer $.uiLabelText;
+  has Pointer $.uiLabelSetText;
+  has Pointer $.uiNewLabel;
+}
+
+sub uiLabelText(uiLabel $l)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiLabelSetText(uiLabel $l, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewLabel(Str $text)
+  returns uiLabel
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 has uiLabel $!label;
 

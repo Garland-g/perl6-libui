@@ -1,5 +1,28 @@
-use Libui::Raw :separator;
+use Libui::Raw :lib;
 use Libui::Control;
+
+use NativeCall;
+
+class uiSeparator is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiNewHorizontalSeparator;
+  has Pointer $.uiNewVerticalSeparator;
+}
+
+sub uiNewHorizontalSeparator()
+  returns uiSeparator
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewVerticalSeparator()
+  returns uiSeparator
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 role Libui::Separator does Libui::Control {
   has $!separator;

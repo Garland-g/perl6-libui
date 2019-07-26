@@ -1,8 +1,69 @@
-use Libui::Raw :form;
+use Libui::Raw :lib;
 use Libui::Container;
+use Libui::Control;
+
+use NativeCall;
 
 unit class Libui::Form;
 also does Libui::Container;
+
+class uiForm is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiFormAppend;
+  has Pointer $.uiFormDelete;
+  has Pointer $.uiFormPadded;
+  has Pointer $.uiFormSetPadded;
+  has Pointer $.uiNewForm;
+}
+  #Unix
+#  has Pointer $.c;
+#  has Pointer $.widget;
+#  has Pointer $.container;
+#  has Pointer $.grid;
+#  has Pointer $.children;
+#  has int32 $.padded;
+#  has Pointer $.stretchygroup;
+  #Windows
+  #has Pointer $.c;
+#  has Pointer $.hwnd;
+#  has Pointer $.controls;
+  #has int32 $.padded;
+  #Darwin
+  #has Pointer $.c;
+#  has Pointer $.view;
+#}
+
+sub uiFormDelete(uiForm $f, int32 $index)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiFormPadded(uiForm $f)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiFormSetPadded(uiForm $f, int32 $padded)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+
+sub uiFormAppend(uiForm $f, Str  $label, uiControl $c, int32  $stretchy)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewForm()
+  returns uiForm
+  is native(LIB)
+  is export(:raw)
+  { * }
 
 has uiForm $!form;
 has UInt $!items = 0;

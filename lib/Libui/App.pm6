@@ -1,7 +1,7 @@
 use v6;
-use Libui::Raw;
 use Libui::Window;
 use Libui::Menu;
+use Libui::Main :ALL;
 unit class Libui::App;
 
 has Libui::Window $!window;

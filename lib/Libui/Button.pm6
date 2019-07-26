@@ -1,7 +1,45 @@
-use Libui::Raw :button;
+use Libui::Raw :lib;
 use Libui::Control;
 
+use NativeCall;
+
 unit class Libui::Button does Libui::Control;
+
+class uiButton is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiButtonText;
+  has Pointer $.uiSetText;
+  has Pointer $.uiButtononClicked;
+  has Pointer $.onClicked;
+  has Pointer $.onClickedData;
+}
+
+sub uiButtonText(uiButton $b)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiButtonSetText(uiButton $b, Str $text)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiButtonOnClicked(uiButton $b, &f (uiButton, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewButton(Str $text)
+  returns uiButton
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 has uiButton $!button;
 has $!clicked-supply;

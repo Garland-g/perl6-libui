@@ -1,5 +1,54 @@
-use Libui::Raw :picker :time;
+use Libui::Raw :lib;
 use Libui::Control;
+use Libui::Time;
+
+use NativeCall;
+
+class uiDateTimePicker is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiDateTimePickerTime;
+  has Pointer $.uiDateTimePickerSetTime;
+  has Pointer $.uiDateTimePickerOnChanged;
+  has Pointer $.uiNewDateTimePicker;
+  has Pointer $.uiNewDatePicker;
+  has Pointer $.uiNewTimePicker;
+}
+
+sub uiDateTimePickerTime(uiDateTimePicker $d, Libui::Time $time is rw)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiDateTimePickerSetTime(uiDateTimePicker $d, Libui::Time $time)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiDateTimePickerOnChanged(uiDateTimePicker $d, &f (uiDateTimePicker, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiNewDateTimePicker()
+  returns uiDateTimePicker
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewDatePicker()
+  returns uiDateTimePicker
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewTimePicker()
+  returns uiDateTimePicker
+  is native(LIB)
+  is export(:raw)
+  { * }
+
 
 role Libui::Picker does Libui::Control {
   has uiDateTimePicker $!picker;

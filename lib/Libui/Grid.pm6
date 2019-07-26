@@ -1,9 +1,66 @@
-use Libui::Raw :grid;
+use Libui::Raw :lib;
 use Libui::Container;
+use Libui::Control;
 use Libui::Types;
+
+use NativeCall;
 
 unit class Libui::Grid is export;
 also does Libui::Container;
+
+class uiGrid is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiGridAppend;
+  has Pointer $.uiGridInsertAt;
+  has int32 $.uiGridPadded;
+  has Pointer $.uiGridSetPadded;
+  has uiGrid $.uiNewGrid;
+}
+
+sub uiGridAppend(uiGrid    $g
+                ,uiControl $c
+                ,int32     $left
+                ,int32     $top
+                ,int32     $xspan
+                ,int32     $yspan
+                ,int32     $hexpand
+                ,uint32    $halign
+                ,int32     $vexpand
+                ,uint32    $valign
+                ) is native(LIB) is export(:raw) { * }
+
+
+sub uiGridInsertAt(uiGrid    $g
+                  ,uiControl $c
+                  ,uiControl $existing
+                  ,uint32    $at
+                  ,int32     $xspan
+                  ,int32     $yspan
+                  ,int32     $hexpand
+                  ,uint32    $halign
+                  ,int32     $vexpand
+                  ,uint32    $valign
+                  ) is native(LIB) is export(:raw) { * }
+
+
+sub uiGridPadded(uiGrid $g)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiGridSetPadded(uiGrid $g, int32 $padded)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewGrid()
+  returns uiGrid
+  is native(LIB)
+  is export(:raw)
+  { * }
 
 
 has uiGrid $!grid;

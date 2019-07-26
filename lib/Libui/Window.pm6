@@ -1,8 +1,142 @@
-use Libui::Raw :window;
+use Libui::Raw :lib;
 use Libui::Container;
+use Libui::Control;
+use NativeCall;
 
 unit class Libui::Window
   does Libui::Container;
+
+class uiWindow is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Str $.uiWindowTitle;
+  has Pointer $.uiWindowSetTitle; # F:
+  has Pointer $.uiWindowContentSize;
+  has Pointer $.uiWindowSetContentSize;
+  has Pointer $.uiWindowFullScreen;
+  has Pointer $.uiWindowSetFullScreen;
+  has Pointer $.uiWindowOnContentSizeChanged;
+  has Pointer $.uiWindowOnClosing;
+  has Pointer $.uiWindowBorderless;
+  has Pointer $.uiWindowSetBorderless;
+  has Pointer $.uiWindowSetChild;
+  has Pointer $.uiWindowMargined;
+  has Pointer $.uiWindowSetMargined;
+  has Pointer $.uiNewWindow;
+
+}
+
+sub uiWindowTitle(uiWindow $w)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowSetTitle(uiWindow $w, Str $title)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowContentSize(uiWindow $w, int32 $width is rw, int32 $height is rw)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowSetContentSize(uiWindow $w, int32 $width, int32 $height)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowFullscreen(uiWindow $w)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowSetFullscreen(uiWindow $w, int32 $fullscreen)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowOnContentSizeChanged(uiWindow $w, &f (uiWindow, Pointer --> int32), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowOnClosing(uiWindow $w, &f (uiWindow, Pointer --> int32), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowBorderless(uiWindow $w)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiWindowSetBorderless(uiWindow $w, int32 $borderless)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowSetChild(uiWindow $w, uiControl $child)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowMargined(uiWindow $w)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiWindowSetMargined(uiWindow $w, int32 $margined)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewWindow(Str $title, int32 $width, int32 $height, int32 $hasMenubar)
+  returns uiWindow
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiOpenFile(uiWindow $parent)
+  returns Str
+  is native(LIB)
+  is export(:open-file)
+  { * }
+
+
+sub uiSaveFile(uiWindow $parent)
+  returns Str
+  is native(LIB)
+  is export(:save-file)
+  { * }
+
+
+
+sub uiMsgBox(uiWindow $parent, Str $title, Str $description)
+  is native(LIB)
+  is export(:msgbox)
+  { * }
+
+
+sub uiMsgBoxError(uiWindow $parent, Str $title, Str $description)
+  is native(LIB)
+  is export(:msgbox-error)
+  { * }
 
 has uiWindow $!window;
 has Supply $!size-changed-supply;

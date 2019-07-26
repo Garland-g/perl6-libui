@@ -1,7 +1,42 @@
-use Libui::Raw :spinbox;
+use Libui::Raw :lib;
 use Libui::Control;
 
+use NativeCall;
+
 unit class Libui::Spinbox does Libui::Control;
+
+class uiSpinbox is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiSpinboxValue;
+  has Pointer $.uiSpinboxSetValue;
+  has Pointer $.uiSpinboxOnChanged;
+  has Pointer $.uiNewSpinbox;
+}
+
+sub uiSpinboxValue(uiSpinbox $s)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiSpinboxSetValue(uiSpinbox $s, int32 $value)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiSpinboxOnChanged(uiSpinbox $s, &f (uiSpinbox, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewSpinbox(int64 $min, int64 $max)
+  returns uiSpinbox
+  is native(LIB)
+  is export(:raw)
+  { * }
 
 has uiSpinbox $!spinbox;
 has $!value-changed;

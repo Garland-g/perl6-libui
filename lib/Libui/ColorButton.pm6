@@ -1,11 +1,69 @@
-use Libui::Raw :color;
+use Libui::Raw :lib;
 use Libui::Control;
 use Libui::Types;
 
 use Color;
+use NativeCall;
 
 
 unit class Libui::ColorButton does Libui::Control;
+
+class uiColorButton is repr('CStruct') is export(:raw) {
+  also does autocast;
+  #Unix
+  has Pointer $.c;
+  has Pointer $.widget;
+  has Pointer $.button;
+  has Pointer $.cb;
+  has Pointer $.cc;
+  has Pointer $.onChanged;
+  has Pointer $.onChangedData;
+  #Windows
+  #has Pointer $.c;
+  has Pointer $.hwnd;
+  has num64 $.r;
+  has num64 $.g;
+  has num64 $.b;
+  has num64 $.a;
+  #has Pointer $.onChanged;
+  #has Pointer $.onChangedData;
+  #Darwin
+  #has Pointer $.c;
+  #has Pointer $.button;
+  #has Pointer $.onChanged;
+  #has Pointer $.onChangedData;
+}
+
+sub uiColorButtonColor(uiColorButton $b
+                      ,num64         $r is rw
+                      ,num64         $g is rw
+                      ,num64         $bl is rw
+                      ,num64         $a is rw
+                      ) is native(LIB) is export(:color) { * }
+
+
+sub uiColorButtonSetColor(uiColorButton $b
+                         ,num64         $r
+                         ,num64         $g
+                         ,num64         $bl
+                         ,num64         $a
+                         ) is native(LIB) is export(:color) { * }
+
+
+sub uiColorButtonOnChanged(uiColorButton $b, &f (uiColorButton, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:color)
+  { * }
+
+
+sub uiNewColorButton()
+  returns uiColorButton
+  is native(LIB)
+  is export(:color)
+  { * }
+
+
+
 
 has uiColorButton $!button;
 has $!changed-supply;

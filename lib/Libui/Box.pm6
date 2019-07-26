@@ -1,6 +1,57 @@
 use v6;
-use Libui::Raw :box;
+use Libui::Raw :lib;
+use Libui::Control;
 use Libui::Container;
+
+use NativeCall;
+
+class uiBox is repr('CStruct') is export(:box) {
+  also does autocast;
+  has Pointer $.uiBoxAppend;
+  has Pointer $.uiBoxDelete;
+  has Pointer $.uiBoxPadded;
+  has Pointer $.uiBoxSetPadded;
+  has Pointer $.uiNewHorizontalBox;
+  has Pointer $.uiNewVerticalBox;
+}
+
+sub uiBoxAppend(uiBox $b, uiControl $child, int32 $stretchy)
+  is native(LIB)
+  is export(:box)
+  { * }
+
+
+sub uiBoxDelete(uiBox $b, ulong $index)
+  is native(LIB)
+  is export(:box)
+  { * }
+
+
+sub uiBoxPadded(uiBox $b)
+  returns int32
+  is native(LIB)
+  is export(:box)
+  { * }
+
+
+sub uiBoxSetPadded(uiBox $b, int32 $padded)
+  is native(LIB)
+  is export(:box)
+  { * }
+
+
+sub uiNewHorizontalBox()
+  returns uiBox
+  is native(LIB)
+  is export(:box)
+  { * }
+
+
+sub uiNewVerticalBox()
+  returns uiBox
+  is native(LIB)
+  is export(:box)
+  { * }
 
 role Libui::Box {
   also does Libui::Container;

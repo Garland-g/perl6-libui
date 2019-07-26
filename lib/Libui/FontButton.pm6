@@ -1,10 +1,67 @@
-use Libui::Raw :draw, :font;
+use Libui::Raw :lib;
 use Libui::Control;
+
+use NativeCall;
 
 #TODO:
 #SetFont is not implemented in libui yet
 
 class Libui::FontButton does Libui::Control is export {
+
+class uiFontDescriptor is repr('CStruct') is export(:raw) {
+  has Str $.Family;
+  has num64 $.Size;
+  has uint32 $.Weight; #Typedef<uiTextWeight> -> unsigned int
+  has uint32 $.Italic; #Typedef<uiTextItalic> -> unsigned int
+  has uint32 $.Stretch; #Typedef<uiTextStretch> -> unsigned int
+}
+
+class uiFontButton is repr('CStruct') is export(:raw) {
+  also does autocast;
+  #Unix
+  has Pointer $.c;
+  has Pointer $.widget;
+  has Pointer $.button;
+  has Pointer $.fb;
+  has Pointer $.fc;
+  has Pointer $.onChanged;
+  has Pointer $.onChangedData;
+  #Windows
+  #has Pointer $.c;
+  has Pointer $.hwnd;
+  has Pointer $.params;
+  has bool $.already;
+  #has Pointer $.onChanged;
+  #has Pointer $.onChangedData;
+  #Darwin
+  #has Pointer $.c;
+  #has Pointer $.button;
+  #has Pointer $.onChanged;
+  #has Pointer $.onChangedData;
+}
+
+sub uiFontButtonFont(uiFontButton $b, uiFontDescriptor $desc)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiFontButtonOnChanged(uiFontButton $b, &f (uiFontButton, Pointer), Pointer $data)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewFontButton()
+  returns uiFontButton
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+sub uiFreeFontButtonFont(uiFontDescriptor $desc)
+  is native(LIB)
+  is export(:raw)
+  { * }
 
   has uiFontButton $!button;
   has uiFontDescriptor $!desc;

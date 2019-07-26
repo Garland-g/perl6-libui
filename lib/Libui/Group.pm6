@@ -1,8 +1,61 @@
-use Libui::Raw :group;
+use Libui::Raw :lib;
+use Libui::Control;
 use Libui::Container;
+
+use NativeCall;
 
 unit class Libui::Group;
 also does Libui::Container;
+
+class uiGroup is repr('CStruct') is export(:raw) {
+  also does autocast;
+  has Pointer $.uiGroupTitle;
+  has Pointer $.uiGroupSetTitle;
+  has Pointer $.uiGroupSetChild;
+  has Pointer $.uiGroupMargined;
+  has Pointer $.uiGroupSetMargined;
+  has Pointer $.uiNewGroup;
+}
+
+sub uiGroupTitle(uiGroup $g)
+  returns Str
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiGroupSetTitle(uiGroup $g, Str $title)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiGroupSetChild(uiGroup $g, uiControl $c)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiGroupMargined(uiGroup $g)
+  returns int32
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiGroupSetMargined(uiGroup $g, int32 $margined)
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
+sub uiNewGroup(Str $title)
+  returns uiGroup
+  is native(LIB)
+  is export(:raw)
+  { * }
+
+
 
 has uiGroup $!group;
 
