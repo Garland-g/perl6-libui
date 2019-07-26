@@ -30,6 +30,9 @@ module Libui:ver<0.0.2> is export {
       die $err;
     }
   }
+  our sub UnInit() {
+    uiUninit();
+  }
 }
 
 
