@@ -118,54 +118,6 @@ enum uiAt is export(:DEFAULT) (
    uiAtBottom => 3
 );
 
-enum uiTextWeight is export(:text) (
-  uiTextWeightMinimum => 0,
-  uiTextWeightThin => 100,
-  uiTextWeightUltraLight => 200,
-  uiTextWeightLight => 300,
-  uiTextWeightBook => 350,
-  uiTextWeightNormal => 400,
-  uiTextWeightMedium => 500,
-  uiTextWeightSemiBold => 600,
-  uiTextWeightBold => 700,
-  uiTextWeightUltraBold => 800,
-  uiTextWeightHeavy => 900,
-  uiTextWeightUltraHeavy => 950,
-  uiTextWeightMaximum => 1000,
-);
-
-enum uiTextItalic is export(:text) <
-  uiTextItalicNormal,
-  uiTextItalicOblique,
-  uiTextItalicItalic,
->;
-
-enum uiTextStretch is export(:text) <
-  uiTextStretchUltraCondensed,
-  uiTextStretchExtraCondensed,
-  uiTextStretchCondensed,
-  uiTextStretchSemiCondensed,
-  uiTextStretchNormal,
-  uiTextStretchSemiExpanded,
-  uiTextStretchExpanded,
-  uiTextStretchExtraExpanded,
-  uiTextStretchUltraExpanded,
->;
-
-enum uiUnderline is export(:text) <
-  uiUnderlineNone,
-  uiUnderlineSingle,
-  uiUnderlineDouble,
-  uiUnderlineSuggestion,
->;
-
-enum uiUnderlineColor is export(:text) <
-  uiUnderlineColorCustom,
-  uiUnderlineColorSpelling,
-  uiUnderlineColorGrammar,
-  uiUnderlineColorAuxiliary,
->;
-
 enum uiForEach is export(:foreach) (
   uiForEachContinue => 0,
   uiForEachStop => 1,
