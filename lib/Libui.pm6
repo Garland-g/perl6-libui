@@ -22,7 +22,7 @@ use Libui::Spinbox;
 use Libui::Tab;
 use Libui::Window;
 
-module Libui:ver<0.0.2> is export {
+module Libui:ver<0.0.3> is export {
   use Libui::Main :ALL;
   our sub Init($options = uiInitOptions.new) {
     my Str $err = uiInit($options);

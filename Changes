@@ -2,6 +2,11 @@ Revision history for Libui
 
 {{$NEXT}}
 
+0.0.3  2019-07-30T09:05:37-07:00
+  - Redo Build script
+  - Split up Raw file
+  - Implement AttributedStrings
+
 0.0.2  2019-03-17T20:11:42-07:00
   - Pickers return DateTime objects
   - Update tests to pass without a DISPLAY
