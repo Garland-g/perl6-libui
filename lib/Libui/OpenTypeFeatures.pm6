@@ -55,10 +55,19 @@ class uiOpenTypeFeatures is repr('CStruct') is export(:raw) {
                            ) returns int32 is native(LIB) is export(:raw) { * }
 
   sub uiOpenTypeFeaturesForEach(uiOpenTypeFeatures $otf
-                               ,&f ( --> uiForEach)
+                               ,&f ( --> int32)
                                ,Pointer $data
                                ) is native(LIB) is export(:raw) { * }
 
+  #
+  subset OpenTypeFeatureName is export(:subsets) of Str where {
+    / ^^ <[ ! .. ~ ]> <[ \x[0020] .. ~ ]> ** 3 $$ /
+  };
+
+  subset OpenTypeFeature is export(:subsets) of Pair where {
+    .key ~~ OpenTypeFeatureName
+    and .value ~~ UInt
+  };
 
   has uiOTFeature $.data;
   has size_t $.len;
@@ -76,20 +85,59 @@ class uiOpenTypeFeatures is repr('CStruct') is export(:raw) {
     uiOpenTypeFeaturesClone(self);
   }
 
-  method add(int8 :$a!, int8 :$b!, int8 :$c!, int8 :$d!, uint32 :$value! --> Nil) {
+  multi method add(int8 :$a!, int8 :$b!, int8 :$c!, int8 :$d!, uint32 :$value! --> Nil) {
     uiOpenTypeFeaturesAdd(self, $a, $b, $c, $d, $value)
   }
 
-  method remove(int8 :$a!, int8 :$b!, int8 :$c!, int8 :$d! --> Nil) {
-    uiOpenTypeFeaturesRemove($a, $b, $c, $d);
+  multi method add(OpenTypeFeature $feature) {
+    my int8 ($a, $b, $c, $d) = $feature.key.comb».ord;
+    uiOpenTypeFeaturesAdd(self, $a, $b, $c, $d, $feature.value);
   }
 
-  method get(int8 :$a!, int8 :$b!, int8 :$c!, int8 :$d!, :$value! is rw --> Int) {
+  multi method add(Str $key, Int $value) {
+    self.add($key => $value);
+  }
+
+  multi method add(*%features) {
+    for %features.kv -> $key, $value {
+      self.add($key, $value);
+    }
+  }
+
+  multi method add(*@features) {
+    for @features -> Str $key, Int $value {
+      self.add($key, $value);
+    }
+  }
+
+  multi method remove(int8 :$a!, int8 :$b!, int8 :$c!, int8 :$d! --> Nil) {
+    uiOpenTypeFeaturesRemove(self, $a, $b, $c, $d);
+  }
+
+  multi method remove(OpenTypeFeatureName $feature) {
+    my int8 ($a, $b, $c, $d) = $feature.comb».ord;
+    uiOpenTypeFeaturesRemove(self, $a, $b, $c, $d);
+  }
+
+  multi method remove(*@features) {
+    for @features -> Str $feature {
+      self.remove($feature);
+    }
+  }
+
+  multi method get(int8 :$a!, int8 :$b!, int8 :$c!, int8 :$d!, :$value! is rw --> Int) {
     uiOpenTypeFeaturesGet(self, $a, $b, $c, $d, $value);
   }
 
-  method for-each(&f ( --> uiForEach), Pointer $data) {
-    uiOpenTypeFeaturesForEach(&f, $data);
+  multi method get(OpenTypeFeatureName $feature --> Int) {
+    my uint32 $value;
+    my int8 ($a, $b, $c, $d) = $feature.comb».ord;
+    my $result = uiOpenTypeFeaturesGet(self, $a, $b, $c, $d, $value);
+    if $result != 0 {
+      return $value;
+    }
+    return Int;
   }
 }
 
+constant OpenTypeFeatures is export = uiOpenTypeFeatures;
