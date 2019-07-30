@@ -1,0 +1,63 @@
+use v6;
+use Libui;
+use Libui::OpenTypeFeatures :ALL;
+use Test;
+
+Libui::Init();
+
+plan *;
+
+dies-ok {my OpenTypeFeatureName $test = "haxxors"}, "Cannot create Feature with more than 4 characters";
+
+dies-ok {my OpenTypeFeatureName $test = "li"}, "Cannot create Feature with less than 4 characters";
+
+dies-ok {my OpenTypeFeatureName $test = "\x[0020]iga"}, "Cannot create Feature with leading space";
+
+lives-ok {my OpenTypeFeatureName $test = "l   "}, "Can create Feature with trailing spaces";
+
+dies-ok {my OpenTypeFeatureName $test = "\x[0019]iga"}, "Cannot create Feature with control character";
+
+dies-ok {my OpenTypeFeatureName $test = "\x[007F]iga"}, "Cannot create Feature with characters outside the range";
+
+my $otf = OpenTypeFeatures.new;
+
+lives-ok { $otf.add("liga", 1) }, <Add a Feature>;
+
+is $otf.get("liga"), 1, <Get a Feature>;
+
+is $otf.get("nada"), Int, <Feature without defined value is undefined>;
+
+lives-ok { $otf.remove("liga") }, <Remove a Feature>;
+
+is $otf.get("liga"), Int, <After removal, value is undefined>;
+
+$otf.add(liga => 1, nada => 0, dino => 2);
+
+subtest {
+  is $otf.get("liga"), 1, <1>;
+  is $otf.get("nada"), 0, <2>;
+  is $otf.get("dino"), 2, <3>;
+}, <Add multiple features at once>;
+
+my uiOpenTypeFeatures $otf2 = $otf.clone;
+
+$otf.remove("dino", "liga", "nada");
+
+subtest {
+  is $otf.get("liga"), Int, <1>;
+  is $otf.get("nada"), Int, <2>;
+  todo 1; diag <Order is important, but should not be. Probably upstream bug>;
+  is $otf.get("dino"), Int, <3>;
+}, <Remove multiple features at once>;
+
+
+subtest {
+  is $otf2.get("liga"), 1, <1>;
+  is $otf2.get("nada"), 0, <2>;
+  is $otf2.get("dino"), 2, <3>;
+}, <Cloned object not modified when original object is modified>;
+
+isa-ok OpenTypeFeatures, uiOpenTypeFeatures, <OpenTypeFeatures is uiOpenTypeFeatures>;
+isa-ok uiOpenTypeFeatures, OpenTypeFeatures, <uiOpenTypeFeatures is OpenTypeFeatures>;
+
+done-testing;

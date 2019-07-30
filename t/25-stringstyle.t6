@@ -1,0 +1,39 @@
+use v6;
+
+use lib 'lib';
+use Libui;
+use Libui::Style;
+
+use Test;
+
+Libui::Init();
+
+#Style composition
+
+plan *;
+
+my Libui::Style $style .= new(size => 22, family => "Courier New", weight => 400);
+
+my $style2 = $style.with(size => 25, stretch => Libui::Text::Stretch::Condensed);
+
+my $style3 = $style.with(color => (1, 0, 0, 1));
+
+my $style4 = $style.with(underline-color => Libui::Text::UnderlineColor::Spelling);
+
+my $style5 = $style.with(background-color => (0, 1, 0, 1));
+
+is $style.weight.value, 400, <Style with Weight>;
+is $style.family.value, "Courier New", <Style with Font>;
+is $style.size.value, 22, <Style with Size>;
+
+is $style2.stretch.value, Libui::Text::Stretch::Condensed, <Style with Stretch>;
+is $style2.size.value, 25, <Override Size>;
+
+is $style3.color.value.rgbad, [1, 0, 0, 1], <Style with Color>;
+
+is $style4.underline-color.value, Libui::Text::UnderlineColor::Spelling, <Style with Underline Color>;
+
+todo 1;
+is $style5.background-color.value.rgbad, [0, 1, 0, 1], <Style with Background Color>;
+
+done-testing;
